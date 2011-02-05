@@ -1,0 +1,23 @@
+<html metal:use-macro="main">
+  <div metal:fill-slot="body">
+    <h1>Add a Company</h1>
+    <form action="${save_url}" method="post">
+
+    <table>
+        <tr>
+          <td class="label"><label>Name:</label></td>
+          <td class="field"><input name="title" type="text"/></td>
+        </tr>
+        <tr>
+          <td class="label"><label>Analysis:</label></td>
+          <td class="field"><textarea name="analysis"></textarea></td>
+        </tr>
+        <tr>
+          <td class="label"></td>
+          <td class="field"><input type="submit" name="submit" value="Save"/></td>
+        </tr>
+    </table>
+
+    </form>
+  </div>
+</html>
