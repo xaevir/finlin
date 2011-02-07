@@ -1,6 +1,8 @@
 <html metal:use-macro="main">
   <div metal:fill-slot="body">
     <h1>${context.title}</h1>
-    <p>${context.analysis}</p>
+    <div tal:replace="structure context.analysis">
+        Page text goes here.
+    </div>
   </div>
 </html>

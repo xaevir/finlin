@@ -1,0 +1,6 @@
+<html metal:use-macro="main">
+  <div metal:fill-slot="body">
+    <h1>Home page, need stuff to put on it</h1>
+    <p>This is a compelling homepage</p>
+  </div>
+</html>

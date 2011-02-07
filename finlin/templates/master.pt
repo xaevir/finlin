@@ -17,14 +17,34 @@
 
 <body>
   <div id="doc">
-    <p metal:define-slot="body">
-      This is the body.
+
+    <div id="hd">
+      <a href="${request.application_url}" id="logo"><img 
+        src="${request.static_url('finlin:static/logo.png')}" style="width: 78px; 
+        height: 66px" /></a>
+    </div>
+
+      <div id="flash" 
+        tal:define="message request.session.pop_flash()"
+        tal:condition="message">
+        <span class="message"
+              tal:repeat="flash message"
+              tal:content="flash" />
+      </div>
+
+    <div id="bd">
+      <div metal:define-slot="body">
+        This is the body.
+      </div>
+    </div>
+
+    <p>
+      <a href="${request.application_url + '/new_company'}">Add Company</a>
     </p>
 
     <div id="ft">
       <p>
         &copy; Finlin 2011
-        <a href="/">[Home]</a> |
       </p>        
     </div>
   </div>

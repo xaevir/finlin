@@ -1,0 +1,10 @@
+<html metal:use-macro="main">
+  <ul metal:fill-slot="body" id="company_form">
+    <li tal:repeat="item context.names">
+      ${item}
+        <a href="${request.application_url}/${item}">view</a>
+        <a href="${request.application_url}/${item}/edit_company">edit</a>
+        <a href="${request.application_url}/${item}/delete_company">delete</a>
+    </li>
+  </ul>
+</html>

@@ -169,6 +169,7 @@ span.error-message, span.required {
 }
    
 #hd {
+    margin-bottom: 20px;
 }
 
 #ft {
@@ -177,6 +178,22 @@ span.error-message, span.required {
 	margin-bottom: 20px;
 	clear: both;
 }
+
+/*----------------------------------------------------------------------------
+                                                              New Company form
+----------------------------------------------------------------------------*/
+#company_form {
+}
+
+#company_form input[type="text"] {
+    padding: .5em;
+    width: 400px; 
+}
+#company_form textarea{
+   width:700px; 
+   height: 700px;
+}
+
 
 /*----------------------------------------------------------------------------
                                                               Income Statment 

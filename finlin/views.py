@@ -5,9 +5,10 @@ from pyramid.renderers import render
 from pyramid.renderers import render_to_response
 from pyramid.httpexceptions import HTTPFound
 from pyramid.response import Response
-
+from pyramid.traversal import resource_path
 import formencode
 from formencode import htmlfill
+from docutils.core import publish_parts
 
 from finlin.models import Company
 import logging
@@ -24,15 +25,33 @@ class CompanyForm(formencode.Schema):
     )
     title = formencode.validators.String(not_empty=True)
 
+
+@view_config(context='finlin.models.Root',
+            renderer='finlin:templates/home_page.pt')
+def home_page(context, request):
+    log.debug('viewing the homepage')
+    main = get_renderer('templates/master.pt').implementation()
+    return dict(main = main)    
+
+
+@view_config(context='finlin.models.Root',
+            name='list_company',
+            renderer='finlin:templates/list_company.pt')
+def list_company(context, request):
+    main = get_renderer('finlin:templates/master.pt').implementation()
+    log.debug('context.names:')
+    log.debug(context.names)
+    return dict(main = main)    
+
+
 @view_config(context='finlin.models.Company',
             renderer='finlin:templates/show_company.pt')
 def show_company(context, request):
     log.debug('got to view!')
     main = get_renderer('templates/master.pt').implementation()
+    edit_url = resource_url(context, request, 'edit_company')
+    context.analysis = publish_parts(context.analysis, writer_name='html')['html_body']
     return dict(main = main)    
-
-
-
 
 @view_config(name='new_company', 
             context='finlin.models.Root',
@@ -51,7 +70,8 @@ def create_company(context, request):
             form = schema.to_python(request.params)
             company = Company(form)
             request.db.company.save(company.__dict__)
-            return HTTPFound(location = resource_url(company, request, 'show_company', company.__name__ ))
+            request.session.flash(company.title + ' saved')
+            return HTTPFound(location = resource_url(context, request, company.__name__ ))
         except formencode.Invalid, error:
             result = new_company(context, request)
             htmlfilled = htmlfill.render(
@@ -86,6 +106,7 @@ def update_company(context, request):
             form = schema.to_python(request.params)
             company = Company(form)
             request.db.company.save(company.__dict__)
+            request.session.flash(company.title + ' saved')
             return HTTPFound(location = resource_url(
                                     context.__parent__, 
                                     request, 
@@ -99,3 +120,15 @@ def update_company(context, request):
             ) 
             return Response(htmlfilled)
 
+
+@view_config(name='delete_company', 
+            context='finlin.models.Company',
+            renderer='finlin:templates/company_form.pt')
+def delete_company(context, request):
+    request.db.company.remove({'__name__':context.__name__})
+    request.session.flash(context.title + ' deleted')
+    return HTTPFound(location = resource_url(
+                                    context.__parent__, 
+                                    request, 
+                                    'list_company'))
+ 
