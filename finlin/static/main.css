@@ -194,6 +194,32 @@ span.error-message, span.required {
    height: 700px;
 }
 
+/*----------------------------------------------------------------------------
+                                                              Login Form
+----------------------------------------------------------------------------*/
+#login_form form {
+    width: 500px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    padding: 20px 0;
+}
+
+#login_form table{
+    margin: 0 auto;
+}
+
+#login_form td {
+    border: none;
+}
+
+
+
+#login_form input[type="text"],
+#login_form input[type="password"] {
+    font-size: 16px;
+    width: 220px
+}
+
 
 /*----------------------------------------------------------------------------
                                                               Income Statment 

@@ -1,5 +1,0 @@
-pyramid
-WebError
-pymongo
-docutils
-FormEncode

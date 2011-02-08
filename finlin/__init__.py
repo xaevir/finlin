@@ -1,8 +1,13 @@
 from pyramid.config import Configurator
 from pyramid.events import subscriber
 from pyramid.events import NewRequest
-from finlin.models import get_root
 from pyramid.session import UnencryptedCookieSessionFactoryConfig
+from pyramid.authentication import AuthTktAuthenticationPolicy
+from pyramid.authorization import ACLAuthorizationPolicy
+
+from finlin.security import groupfinder
+from finlin.models import get_root
+
 import logging
 
 from gridfs import GridFS
@@ -12,6 +17,12 @@ import pymongo
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
+
+    authn_policy = AuthTktAuthenticationPolicy(secret='batman',
+                                               callback=groupfinder)
+    authz_policy = ACLAuthorizationPolicy()
+
+
     mongodb_uri = settings.get('mongodb_uri')
     if mongodb_uri is None:
         raise ValueError("No 'mongodb_uri' in application configuration.")
@@ -21,7 +32,9 @@ def main(global_config, **settings):
     conn = pymongo.Connection(mongodb_uri)
     config = Configurator(root_factory=get_root,
                           settings=settings,
-                          session_factory = my_session_factory 
+                          session_factory = my_session_factory,
+                          authentication_policy=authn_policy,
+                          authorization_policy=authz_policy
                           )
 
     config.registry.settings['db_conn'] = conn
