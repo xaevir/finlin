@@ -1,0 +1,22 @@
+<html metal:use-macro="main">
+  <div metal:fill-slot="body" id="login_form">
+    <form action="${save_url}" method="post">
+        <table>
+            <tr>
+                <td><label>Username</label></td>
+                <td><input name="username" type="text"/></td>
+            </tr>
+            <tr>
+                <td><label>Password:</label></td>
+                <td><input name="password" type="password"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" name="form.submitted" 
+                        value="${submit_label}"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+  </div>
+</html>
