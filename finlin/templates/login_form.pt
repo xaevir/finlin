@@ -1,14 +1,15 @@
 <html metal:use-macro="main">
   <div metal:fill-slot="body" id="login_form">
     <form action="${save_url}" method="post">
+        <input type="hidden" name="came_from" value="${came_from}"/>
         <table>
             <tr>
                 <td><label>Username</label></td>
-                <td><input name="username" type="text"/></td>
+                <td><input name="username" type="text" value="${username}"/></td>
             </tr>
             <tr>
                 <td><label>Password:</label></td>
-                <td><input name="password" type="password"/></td>
+                <td><input name="password" type="password" value="${password}"/></td>
             </tr>
             <tr>
                 <td></td>

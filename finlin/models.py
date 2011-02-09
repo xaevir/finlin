@@ -2,7 +2,9 @@ import logging
 from pprint import pprint
 import re
 import datetime
+
 import cryptacular.bcrypt
+
 from zope.interface import implements
 from zope.interface import Interface
 
@@ -20,20 +22,13 @@ class Root(dict):
     __parent__ = None
     def __init__(self, request):
         self.request = request 
-        self.result = self.request.db.company.find({}, {'__name__':1})
-        self.children = to_dict(self.result)
-        log.debug('------------------------- New Request -------------------')
-        log.debug('children: ')
-        log.debug(pprint(self.children.keys()))
     def __getitem__(self, key):
-        try: 
-            log.debug('key called: '+ key)
-            self.children[key]
-        except KeyError:
-            raise KeyError(key)
         if key == 'user':
             return UserContainer('user', self)
         doc = self.request.db.company.find_one({'__name__':key})
+        if doc is None:
+            raise KeyError
+        
         company = Company(doc)
         company.__parent__ = self
         company.__name__ = key
@@ -74,30 +69,28 @@ class Company(object):
         return name	
 
 
-class UserContainer(object):
+class UserFolder(object):
     __name__ = 'user'
     def __init__(self, parent): 
         self.__parent__ = parent
         self.request = parent.request
-        self.children = to_dict(self.request.db.user.find({}, {'username':1}))
     def __getitem__(self, key):
-        try: 
-            self.children[key]
-        except KeyError:
-            raise KeyError(key)
         doc = self.request.db.user.find_one({'username':key})
-        user = User(doc)
+        if doc is None:
+            raise KeyError
+        user = User()
+        for k, v in doc.items():
+            setattr(user, k, v)
         user.__parent__ = self
         user.__name__ = key
         return user
 
 class User(object):
     def __init__(self, doc): 
-        self.password = doc['password']
-        self.username= doc['username']        
+        self.username= doc.get('username', None)        
         self.groups = doc.get('groups', ['commentors'])
-        self.date_created = doc.get('date_create', datetime.datetime.now)
-    def check_password(self, raw_password):        
-        bcrypt = cryptacular.bcrypt.BCRYPTPasswordManager()
-        return bcrypt.check(self.password, raw_password)   
+        self.date_created = datetime.datetime.now
+        if doc.get('password'):
+            bcrypt = cryptacular.bcrypt.BCRYPTPasswordManager()
+            self.password = bcrypt.encode(doc.get('password'))
 

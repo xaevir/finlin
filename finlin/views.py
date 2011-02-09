@@ -9,6 +9,7 @@ from pyramid.traversal import resource_path
 from pyramid.security import remember
 from pyramid.security import forget
 
+import cryptacular.bcrypt
 
 import formencode
 from formencode import validators
@@ -17,6 +18,7 @@ from docutils.core import publish_parts
 
 from finlin.models import Company
 from finlin.models import User
+
 import logging
 log = logging.getLogger(__name__)
 
@@ -99,14 +101,6 @@ def edit_company(context, request):
         schema = CompanyForm() 
         try:
             form = schema.to_python(request.params)
-        except formencode.Invalid, e:
-            html = htmlfill.render(
-                                render_page(),
-                                defaults=e.value,
-                                errors=e.error_dict) 
-            return Response(html)
-        else:
-            log.debug('not getting thru')
             company = Company(form)
             request.db.company.save(company.__dict__)
             request.session.flash(company.name + ' saved')
@@ -114,9 +108,13 @@ def edit_company(context, request):
                                     context.__parent__, 
                                     request, 
                                     company.__name__))
-    html = htmlfill.render(
-                        render_page(),
-                        defaults=context.__dict__) 
+        except formencode.Invalid, e:
+            html = htmlfill.render(
+                                render_page(),
+                                defaults=e.value,
+                                errors=e.error_dict) 
+            return Response(html)
+    html = htmlfill.render(render_page(), defaults=context.__dict__) 
     return Response(html)
 
 
@@ -152,28 +150,65 @@ class CreateAccountForm(formencode.Schema):
 
 @view_config(name='create_account', context='finlin.models.Root')
 def create_account(context, request):
-    main = get_renderer('templates/master.pt').implementation()
-    save_url = resource_url(context, request, 'create_account')
     def render_page():
-        return render('finlin:templates/login_form.pt',
-                      {'main':main, 'save_url':save_url, 
-                       'submit_label': 'Create Account'}, 
-                      request=request)
+        return render('finlin:templates/login_form.pt', 
+            dict(
+                main = get_renderer('templates/master.pt').implementation(),
+                save_url = resource_url(context, request, 'create_account'), 
+                submit_label = 'Create Account'
+                ), 
+            request=request)
     if 'form.submitted' in request.params:
         schema = CreateAccountForm() 
         try:
             form = schema.to_python(request.params, request)
+            user = User(form)
+            request.db.user.save(user.__dict__)
+            request.session.flash('Welcome ' + user.username)
+            return HTTPFound(location = request.application_url)
         except formencode.Invalid, e:
             html = htmlfill.render(
                                 render_page(),
                                 defaults=e.value,
                                 errors=e.error_dict) 
             return Response(html)
-        else:
-            user = User(form)
-            request.db.user.save(user.__dict__)
-            request.session.flash('Welcome ' + user.username)
-            log.debug('request application: ' + request.application_url)
-            return HTTPFound(location = request.application_url)
     return Response(render_page())
 
+
+@view_config(context='finlin.models.Root', name='login',
+             renderer='templates/login_form.pt')
+@view_config(context='pyramid.exceptions.Forbidden', 
+             renderer='templates/login_form.pt')
+def login(context, request):
+    login_url = resource_url(request.context, request, 'login')
+    referrer = request.url
+    if referrer == login_url:
+        referrer = '/' # never use the login form itself as came_from
+    came_from = request.params.get('came_from', referrer)
+    username = ''
+    password = ''
+    if 'form.submitted' in request.params:
+        try: 
+            username = request.params['username']
+            password = request.params['password']
+            doc = request.db.user.find_one({'username':username})
+            if doc is None:
+                raise Exception
+            bcrypt = cryptacular.bcrypt.BCRYPTPasswordManager()
+            result = bcrypt.check(doc['password'], password)   
+            if result is None:
+                raise Exception 
+            headers = remember(request, username)
+            return HTTPFound(location = came_from, headers = headers)
+        except:
+            message = 'The username or password you provided does not match our records.'
+            request.session.flash(message)
+    return dict(
+        main = get_renderer('templates/master.pt').implementation(),
+        save_url = login_url,
+        came_from = came_from,
+        username = username,
+        password = password,
+        submit_label = 'Login'
+        ) 
+       
