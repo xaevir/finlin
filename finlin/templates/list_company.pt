@@ -1,6 +1,6 @@
 <html metal:use-macro="main">
   <ul metal:fill-slot="body" id="company_form">
-    <li tal:repeat="item context.children">
+    <li tal:repeat="item context.items()">
       ${item}
         <a href="${request.application_url}/${item}">view</a>
         <a href="${request.application_url}/${item}/edit_company">edit</a>

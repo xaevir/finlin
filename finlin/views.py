@@ -212,3 +212,44 @@ def login(context, request):
         submit_label = 'Login'
         ) 
        
+
+class CommentForm(formencode.Schema):
+    allow_extra_fields = True
+    filter_extra_fields = True
+    name = formencode.All(validators.PlainText(not_empty=True),
+                              validators.MaxLength(50),
+                              validators.MinLength(2))
+    email = formencode.All(validators.Email(not_empty=True),
+                              validators.MaxLength(100),
+                              validators.MinLength(3))
+    website = formencode.All(validators.URL(add_http=True),
+                              validators.MaxLength(500))
+    comment = formencode.All(validators.String(not_empty=True),
+                              validators.MaxLength(3000))
+    company_name = formencode.All(validators.PlainText(not_empty=True),
+                              validators.MaxLength(500))
+
+@view_config(name='comment', context='finlin.models.Company') 
+def comment(context, request): 
+    def render_page(): 
+        return render('finlin:templates/comment.pt', dict(
+                save_url = resource_url(context, request, 'comment'), 
+                submit_label = 'Post Comment'
+                ), 
+            request=request)
+    if 'form.submitted' in request.params:
+        schema = CommentForm() 
+        try:
+            form = schema.to_python(request.params, request)
+            user = User(form)
+            request.db.user.save(user.__dict__) request.session.flash('Welcome ' + user.username)
+            return HTTPFound(location = request.application_url)
+        except formencode.Invalid, e:
+            html = htmlfill.render(
+                                render_page(),
+                                defaults=e.value,
+                                errors=e.error_dict) 
+            return Response(html)
+    return Response(render_page())
+
+ 

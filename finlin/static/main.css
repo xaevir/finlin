@@ -166,6 +166,7 @@ span.error-message, span.required {
 ----------------------------------------------------------------------------*/
 #doc {
     background-color: #fff;
+    border: 7px solid #8cd3ff;
 }
    
 #hd {

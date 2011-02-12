@@ -11,49 +11,87 @@ from zope.interface import Interface
 log = logging.getLogger(__name__)
 
 
-
 def Mongo(event):
     settings = event.request.registry.settings
     db = settings['db_conn'][settings['db_name']]   
     event.request.db = db
 
-class Root(dict):
+
+class TraversableEntity(object):
+     def __init__(self, parent=None, name=None, db=None):
+         self._db = db
+         self.__parent__ = parent
+         self.__name__ = name
+
+     def __getitem__(self, key):
+        log.debug('key: %s' % key )
+        log.debu('key')
+        doc = self._collection.find_one({'__name__':key})
+        if doc is None:
+            raise KeyError
+        if isinstance(self, UserContainer):
+            obj = User(exists=True)             
+        for k, v in doc.items():
+            setattr(obj, k, v)
+        obj.__parent__ = self
+        obj.__name__ = key
+        return obj
+
+     def items(self):
+         result = []
+         for obj in self._collection.find():
+             obj.__parent__= self
+             obj.__name__ = obj.__name__
+             result.append((obj.__name__, obj))
+         return result
+
+     @property
+     def _collection(self):
+         db = self._db
+         collection = db[self.__name__]
+         return collection
+
+class Root(object):
     __name__ = None
     __parent__ = None
     def __init__(self, request):
-        self.request = request 
+        self.db = request.db 
     def __getitem__(self, key):
         if key == 'user':
-            return UserContainer('user', self)
-        doc = self.request.db.company.find_one({'__name__':key})
+            return UserContainer(parent=self, name='user', db=self.db )
+        doc = self.db.company.find_one({'__name__':key})
         if doc is None:
             raise KeyError
-        
-        company = Company(doc)
+        company = Company(exists=True)             
+        for k, v in doc.items():
+            setattr(company, k, v)
         company.__parent__ = self
-        company.__name__ = key
         return company
 
-def to_dict(cursor):
-    children = {}
-    for doc in cursor:
-         children[doc.get('__name__')] = doc.get('_id') 
-    return children
+    def items(self):
+        result = {}
+        for obj in self.db.company.find():
+            obj['__parent__']= self
+            result[obj['__name__']] = obj
+        return result
+
+
 
 def get_root(request):
     root = Root(request)
-    root.children['user'] = True   
     return root 
 
 
+
+class UserContainer(TraversableEntity):
+    pass
+
 class Company(object):
-    def __init__(self, data): 
-        self.name = data.get('name', None)
+    def __init__(self, data=None, exists=False): 
+        if exists: return
+        self.name = data['name'] 
         self.analysis = data['analysis']
-        try: 
-            self.__name__ = data['__name__']
-        except:
-            self.__name__ = self.slugify(data['name'])
+        self.__name__ = property(slugify(data['__name__']))
     def slugify(self, name):
         filter = { 
     		#// replace & with 'and' for readability
@@ -69,28 +107,15 @@ class Company(object):
         return name	
 
 
-class UserFolder(object):
-    __name__ = 'user'
-    def __init__(self, parent): 
-        self.__parent__ = parent
-        self.request = parent.request
-    def __getitem__(self, key):
-        doc = self.request.db.user.find_one({'username':key})
-        if doc is None:
-            raise KeyError
-        user = User()
-        for k, v in doc.items():
-            setattr(user, k, v)
-        user.__parent__ = self
-        user.__name__ = key
-        return user
 
 class User(object):
-    def __init__(self, doc): 
-        self.username= doc.get('username', None)        
-        self.groups = doc.get('groups', ['commentors'])
-        self.date_created = datetime.datetime.now
-        if doc.get('password'):
-            bcrypt = cryptacular.bcrypt.BCRYPTPasswordManager()
-            self.password = bcrypt.encode(doc.get('password'))
+    def __init__(self, data=None, exists=False):
+        if exists: return
+        self.username= data['username']        
+        self.groups = ['commentors']
+        self.created = datetime.datetime.now()
+        self.password = property(data['password'])
+    def password(self, unencoded):
+        bcrypt = cryptacular.bcrypt.BCRYPTPasswordManager()
+        return bcrypt.encode(unencoded)
 
