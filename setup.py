@@ -11,7 +11,10 @@ requires = ['pyramid',
             'pymongo',
             'docutils', 
             'FormEncode',
-            'cryptacular']
+            'cryptacular',
+            'ElementTree',
+            'Markdown',
+]
 
 setup(name='Finlin',
       version='0.0',

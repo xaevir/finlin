@@ -1,136 +1,194 @@
 html {
-}
+    background: transparent !important;
+	/*
+	border: 10px solid #cd0000;
+	border-top: 5px solid #cd0000;
+	*/
+}	
+
+
 body {
-	/* For breathing room between content and viewport. */
-	/*margin:10px;*/
-    background: url(/img/bg_top_outer.jpg) repeat-x top left;
-
+    /*font-family:verdana,sans-serif;*/
+    color: #000;
+	/*background-color: #f7f7f7;*/
+	line-height: 1.5;
+	background-color: #F7F7F7;
+	color: #5F5F5F;
+	
+	
 }
-
+h1,h2,h3,h4,h5,h6,strong {
+   /*bringing boldness back to headers and the strong element*/
+	color: #666;
+	font-family: tahoma,"trebuchet ms",helvetica,arial,sans-serif;
+	
+}
 h1 {
-	/* 18px via YUI Fonts CSS foundation. */
-	font-size: 138.5%;
+   /*18px via YUI Fonts CSS foundation*/
+    font-size:18px;  
+    font-size: 48px;
+	color: #b22222;
+	margin-top: 0;
+	margin-bottom: .25em;
+	border-bottom: 1px dotted #ccc;
 }
-
 h2 {
-	/* 16px via YUI Fonts CSS foundation. */
-	font-size: 123.1%;
+    /*16px via YUI Fonts CSS foundation*/
+    font-size:123.1%;
+	font-size: 24px;    
 }
-
 h3 {
-	/* 14px via YUI Fonts CSS foundation. */
-	font-size: 108%;
+   /*14px via YUI Fonts CSS foundation*/
+   font-size:108%;  
+}
+h2,h3 {
+   /* top & bottom margin based on font size */
+   margin: 1em 0;
+   line-height: 1.2;
 }
 
-h1,h2,h3 {
-	/* Top & bottom margin based on font size. */
-	margin: 1em 0;
+hr {
+   border: none;
+   height:1px;
+   margin:10px 0;
+   background-color: #262626;
+   color: #262626;
 }
-
-h1,h2,h3,h4,h5,h6,strong,dt {
-	/* Bringing boldness back to headers and the strong element. */
-	font-weight: bold;
-}
-optgroup {
-	font-weight:normal;
-}
-
 abbr,acronym {
-	/* Indicating to users that more info is available. */
-	border-bottom: 1px dotted #000;
-	cursor: help;
-}
-
+   /*indicating to users that more info is available */
+   border-bottom:1px dotted #000;
+   cursor:help;
+} 
 em {
-	/* Bringing italics back to the em element. */
-	font-style: italic;
+   /*bringing italics back to the em element*/
+   font-style:italic;
 }
-
-del {
-	/* Striking deleted phrases. */
-	text-decoration: line-through;
-}
-
 blockquote,ul,ol,dl {
-	/* Giving blockquotes and lists room to breath. */
-	margin: 1em;
+   /*giving blockquotes and lists room to breath*/
+   /* margin:1em; */
 }
-
 ol,ul,dl {
-	/* Bringing lists on to the page with breathing room. */
-	margin-left: 2em;
+   /*bringing lists on to the page with breathing room */
+  /*  margin-left:2em; */
 }
 
 ol li {
-	/* Giving OL's LIs generated numbers. */
-	list-style: decimal outside;
+   /*giving OL's LIs generated numbers*/
+   list-style: decimal inside;  
 }
-
 ul li {
-	/* Giving UL's LIs generated disc markers. */
-	list-style: disc outside;
+   /*giving UL's LIs generated disc markers*/
+   /*list-style: disc outside;*/
 }
-
 dl dd {
-	/* Giving UL's LIs generated numbers. */
-	margin-left: 1em;
+   /*giving UL's LIs generated numbers*/
+   margin-left:1em;
 }
-
-th,td {
-	/* Borders and padding to make the table readable. */
-	border: 1px solid #000;
-	padding: .5em;
-}
-
-th {
-	/* Distinguishing table headers from data cells. */
+dt {
 	font-weight: bold;
-	text-align: center;
 }
 
 caption {
-	/* Coordinated margin to match cell's padding. */
-	margin-bottom: .5em;
-	/* Centered so it doesn't blend in to other content. */
-	text-align: center;
+   /*coordinated marking to match cell's padding*/
+   margin-bottom:.5em;
+   /*centered so it doesn't blend in to other content*/
+   text-align:center;
+}
+p,fieldset,table {
+   /*so things don't run into each other*/
+   margin-bottom:1em;
+	
 }
 
-sup {
-	/* to preserve line-height and selector appearance */
-	vertical-align: super;
+input[type=submit], button {
+    cursor: pointer;
+}
+input[type=text], input[type=password], textarea{
+  /*width:12.25em;
+  *width:11.9em;*/
+}
+input, select {
+   padding: 2px;
 }
 
-sub {
-	/* to preserve line-height and selector appearance */
-	vertical-align: sub;
+button, input[type=submit] {
+	/*padding: 4px 10px;*/
 }
 
-p,
-fieldset,
-table,
-pre {
-	/* So things don't run into each other. */
-	margin-bottom: 1em;
-}
-/* Opera requires 1px of passing to render with contemporary native chrome */
-button,
-input[type="checkbox"],
-input[type="radio"],
-input[type="reset"],
-input[type="submit"] {
-	padding:1px;
+/* only works if img is a block */
+a img {
+    text-decoration: none;
 }
 
+/* if you change, the link color in the caption 
+   must also be changed */
 a {
-	color:#0033CC;
+	color:#0181E3;
 	text-decoration: none;
 }
 a:hover {
     text-decoration: underline;
 }
-/*----------------------------------------------------------------------------
-                                                                       Classes
-----------------------------------------------------------------------------*/
+
+p {
+	/*font-size: 12px;*/
+}
+/*-----------------------------------------------------------------------------------------
+                                                                          TABLE
+-------------------------------------------------------------------------------------------*/
+table{
+    border-collapse: separate;
+    border-spacing: 0;
+	border:1px solid #7F7F7F !important;
+	background-color: #fff;	
+	color: #000;
+	font-family: arial;
+}
+
+thead {
+	border-spacing: 0;
+}
+
+th {
+	font-weight: normal;
+	background: #D8D8DA url(http://yui.yahooapis.com/2.8.1/build/assets/skins/sam/sprite.png) repeat-x 0 0;
+	text-align:center;
+	border-right:1px solid #CBCBCB;
+	border-bottom:1px solid #7F7F7F;
+}
+
+tr.odd {
+	background-color:#EDF5FF;
+	
+}
+th,td {
+    padding:4px 10px;
+    vertical-align: top; 
+}
+
+td {
+	border-right: 1px solid #CBCBCB;
+}
+
+tr {
+	align: top;
+}
+
+
+/*-----------------------------------------------------------------------------------------
+                                                                          CLASSES
+-------------------------------------------------------------------------------------------*/
+
+.noDisplay {
+	display: none;
+}
+
+.clear-both {
+    clear: both;
+}
+.center {
+    text-align: center;
+}
 
 .clearfix:after {
     content:".";
@@ -149,36 +207,331 @@ a:hover {
     .clearfix {display:block;} /* ie7 clear fix */
 /* End hide from IE-mac */
 
-span.error-message, span.required {
-    font-weight: bold;
-    color: #f00;
+.has-disc li{
+   list-style-type: disc;     
 }
-#flash {
-    background: #ffc;
-    padding: 5px;
-    border: 1px dotted #000;
-    margin-bottom: 20px;
-}
-#flash p { margin: 0px; padding: 0px; }
 
-/*----------------------------------------------------------------------------
-                                                                MAIN DIV SETUP
-----------------------------------------------------------------------------*/
-#doc {
-    background-color: #fff;
-    border: 7px solid #8cd3ff;
+.rounded {
+	-moz-border-radius:7px;
+	-webkit-border-radius:7px;
 }
-   
+
+.spaced li{
+	margin-bottom: 1em;
+}
+
+.red {
+	color: #cd0000;
+}
+
+.footnote {
+	font-size: 10px;
+	text-decoration: none;
+}
+
+h2 a {
+	color:#0181E3;
+	text-decoration: none;
+}
+
+h2 a:hover {
+	background-color: #eef4ff;
+	color: #222;
+}
+
+.learn-more {
+	text-align: center;
+}
+
+.dropcap {
+	font-size: 3em;
+	float: left;
+	font-weight: bold;
+	margin:0.13em 0.2em 0 0;  
+    line-height:0.7;
+    font-family: Georgia;
+}
+
+/*___________________________________________________________Main Div Setup_*/
+
+#doc2 {
+	margin-top: 20px;
+	font-size: 13px;
+	width: 950px;
+
+}
+
+#logo {
+	float: left;
+}
+
+#bull-bear {
+	float: right;
+}
+#bull-bear span{
+    font-family: georgia;
+    font-size: 18px;
+    font-style: italic;
+}
 #hd {
-    margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
-#ft {
-    text-align: center;
+#bd {
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border: 1px solid #e6e6e6;
+	background-color: #fff;
+	padding:18px;
+}
+
+#footer {
+	font-size: 11px;
+	text-align: center;
 	margin-top: 20px;
 	margin-bottom: 20px;
 	clear: both;
 }
+
+/*__________________________________________________________Main Navigation_*/
+
+#nav {
+	background: url(/static/navigation.png) no-repeat 0 0;
+	clear: both;
+	width: 950px;
+	height: 46px;
+	padding-left: 20px;
+}
+
+#nav ul{
+	padding-top: 4px;
+}
+
+#nav li {
+	float: left;
+	margin-left: 20px;
+	margin-right: 50px;
+}
+
+#nav a{
+	font-size: 14px;
+	display:block;
+	text-decoration: none;
+	color: #222;
+	padding: 8px 10px;
+	padding-top: 6px;
+	border: 1px solid #eee;
+}
+
+#nav a:hover {
+	background: #fff url(/static/nav-hover.png) repeat-x top left;
+	border: 1px solid #dcdcdc;
+}
+
+/*-----------------------------------------------------------------------------------------
+                                                                          HOME
+-------------------------------------------------------------------------------------------*/
+#banner-inner {
+	
+	
+}
+
+#banner {
+	margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#home-bd {
+	/*
+	
+	height: 671px;
+	margin-top: 10px;
+	position: relative;
+	*/
+}
+
+#index h1 {
+	text-align: center;
+	font-size: 48px;
+	font-weight: bold;
+	color: #000;
+	color: #1690a7;
+	margin-bottom: 0;
+	margin-top: 10px;
+	border: none;
+}
+
+#index h2 {
+	font-size: 42px;
+	color: #1690a7;
+	/*letter-spacing: -.03em;*/
+	margin-bottom: .2em;
+	margin-top: 0;
+	text-align: center;
+	
+}
+
+#index h4 {
+	font-size: 18px;
+}
+
+#index h3{
+	font-size: 20px;
+	margin-top: 0;
+	margin-bottom: 1em;
+}
+
+.panel {
+	-moz-border-radius:7px;
+	-webkit-border-radius:7px;
+	float: left;
+	height: 480px;
+	border: 1px solid #e6e6e6;
+	background-color: #fff;
+	padding:18px;
+}
+
+.panel1, .panel2, .panel3 {
+	/*
+	background:#E6E6E6 url(/images/panel-bg-grey.png) repeat-x left top;
+	/*border:5px solid #E6E6E6;*/
+	/*
+	margin-bottom:70px;
+	*/
+}
+
+.panel-inner {
+	/*
+	background:#FFFFFF url(/images/panel-bg.png) repeat-x center bottom;
+	border-bottom:1px solid #999999;
+	
+	padding-bottom: 0;
+	height: 97.5%;*/
+}	
+
+.panel1 {
+	margin-right:.9%;
+	width:52%;	
+}
+
+.panel2 {
+	width: 39%;
+}
+
+.panel1 p{
+	/*font-size: 15px;*/
+}
+
+.module-top {
+	background: url(/images/gray-bg.png) repeat-x bottom left;
+	border: 2px solid #e6e6e6;
+	/*padding-left: 10px;*/
+	-webkit-border-top-left-radius:7pxx;
+	-moz-border-radius-topleft:7px;
+	-webkit-border-top-right-radius:7pxx;
+	-moz-border-radius-topright:7px;
+	padding-left: 18px;
+}
+
+#index ol {
+	margin-left: 25px;
+	 
+}
+#index ol li {
+	list-style-position: outside;
+	font-size: 16px;
+}
+
+#index ol li p {
+	font-family: verdana;
+	font-style: normal;
+	color: #2c2c2c;
+	font-size: 15px;
+}
+
+.module-body {
+	/*
+	background: url(/images/gradient-bottom.png) repeat-x bottom left;
+	border: 1px solid #666;
+	-moz-border-radius:15px;
+	-webkit-border-radius:15px;
+	background-color: #fff;
+	margin-bottom: 5px;
+	padding: 5px 18px 4px 18px;
+	position: absolute;
+	*/
+}
+
+/*-----------------------------------------------------------------------------------------
+                                                                          PRICING
+-------------------------------------------------------------------------------------------*/
+#pricing .panel{
+	-moz-border-radius:7px;
+	-webkit-border-radius:7px;
+	paddding: 5px;
+	background:#CBCBCB url(/images/panel-bg-grey.png) repeat-x left top;
+	border:5px solid #F6F6F6;
+	margin-bottom:70px;
+	width: 750px;
+}
+
+#pricing .panel-inner {
+	background:#FFFFFF url(/images/panel-bg.png) repeat-x center bottom;
+	border-bottom:1px solid #999999;
+	padding:1em 1.5em;
+	padding-bottom: 0;
+	height: 97.5%;
+}	
+
+.panel-inner li {
+	margin-bottom: 1em;
+}
+
+/*-----------------------------------------------------------------------------------------
+                                                                          WHAT WE DO
+-------------------------------------------------------------------------------------------*/
+
+#what-we-do .content li {
+	margin-bottom: 1em;
+	list-style-position: outside;
+	margin-left: 1.5em;
+}
+
+/*-----------------------------------------------------------------------------------------
+                                                                          Pricing
+-------------------------------------------------------------------------------------------*/
+
+#pricing .content li{
+	list-style-position:outside;
+	margin-bottom:1em;
+	margin-left:1.5em;
+}
+
+/*-----------------------------------------------------------------------------------------
+                                                                          Contact
+-------------------------------------------------------------------------------------------*/
+
+#contact input[type=text], 
+#contact select, 
+#contact textarea {
+   width:295px;
+   border: none;
+   background: none;
+}
+
+#ft {
+    padding-top: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	clear: both;
+    position: relative;
+}
+#ft #swag{
+    position: relative;
+    top: -10px;
+}
+
+
 
 /*----------------------------------------------------------------------------
                                                               New Company form
@@ -193,6 +546,7 @@ span.error-message, span.required {
 #company_form textarea{
    width:700px; 
    height: 700px;
+   font-family: monospace;
 }
 
 /*----------------------------------------------------------------------------
@@ -219,6 +573,62 @@ span.error-message, span.required {
 #login_form input[type="password"] {
     font-size: 16px;
     width: 220px
+}
+
+
+/*----------------------------------------------------------------------------
+                                                              Comment Form
+----------------------------------------------------------------------------*/
+#comment-form textarea{
+   width:500px; 
+   height: 100px;
+}
+
+#comment-form div {
+    margin-top: 10px;
+}
+
+.button {
+    font-size: 14px;
+    font-weight: bold;
+    padding: .5em 1.2em .55em !important;
+    cursor: pointer;
+}
+
+.shadow {
+    -moz-box-shadow: 2px 2px 2px #888;
+    -webkit-box-shadow: 2px 2px 2px #888;
+    box-shadow: 2px 2px 2px #888;
+    behavior: url(/PIE.htc);
+}
+
+.roundify{
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    behavior: url(/PIE.htc);
+}   
+
+.blue {
+	color: #fff;
+	border: solid 1px #0076a3;
+	background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
+	background: -moz-linear-gradient(top,  #00adee,  #0078a5);
+    -pie-background: linear-gradient(#00adee,  #0078a5 top);
+}
+
+.blue:hover {
+	background: -webkit-gradient(linear, left top, left bottom, from(#0095cc), to(#00678e));
+	background: -moz-linear-gradient(top,  #0095cc,  #00678e);
+    background: linear-gradient(#0095cc, #00678e top);
+    -pie-background: linear-gradient(#0095cc, #00678e top);
+}
+
+.blue:active {
+	background: -webkit-gradient(linear, left top, left bottom, from(#0078a5), to(#00adee));
+	background: -moz-linear-gradient(top,  #0078a5,  #00adee);
+    background: linear-gradient(#0078a5,  #00adee top);
+    -pie-background: linear-gradient(#0095cc, #00678e top);
 }
 
 

@@ -2,51 +2,83 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <title>Finlin</title>
-  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-  <link rel="shortcut icon"
+    <title>Finlin</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <link rel="shortcut icon"
         href="${request.static_url('finlin:static/favicon.ico')}" />
-  <link rel="stylesheet"
+    <link rel="stylesheet"
         href="${request.static_url('finlin:static/reset-fonts-grids.css')}"
         type="text/css" media="screen" charset="utf-8" />
 
-  <link rel="stylesheet"
+    <link rel="stylesheet"
         href="${request.static_url('finlin:static/main.css')}"
         type="text/css" media="screen" charset="utf-8" />
-</head>
+
+    <script src="${request.static_url('finlin:static/js/jquery.js')}"></script>
+    <script src="${request.static_url('finlin:static/js/cufon-yui.js')}"></script>
+    <script src="${request.static_url('finlin:static/js/gotham_rounded_350.font.js')}"></script>
+    <script src="${request.static_url('finlin:static/js/Bembo_400-Bembo_700.font.js')}"></script>
+    <script src="${request.static_url('finlin:static/js/Bembo_400-Bembo_700.font.js')}"></script>
+
+    <script type="text/javascript">
+        Cufon.replace('#nav a', { fontFamily: 'gotham rounded' });
+        Cufon.replace('h1', { fontFamily: 'Bembo' });
+        Cufon.replace('#index h2', { fontFamily: 'Bembo' });
+        Cufon.replace('#index h3', { fontFamily: 'Bembo' });
+        Cufon.replace('.bembo', { fontFamily: 'Bembo' });
+    </script>
+
+
+    </head>
 
 <body>
-  <div id="doc">
-
-    <div id="hd">
-      <a href="${request.application_url}" id="logo"><img 
-        src="${request.static_url('finlin:static/logo.png')}" style="width: 78px; 
-        height: 66px" /></a>
+<div id="doc2">
+    <div id="hd" class="clearfix">
+        <a id="logo" href="${request.application_url}">
+            <img src="${request.static_url('finlin:static/logo.png')}" />
+        </a>
+		<div id="bull-bear">
+            <a href="/">
+                <img src="/static/bull-heart-bear-small.jpg" alt="bull penny bear second logo" />    
+            </a><br />
+            <span>&ldquo;Virtus et Honor&rdquo;</span>
+        </div>
+        <div id="nav">
+            <ul class="clearfix">
+                <li>
+                    <a class="roundify" href="${request.application_url}">Home</a>
+                </li>
+                <li> <a class="roundify" href="${request.application_url}">Company Analyses</a> </li>
+                <li> <a class="roundify" href="${request.application_url}">About</a> </li>
+                <li> <a class="roundify" href="${request.application_url}">Contact</a>  </li> 
+            </ul>
+        </div>    
     </div>
-
-      <div id="flash" 
-        tal:define="message request.session.pop_flash()"
-        tal:condition="message">
-        <span class="message"
-              tal:repeat="flash message"
-              tal:content="flash" />
-      </div>
-
     <div id="bd">
-      <div metal:define-slot="body">
-        This is the body.
-      </div>
+        <div id="flash" 
+          tal:define="message request.session.pop_flash()"
+          tal:condition="message">
+          <span class="message"
+                tal:repeat="flash message"
+                tal:content="flash" />
+        </div>
+        <div metal:define-slot="body">
+          This is the body.
+        </div>
     </div>
-
-    <p>
-      <a href="${request.application_url + '/new_company'}">Add Company</a>
-    </p>
-
     <div id="ft">
-      <p>
-        &copy; Finlin 2011
-      </p>        
+        <p style="float: left;">
+            &copy; Finlin 2011
+        </p>
+        <p style="float: right; padding-right:20px;" id="swag">
+            <img src="${request.static_url('finlin:static/pyramid.png')}"/>
+            <img src="${request.static_url('finlin:static/mongodb.png')}"/>
+         </p>
+
+        <p style="float:right; padding-right: 7px;">
+            Powered by:
+        </p>
     </div>
-  </div>
+</div>
 </body>
 </html>

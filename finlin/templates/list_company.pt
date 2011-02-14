@@ -3,8 +3,8 @@
     <li tal:repeat="item context.items()">
       ${item}
         <a href="${request.application_url}/${item}">view</a>
-        <a href="${request.application_url}/${item}/edit_company">edit</a>
-        <a href="${request.application_url}/${item}/delete_company">delete</a>
+        <a href="${request.application_url}/${item}/edit">edit</a>
+        <a href="${request.application_url}/${item}/delete">delete</a>
     </li>
   </ul>
 </html>

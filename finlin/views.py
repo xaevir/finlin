@@ -14,13 +14,24 @@ import cryptacular.bcrypt
 import formencode
 from formencode import validators
 from formencode import htmlfill
-from docutils.core import publish_parts
 
+import markdown
 from finlin.models import Company
 from finlin.models import User
 
 import logging
+from pprint import pprint
 log = logging.getLogger(__name__)
+
+
+class UniqueCompanyName(formencode.FancyValidator):
+    def _to_python(self, value, state):
+        result = state.db.company.find_one({'name':value})
+        if result is not None:
+            raise formencode.Invalid(
+                'That company name already exists',
+                 value, state)
+        return value
 
 class CompanyForm(formencode.Schema):
     allow_extra_fields = True
@@ -31,19 +42,18 @@ class CompanyForm(formencode.Schema):
             'empty':'Please enter some content for the page.'
         }
     )
-    name = validators.String(not_empty=True)
-
+    name = formencode.All(validators.String(not_empty=True), 
+                             UniqueCompanyName()) 
 
 @view_config(context='finlin.models.Root',
             renderer='finlin:templates/home_page.pt')
 def home_page(context, request):
-    log.debug('viewing the homepage')
     main = get_renderer('templates/master.pt').implementation()
     return dict(main = main)    
 
 
 @view_config(context='finlin.models.Root',
-            name='list_company',
+            name='list',
             renderer='finlin:templates/list_company.pt')
 def list_company(context, request):
     main = get_renderer('finlin:templates/master.pt').implementation()
@@ -51,81 +61,86 @@ def list_company(context, request):
 
 
 @view_config(context='finlin.models.Company',
-            renderer='finlin:templates/show_company.pt')
-def show_company(context, request):
-    main = get_renderer('templates/master.pt').implementation()
-    edit_url = resource_url(context, request, 'edit_company')
-    context.analysis = publish_parts(context.analysis, writer_name='html')['html_body']
-    return dict(main = main)    
+             renderer='finlin:templates/view_company.pt')
+def view_company(context, request):
+    context['analysis']  = markdown.markdown(context['analysis'])
+    return {
+           'main': get_renderer('templates/master.pt').implementation(),
+           'comment_form': get_renderer('templates/comment_form.pt').implementation(),
+           }
 
 
-@view_config(name='new_company', context='finlin.models.Root')
-def new_company(context, request):
-    main = get_renderer('templates/master.pt').implementation()
-    save_url = resource_url(context, request, 'new_company')
-    def render_page():
-        return render('finlin:templates/company_form.pt',
-                      {'main':main, 'save_url':save_url}, 
-                      request=request)
+@view_config(name='add', context='finlin.models.Root')
+def add_company(context, request):
+    tpl = 'finlin:templates/company_form.pt'
+    tpl_vars = { 
+        'main': get_renderer('templates/master.pt').implementation(),
+        'save_url': request.path_url,
+        'submit_label': 'add company'} 
+
     if 'form.submitted' in request.params:
         schema = CompanyForm() 
         try:
-            form = schema.to_python(request.params)
+            params = schema.to_python(request.params, request)
         except formencode.Invalid, e:
             html = htmlfill.render(
-                                render_page(),
+                                render(tpl, tpl_vars, request),
                                 defaults=e.value,
                                 errors=e.error_dict) 
             return Response(html)
         else:
-            company = Company(form)
-            request.db.company.save(company.__dict__)
-            request.session.flash(company.name + ' created')
+            company = Company(params)
+            request.db.company.save(company)
+            request.session.flash(company['name'] + ' created')
+            log.debug(company)
             return HTTPFound(location = resource_url(
                                     context, 
                                     request, 
                                     company.__name__))
-    return Response(render_page())
+    return Response(render(tpl, tpl_vars, request))
 
 
-
-@view_config(name='edit_company', context='finlin.models.Company')
+@view_config(name='edit', context='finlin.models.Company')
 def edit_company(context, request):
-    main = get_renderer('templates/master.pt').implementation()
-    save_url = resource_url(context, request, 'edit_company')
-    def render_page():
-        return render('finlin:templates/company_form.pt',
-                      {'main':main, 'save_url':save_url}, 
-                      request=request)
+    tpl = 'finlin:templates/company_form.pt'
+    tpl_vars = { 
+        'main': get_renderer('templates/master.pt').implementation(),
+        'save_url': request.path_url,
+        'submit_label': 'edit'} 
     if 'form.submitted' in request.params:
         schema = CompanyForm() 
+        schema.fields['name'] = validators.String(not_empty=True)
         try:
-            form = schema.to_python(request.params)
-            company = Company(form)
-            request.db.company.save(company.__dict__)
-            request.session.flash(company.name + ' saved')
-            return HTTPFound(location = resource_url(
-                                    context.__parent__, 
-                                    request, 
-                                    company.__name__))
+            params = schema.to_python(request.params, request)
         except formencode.Invalid, e:
-            html = htmlfill.render(
-                                render_page(),
+            htmlfilled = htmlfill.render(
+                                render(tpl, tpl_vars, request),
                                 defaults=e.value,
                                 errors=e.error_dict) 
-            return Response(html)
-    html = htmlfill.render(render_page(), defaults=context.__dict__) 
+            return Response(htmlfilled)
+        else:
+            for key, value in params.items():
+                context[key] = value
+            request.db.company.save(context)
+            request.session.flash(context['name'] + ' saved')
+            return HTTPFound(location = resource_url(
+                                            context.__parent__, 
+                                            request, 
+                                            context.__name__))
+    html = htmlfill.render(
+                      render(tpl, tpl_vars, request),
+                      defaults=context,)
     return Response(html)
 
 
-@view_config(name='delete_company', context='finlin.models.Company')
+@view_config(name='delete', context='finlin.models.Company')
 def delete_company(context, request):
     request.db.company.remove({'__name__':context.__name__})
-    request.session.flash(context.name + ' deleted')
+    request.session.flash(context['name'] + ' deleted')
     return HTTPFound(location = resource_url(
                                     context.__parent__, 
                                     request, 
-                                    'list_company'))
+                                    'list'))
 
 
 class UniqueUsername(formencode.FancyValidator):
@@ -137,7 +152,7 @@ class UniqueUsername(formencode.FancyValidator):
                  value, state)
         return value
 
-class CreateAccountForm(formencode.Schema):
+class AddAccountForm(formencode.Schema):
     allow_extra_fields = True
     filter_extra_fields = True
     username = formencode.All(validators.PlainText(not_empty=True),
@@ -148,70 +163,85 @@ class CreateAccountForm(formencode.Schema):
                               validators.MaxLength(50),
                               validators.MinLength(3))
 
-@view_config(name='create_account', context='finlin.models.Root')
-def create_account(context, request):
-    def render_page():
-        return render('finlin:templates/login_form.pt', 
-            dict(
-                main = get_renderer('templates/master.pt').implementation(),
-                save_url = resource_url(context, request, 'create_account'), 
-                submit_label = 'Create Account'
-                ), 
-            request=request)
+@view_config(name='add_account', context='finlin.models.Root')
+def add_account(context, request):
+    tpl = 'finlin:templates/login_form.pt'
+    tpl_vars = { 
+        'main': get_renderer('templates/master.pt').implementation(),
+        'save_url': resource_url(context, request, self.__name__),
+        'submit_label': 'create account'} 
+
     if 'form.submitted' in request.params:
         schema = CreateAccountForm() 
         try:
-            form = schema.to_python(request.params, request)
-            user = User(form)
-            request.db.user.save(user.__dict__)
-            request.session.flash('Welcome ' + user.username)
-            return HTTPFound(location = request.application_url)
+            params = schema.to_python(request.params, request)
         except formencode.Invalid, e:
             html = htmlfill.render(
-                                render_page(),
+                                render(tpl, tpl_vars, request),
                                 defaults=e.value,
                                 errors=e.error_dict) 
             return Response(html)
-    return Response(render_page())
+        else:
+            params['created'] = datetime.datetime.now()
+            params['password']= User.set_password(params['password']) 
+            request.db.user.save(params)
+            request.session.flash('Welcome ' + params['username'])
+            return HTTPFound(location = request.application_url)
+    return Response(render(tpl, tpl_vars, request))
 
 
-@view_config(context='finlin.models.Root', name='login',
-             renderer='templates/login_form.pt')
-@view_config(context='pyramid.exceptions.Forbidden', 
-             renderer='templates/login_form.pt')
+class Login(formencode.Schema):
+    allow_extra_fields = True
+    filter_extra_fields = True
+    name = formencode.All(validators.PlainText(not_empty=True))
+    password = formencode.All(validators.PlainText(not_empty=True))
+ 
+@view_config(context='finlin.models.Root', name='login')
+@view_config(context='pyramid.exceptions.Forbidden')
 def login(context, request):
     login_url = resource_url(request.context, request, 'login')
     referrer = request.url
     if referrer == login_url:
         referrer = '/' # never use the login form itself as came_from
     came_from = request.params.get('came_from', referrer)
-    username = ''
-    password = ''
+
+    tpl = 'finlin:templates/login_form.pt'
+    tpl_vars = { 
+        'main': get_renderer('templates/master.pt').implementation(),
+        'save_url': login_url,
+        'came_from': came_from,
+        'submit_label': 'Login'} 
+
     if 'form.submitted' in request.params:
-        try: 
-            username = request.params['username']
-            password = request.params['password']
-            doc = request.db.user.find_one({'username':username})
+        schema = LoginForm() 
+        try:
+            params = schema.to_python(request.params, request)
+        except (formencode.Invalid), e:
+            htmlfilled = htmlfill.render(   
+                                   render(tpl, tpl_vars, request),
+                                   defaults=e.value,
+                                   errors=e.error_dict) 
+            return Response(htmlfilled)
+        try:
+            doc = collection.find_one({'username':params['username']})
             if doc is None:
                 raise Exception
-            bcrypt = cryptacular.bcrypt.BCRYPTPasswordManager()
-            result = bcrypt.check(doc['password'], password)   
-            if result is None:
-                raise Exception 
-            headers = remember(request, username)
-            return HTTPFound(location = came_from, headers = headers)
-        except:
-            message = 'The username or password you provided does not match our records.'
-            request.session.flash(message)
-    return dict(
-        main = get_renderer('templates/master.pt').implementation(),
-        save_url = login_url,
-        came_from = came_from,
-        username = username,
-        password = password,
-        submit_label = 'Login'
-        ) 
-       
+            result = User.check_password(doc['password'], value)
+            if result is False:
+                raise Exception
+        except (ValueError, TypeError, Exception): 
+            htmlfilled = htmlfill.render(
+                                render(tpl, tpl_vars, request),
+                                defaults=params)
+            message = ['The username or password you ',
+                       'provided does not match our records.']
+            request.session.flash(''.join(message))
+            return Response(htmlfilled)
+        else:
+           headers = remember(request, username)
+           return HTTPFound(location = came_from, headers = headers)
+    return Response(render(tpl, tpl_vars, request))
+
 
 class CommentForm(formencode.Schema):
     allow_extra_fields = True
@@ -222,34 +252,43 @@ class CommentForm(formencode.Schema):
     email = formencode.All(validators.Email(not_empty=True),
                               validators.MaxLength(100),
                               validators.MinLength(3))
-    website = formencode.All(validators.URL(add_http=True),
-                              validators.MaxLength(500))
     comment = formencode.All(validators.String(not_empty=True),
                               validators.MaxLength(3000))
-    company_name = formencode.All(validators.PlainText(not_empty=True),
-                              validators.MaxLength(500))
+    website = formencode.All(validators.URL(add_http=True))
 
-@view_config(name='comment', context='finlin.models.Company') 
-def comment(context, request): 
-    def render_page(): 
-        return render('finlin:templates/comment.pt', dict(
-                save_url = resource_url(context, request, 'comment'), 
-                submit_label = 'Post Comment'
-                ), 
-            request=request)
+
+def comment_form(context, request):
+     return render(
+        'templates/comment_form.pt',
+        dict(
+            save_url= resource_url(context, request, 'add_comment'),
+            submit_label= 'add comment',
+            ), 
+        request,
+        )
+
+
+
+@view_config(name='add_comment', context='finlin.models.Root')
+def add_comment(context, request):
     if 'form.submitted' in request.params:
         schema = CommentForm() 
         try:
-            form = schema.to_python(request.params, request)
-            user = User(form)
-            request.db.user.save(user.__dict__) request.session.flash('Welcome ' + user.username)
-            return HTTPFound(location = request.application_url)
+            params = schema.to_python(request.params)
         except formencode.Invalid, e:
             html = htmlfill.render(
-                                render_page(),
+                                render(tpl, tpl_vars, request),
                                 defaults=e.value,
                                 errors=e.error_dict) 
             return Response(html)
-    return Response(render_page())
+        else:
+            params['created'] = datetime.datetime.now()
+            request.db.company.save(params)
+            request.session.flash(params['name'] + ' created')
+            return HTTPFound(location = resource_url(
+                                    context, 
+                                    request, 
+                                    company.__name__))
+    return Response(render(tpl, tpl_vars, request))
 
- 
+
