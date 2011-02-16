@@ -9,18 +9,21 @@ html {
 
 body {
     /*font-family:verdana,sans-serif;*/
-    color: #000;
+    color: #303030;
 	/*background-color: #f7f7f7;*/
 	line-height: 1.5;
 	background-color: #F7F7F7;
-	color: #5F5F5F;
+    font-size: 100%;
+    font-family: 'Times New Roman';
 	
 	
 }
 h1,h2,h3,h4,h5,h6,strong {
    /*bringing boldness back to headers and the strong element*/
-	color: #666;
-	font-family: tahoma,"trebuchet ms",helvetica,arial,sans-serif;
+	font-family: 'Times New Roman', tahoma,"trebuchet ms",helvetica,arial,sans-serif;
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: .3em;
 	
 }
 h1 {
@@ -28,14 +31,14 @@ h1 {
     font-size:18px;  
     font-size: 48px;
 	color: #b22222;
-	margin-top: 0;
-	margin-bottom: .25em;
+	/*margin-bottom: .25em;*/
 	border-bottom: 1px dotted #ccc;
+    font-weight: normal;
 }
 h2 {
     /*16px via YUI Fonts CSS foundation*/
     font-size:123.1%;
-	font-size: 24px;    
+    font-size: 1.6em;
 }
 h3 {
    /*14px via YUI Fonts CSS foundation*/
@@ -43,8 +46,7 @@ h3 {
 }
 h2,h3 {
    /* top & bottom margin based on font size */
-   margin: 1em 0;
-   line-height: 1.2;
+   margin-bottom: .3;
 }
 
 hr {
@@ -132,6 +134,7 @@ a:hover {
 
 p {
 	/*font-size: 12px;*/
+    font-size: 1.3em;
 }
 /*-----------------------------------------------------------------------------------------
                                                                           TABLE
@@ -256,7 +259,6 @@ h2 a:hover {
 
 #doc2 {
 	margin-top: 20px;
-	font-size: 13px;
 	width: 950px;
 
 }
@@ -285,6 +287,27 @@ h2 a:hover {
 	padding:18px;
 }
 
+#company-view #analysis{
+    width: 750px;
+}
+#company-view #toc-body {
+    border-left: 1px dotted #CCCCCC;
+    border-bottom: 1px dotted #ccc;
+    float: right;
+    width: 200px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+
+}
+#company-view #toc-body li{
+    padding-bottom: 12px;
+}
+
+
+#company-view #toc-body a {
+    color: #666;
+    border-bottom: 1px dotted #666;
+}
 #footer {
 	font-size: 11px;
 	text-align: center;

@@ -9,11 +9,11 @@ CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 requires = ['pyramid', 
             'WebError', 
             'pymongo',
-            'docutils', 
             'FormEncode',
             'cryptacular',
             'ElementTree',
             'Markdown',
+            'BeautifulSoup',
 ]
 
 setup(name='Finlin',

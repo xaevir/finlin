@@ -1,3 +1,4 @@
+from pyramid.threadlocal import get_current_request 
 import logging
 from pprint import pprint
 import re
@@ -7,11 +8,11 @@ import cryptacular.bcrypt
 log = logging.getLogger(__name__)
 
 
-def Mongo(event):
-    settings = event.request.registry.settings
-    db = settings['db_conn'][settings['db_name']]   
-    event.request.db = db
-
+def get_db():
+    req =  get_current_request()
+    return req.db 
+ 
+  
 
 class Root(object):
     __name__ = None
@@ -21,7 +22,7 @@ class Root(object):
     def __getitem__(self, key):
         if key == 'user':
             return UserContainer(parent=self, name='user', db=self.db )
-        doc = self.db.company.find_one({'__name__':key})
+        doc = self.db.company.find_one({'slug':key})
         if doc is None:
             raise KeyError
         return Company(doc, self)             
@@ -30,7 +31,7 @@ class Root(object):
         result = {}
         for obj in self.db.company.find():
             obj['__parent__']= self
-            result[obj['__name__']] = obj
+            result[obj['slug']] = obj
         return result
 
 
@@ -40,13 +41,14 @@ def get_root(request):
 
 class Company(dict):
     def __init__ (self, data, parent=None):
-        self['_id'] = data.get('_id', None) 
-        self['name'] = data['name']
+        self['name']     = data['name']
+        self['slug']     = self.slugify(self['name'])
         self['analysis'] = data['analysis'] 
-        self.__name__ = self['__name__'] = self.slugify(self['name'])
-        self['created'] = data.get('created', 
-                                    datetime.datetime.now()) 
-        self.__parent__ = parent 
+        self['_id']      = data.get('_id') 
+        self['created']  = data.get('created', datetime.datetime.now()) 
+        
+        self.__name__    = self['slug']
+        self.__parent__  = parent 
 
     def slugify(self, name):
         filter = { 
@@ -58,6 +60,25 @@ class Company(dict):
             name = re.sub(k, v, name)
         name = name.strip('_') 
         return name	
+
+class Comment(dict):
+    def __init__ (self, data, parent_context):
+        self.__parent__   = parent_context
+        self['_id']       = data.get('_id') 
+        self['body']      = data['body']
+        self['created']   = data.get('created', datetime.datetime.now()) 
+        self['company_id']  = parent_context['_id']
+        self['username']  = data['username']
+        self['path']     =  data.get('path', "")
+        try:
+            self['parent_id'] = data['parent_id']
+            parent            = get_db().comment.find_one(self['parent_id'])   
+            self['depth']     = parent['depth'] + 1
+            self['path']      = parent['path'] + ":" + parent['_id']
+        except KeyError: pass
+            
+    def save(self):
+        get_db().comment.save(self)
 
 class UserContainer(object):
     pass
@@ -71,3 +92,5 @@ class User(object):
     def check_password(encoded, password):
         bcrypt = cryptacular.bcrypt.BCRYPTPasswordManager()
         return bcrypt.check(encoded, password)
+
+

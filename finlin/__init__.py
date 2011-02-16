@@ -28,7 +28,6 @@ def main(global_config, **settings):
         raise ValueError("No 'mongodb_uri' in application configuration.")
 
     my_session_factory = UnencryptedCookieSessionFactoryConfig('batman')
-    logging.debug('about to config ')
     conn = pymongo.Connection(mongodb_uri)
     config = Configurator(root_factory=get_root,
                           settings=settings,

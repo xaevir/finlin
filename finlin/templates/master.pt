@@ -13,7 +13,7 @@
     <link rel="stylesheet"
         href="${request.static_url('finlin:static/main.css')}"
         type="text/css" media="screen" charset="utf-8" />
-
+    <!-- this is a test -->
     <script src="${request.static_url('finlin:static/js/jquery.js')}"></script>
     <script src="${request.static_url('finlin:static/js/cufon-yui.js')}"></script>
     <script src="${request.static_url('finlin:static/js/gotham_rounded_350.font.js')}"></script>
@@ -37,12 +37,6 @@
         <a id="logo" href="${request.application_url}">
             <img src="${request.static_url('finlin:static/logo.png')}" />
         </a>
-		<div id="bull-bear">
-            <a href="/">
-                <img src="/static/bull-heart-bear-small.jpg" alt="bull penny bear second logo" />    
-            </a><br />
-            <span>&ldquo;Virtus et Honor&rdquo;</span>
-        </div>
         <div id="nav">
             <ul class="clearfix">
                 <li>
@@ -62,7 +56,7 @@
                 tal:repeat="flash message"
                 tal:content="flash" />
         </div>
-        <div metal:define-slot="body">
+        <div metal:define-slot="body" id="bd-content">
           This is the body.
         </div>
     </div>

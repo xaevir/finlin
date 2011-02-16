@@ -16,12 +16,20 @@ from formencode import validators
 from formencode import htmlfill
 
 import markdown
+from BeautifulSoup import BeautifulSoup, Tag
+
 from finlin.models import Company
 from finlin.models import User
+from finlin.models import Comment
 
 import logging
 from pprint import pprint
 log = logging.getLogger(__name__)
+
+md = markdown.Markdown(
+        extensions=['toc'], 
+        safe_mode='remove',
+)
 
 
 class UniqueCompanyName(formencode.FancyValidator):
@@ -54,20 +62,86 @@ def home_page(context, request):
 
 @view_config(context='finlin.models.Root',
             name='list',
-            renderer='finlin:templates/list_company.pt')
+            renderer='finlin:templates/company_list.pt')
 def list_company(context, request):
     main = get_renderer('finlin:templates/master.pt').implementation()
     return dict(main = main)    
 
 
-@view_config(context='finlin.models.Company',
-             renderer='finlin:templates/view_company.pt')
+class CommentForm(formencode.Schema):
+    allow_extra_fields = True
+    filter_extra_fields = True
+    username = formencode.All(validators.PlainText(not_empty=True),
+                              validators.MaxLength(50),
+                              validators.MinLength(2))
+    email = formencode.All(validators.Email(not_empty=True),
+                              validators.MaxLength(100),
+                              validators.MinLength(3))
+    body = formencode.All(validators.String(not_empty=True),
+                              validators.MaxLength(3000))
+
+
+
+@view_config(context='finlin.models.Company', name='')
 def view_company(context, request):
-    context['analysis']  = markdown.markdown(context['analysis'])
-    return {
-           'main': get_renderer('templates/master.pt').implementation(),
-           'comment_form': get_renderer('templates/comment_form.pt').implementation(),
-           }
+    try:
+        comment = request.session['errors']
+        request.session['errors'] = None
+    except:
+        comment = comment_form(context, request) 
+
+    whole_page = md.convert(context['analysis'])
+
+    soup = BeautifulSoup(whole_page)
+    toc = soup.find('div', 'toc')
+    toc.extract()
+
+    li_list = toc.findAll('li')
+    li_list = reversed(li_list)
+
+    beautiful = BeautifulSoup()
+    ul = Tag(beautiful, "ul")
+    beautiful.insert(0, ul)
+    for li in li_list:
+        ul.insert(0, li)
+
+    toc = ul
+
+    context['analysis'] = soup
+    context['toc'] = toc
+    return render_to_response('finlin:templates/company_view.pt',
+            dict(
+                main = get_renderer('templates/master.pt').implementation(),
+                comment_form = comment,
+               ),
+               request)
+
+def comment_form(context, request):
+    tpl = 'finlin:templates/comment_form.pt'
+    tpl_vars = { 
+        'save_url': resource_url(context, request, 'add_comment'),
+        'submit_label': 'add comment'} 
+    return render(tpl, tpl_vars, request)
+
+
+@view_config(context='finlin.models.Company', name='add_comment')
+def add_comment(context, request):
+    schema = CommentForm() 
+    try:
+        params = schema.to_python(request.params)
+    except formencode.Invalid, e:
+        html = htmlfill.render(
+                            comment_form(context, request),
+                            defaults=e.value,
+                            errors=e.error_dict) 
+        request.session['errors'] = html
+        return HTTPFound(location = resource_url(context, request))
+    else:
+        comment = Comment(params, context)
+        comment.save()
+        return HTTPFound(location = resource_url(context, request))
+
+
 
 
 @view_config(name='add', context='finlin.models.Root')
@@ -92,7 +166,6 @@ def add_company(context, request):
             company = Company(params)
             request.db.company.save(company)
             request.session.flash(company['name'] + ' created')
-            log.debug(company)
             return HTTPFound(location = resource_url(
                                     context, 
                                     request, 
@@ -242,53 +315,5 @@ def login(context, request):
            return HTTPFound(location = came_from, headers = headers)
     return Response(render(tpl, tpl_vars, request))
 
-
-class CommentForm(formencode.Schema):
-    allow_extra_fields = True
-    filter_extra_fields = True
-    name = formencode.All(validators.PlainText(not_empty=True),
-                              validators.MaxLength(50),
-                              validators.MinLength(2))
-    email = formencode.All(validators.Email(not_empty=True),
-                              validators.MaxLength(100),
-                              validators.MinLength(3))
-    comment = formencode.All(validators.String(not_empty=True),
-                              validators.MaxLength(3000))
-    website = formencode.All(validators.URL(add_http=True))
-
-
-def comment_form(context, request):
-     return render(
-        'templates/comment_form.pt',
-        dict(
-            save_url= resource_url(context, request, 'add_comment'),
-            submit_label= 'add comment',
-            ), 
-        request,
-        )
-
-
-
-@view_config(name='add_comment', context='finlin.models.Root')
-def add_comment(context, request):
-    if 'form.submitted' in request.params:
-        schema = CommentForm() 
-        try:
-            params = schema.to_python(request.params)
-        except formencode.Invalid, e:
-            html = htmlfill.render(
-                                render(tpl, tpl_vars, request),
-                                defaults=e.value,
-                                errors=e.error_dict) 
-            return Response(html)
-        else:
-            params['created'] = datetime.datetime.now()
-            request.db.company.save(params)
-            request.session.flash(params['name'] + ' created')
-            return HTTPFound(location = resource_url(
-                                    context, 
-                                    request, 
-                                    company.__name__))
-    return Response(render(tpl, tpl_vars, request))
 
 

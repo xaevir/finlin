@@ -1,0 +1,18 @@
+<html metal:use-macro="main">
+  <div metal:fill-slot="body" id="company-view">
+    <h1>${context['name']}</h1>
+    <div id="toc-body">
+        <h3>Table of Contents</h3>
+        <div tal:replace="structure context['toc']">
+            Table of Contents
+        </div>
+    </div>
+    <div id="analyis">
+        <div tal:replace="structure context['analysis']">
+            Page text goes here.
+        </div>
+    </div>
+    <div tal:replace="structure comment_form" />
+
+  </div>
+</html>
