@@ -5,6 +5,7 @@ from pyramid.session import UnencryptedCookieSessionFactoryConfig
 from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 
+from finlin.security import groupfinder
 from finlin.models import get_root
 
 import logging
@@ -17,9 +18,9 @@ def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
 
-#    authn_policy = AuthTktAuthenticationPolicy(secret='batman',
+    authn_policy = AuthTktAuthenticationPolicy(secret='batman',
                                                callback=groupfinder)
-#    authz_policy = ACLAuthorizationPolicy()
+    authz_policy = ACLAuthorizationPolicy()
 
 
     mongodb_uri = settings.get('mongodb_uri')
