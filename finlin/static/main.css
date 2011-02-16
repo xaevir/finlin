@@ -255,6 +255,10 @@ h2 a:hover {
     font-family: Georgia;
 }
 
+.error-message{
+    color: red;
+}
+
 /*___________________________________________________________Main Div Setup_*/
 
 #doc2 {
@@ -288,7 +292,8 @@ h2 a:hover {
 }
 
 #company-view #analysis{
-    width: 750px;
+    padding-bottom: 30px;
+
 }
 #company-view #toc-body {
     border-left: 1px dotted #CCCCCC;
@@ -302,7 +307,6 @@ h2 a:hover {
 #company-view #toc-body li{
     padding-bottom: 12px;
 }
-
 
 #company-view #toc-body a {
     color: #666;
@@ -533,14 +537,24 @@ h2 a:hover {
 /*-----------------------------------------------------------------------------------------
                                                                           Contact
 -------------------------------------------------------------------------------------------*/
+#contact table{
 
+    border: none !important;
+}
 #contact input[type=text], 
 #contact select, 
 #contact textarea {
    width:295px;
-   border: none;
-   background: none;
 }
+
+#contact textarea {
+      height: 200px;
+}
+#contact td {
+    border: none;
+}
+
+
 
 #ft {
     padding-top: 20px;
@@ -602,6 +616,19 @@ h2 a:hover {
 /*----------------------------------------------------------------------------
                                                               Comment Form
 ----------------------------------------------------------------------------*/
+#flash {
+    padding: 20px;
+    text-align: center;
+    border: 3px solid yellow;
+}
+
+#comment-form {
+    font-size: 13px;
+    border-top: 1px dotted #666;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+
 #comment-form textarea{
    width:500px; 
    height: 100px;
@@ -654,6 +681,14 @@ h2 a:hover {
     -pie-background: linear-gradient(#0095cc, #00678e top);
 }
 
+
+.comment-time{
+    font-size: 12px;
+}
+
+.comment-username{
+
+}
 
 /*----------------------------------------------------------------------------
                                                               Income Statment 

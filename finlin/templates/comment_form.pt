@@ -1,9 +1,9 @@
-<h3>Comment</h3>
+<div id="comment-form">
+<h2>Comment</h2>
 <p>
     For links just precede the url with http://
 </p>
-<form action="${save_url}" method="post" 
-        id="comment-form">
+<form action="${save_url}" method="post">
     <div>
       <textarea name="body"></textarea>
     </div>
@@ -20,3 +20,4 @@
              name="form.submitted" value="${submit_label}"/>
     </div>
   </form>
+</div>

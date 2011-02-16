@@ -1,18 +1,38 @@
 <html metal:use-macro="main">
   <div metal:fill-slot="body" id="company-view">
     <h1>${context['name']}</h1>
-    <div id="toc-body">
-        <h3>Table of Contents</h3>
-        <div tal:replace="structure context['toc']">
-            Table of Contents
-        </div>
+    <div tal:condition="context.get('toc')" id="toc-body">
+      <h3>Table of Contents</h3>
+      <div tal:replace="structure context['toc']">
+          Table of Contents
+      </div>
     </div>
-    <div id="analyis">
-        <div tal:replace="structure context['analysis']">
-            Page text goes here.
-        </div>
+    <div id="analysis">
+      <div tal:replace="structure context['analysis']">
+        Page text goes here.
+      </div>
     </div>
-    <div tal:replace="structure comment_form" />
+    <div tal:replace="structure comment_form">
+        Comment form 
+    </div>
+
+
+    <div tal:define="comments context.get_comments()"
+         tal:condition="comments">
+      <div tal:repeat="comment comments" class="comment"    
+           id="comment_${comment['_id']}">
+          <div>
+            <span tal:content="context.pretty_date(comment['created'])" class="comment-time"></span> -
+            <span tal:content="comment['username']" class="comment-username"></span> 
+            <p>
+                ${comment.body}
+            </p>
+          </div>
+      </div>
+
+
+    </div>
 
   </div>
 </html>
+        

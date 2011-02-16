@@ -5,7 +5,6 @@ from pyramid.session import UnencryptedCookieSessionFactoryConfig
 from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 
-from finlin.security import groupfinder
 from finlin.models import get_root
 
 import logging

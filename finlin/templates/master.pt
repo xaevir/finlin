@@ -44,7 +44,7 @@
                 </li>
                 <li> <a class="roundify" href="${request.application_url}">Company Analyses</a> </li>
                 <li> <a class="roundify" href="${request.application_url}">About</a> </li>
-                <li> <a class="roundify" href="${request.application_url}">Contact</a>  </li> 
+                <li> <a class="roundify" href="${request.application_url}/contact">Contact</a>  </li> 
             </ul>
         </div>    
     </div>
@@ -68,9 +68,8 @@
             <img src="${request.static_url('finlin:static/pyramid.png')}"/>
             <img src="${request.static_url('finlin:static/mongodb.png')}"/>
          </p>
-
         <p style="float:right; padding-right: 7px;">
-            Powered by:
+            Powered with:
         </p>
     </div>
 </div>

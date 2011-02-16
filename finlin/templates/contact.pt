@@ -1,0 +1,65 @@
+<html metal:use-macro="main">
+  <div metal:fill-slot="body" id="contact">
+	<h1>Contact Us</h1>
+
+    <p style="margin-bottom: 3em;">
+    	We'd love to hear from you, so if you have any questions about Finlin, <br />
+    	the otc market, or any other aspects of 
+        a website, please complete the form below. <br />
+        <span style="font-style:italic">Thank you for your interest!</span>
+    </p>
+
+	<div style="width: 300px; float: left;">
+	            <p>
+	            	<b>Address:</b> <br/>
+	            	2202 N. West Shore Blvd., Suite 200<br/>
+	            	Tampa, FL  33607
+	            </p>
+	            
+	            
+	            <p>
+	            	<b>Email: </b>info@finlin.com
+	            </p>
+	            
+	            <p>
+	            	<b>Office hours:</b><br/>
+	      			Monday-Friday: 9am-5pm 
+	            </p>
+	</div>
+	
+	<div style="width:500px; float: left; 
+				margin-left: 15px; 
+				border-left: 1px dotted #D3D3D3;
+				padding-left: 50px;
+				">
+        <form action="${save_url}" method="post">
+        <table>
+            <tr>
+                <td><label>Name</label></td>
+                <td><input name="name" type="text"/></td>
+            </tr>
+            <tr>
+                <td><label>Email:</label></td>
+                <td><input name="email" type="text"/></td>
+            </tr>
+            <tr>
+                <td><label>Message:</label></td>
+                <td><textarea name="body"></textarea></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input type="submit" name="form.submitted" 
+                        value="${submit_label}"/>
+                </td>
+            </tr>
+        </table>
+    </form>	</div>
+
+
+
+
+
+
+  </div>
+</html>
