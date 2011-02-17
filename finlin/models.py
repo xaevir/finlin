@@ -39,6 +39,10 @@ class Root(object):
             raise KeyError
         return Company(doc, self)             
 
+    def get_homepage(self):
+        return get_db().comment.find({'slug': 'H_H_Imports_aka_TV_Goods'})
+
+
     def items(self):
         result = {}
         for obj in self.db.company.find():
@@ -67,7 +71,6 @@ class Company(dict):
 
     def pretty_date(self, date):
         return date.strftime('%B %d, %Y')  
-
 
 class Comment(dict):
     def __init__ (self, data, parent_context):

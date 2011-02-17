@@ -53,11 +53,14 @@ class CompanyForm(formencode.Schema):
     name = formencode.All(validators.String(not_empty=True), 
                              UniqueCompanyName()) 
 
-@view_config(context='finlin.models.Root',
-            renderer='finlin:templates/home_page.pt')
+@view_config(context='finlin.models.Root')
 def home_page(context, request):
-    main = get_renderer('templates/master.pt').implementation()
-    return dict(main = main)    
+    doc = request.db.company.find_one({'slug':'H_H_Imports_aka_TV_Goods'})
+    company = Company(doc)
+    log.debug(company)
+    #main = get_renderer('templates/master.pt').implementation()
+    return view_company(company, request) 
+    #return dict(main = main)    
 
 
 @view_config(context='finlin.models.Root',
@@ -102,8 +105,8 @@ def view_company(context, request):
         context['toc'] = toc
     except AttributeError: pass
         
-        
     comment = comment_form(context, request)
+
     return render_to_response('finlin:templates/company_view.pt',
             dict(
                 main = get_renderer('templates/master.pt').implementation(),

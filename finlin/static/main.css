@@ -331,12 +331,14 @@ h2 a:hover {
 
 #nav ul{
 	padding-top: 4px;
+    
 }
 
 #nav li {
 	float: left;
 	margin-left: 20px;
 	margin-right: 50px;
+    list-style-type: none;
 }
 
 #nav a{

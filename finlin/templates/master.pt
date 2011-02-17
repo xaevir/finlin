@@ -37,6 +37,10 @@
         <a id="logo" href="${request.application_url}">
             <img src="${request.static_url('finlin:static/logo.png')}" />
         </a>
+        <a style="float: right" href="${request.application_url}">
+            <img src="${request.static_url('finlin:static/otc.png')}" />
+        </a>
+
         <div id="nav">
             <ul class="clearfix">
                 <li>
