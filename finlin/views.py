@@ -209,7 +209,7 @@ def edit_company(context, request):
 
 @view_config(name='delete', context='finlin.models.Company')
 def delete_company(context, request):
-    request.db.company.remove({'__name__':context.__name__})
+    request.db.company.remove({'slug':context.__name__})
     request.session.flash(context['name'] + ' deleted')
     return HTTPFound(location = resource_url(
                                     context.__parent__, 

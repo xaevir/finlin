@@ -134,7 +134,6 @@ a:hover {
 
 p {
 	/*font-size: 12px;*/
-    font-size: 1.3em;
 }
 /*-----------------------------------------------------------------------------------------
                                                                           TABLE
@@ -264,7 +263,7 @@ h2 a:hover {
 #doc2 {
 	margin-top: 20px;
 	width: 950px;
-
+    font-size: 1.3em;
 }
 
 #logo {
