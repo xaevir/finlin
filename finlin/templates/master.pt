@@ -6,26 +6,19 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <link rel="shortcut icon"
         href="${request.static_url('finlin:static/favicon.ico')}" />
-    <link rel="stylesheet"
-        href="${request.static_url('finlin:static/reset-fonts-grids.css')}"
-        type="text/css" media="screen" charset="utf-8" />
+        
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.2r1/build/reset-fonts-grids/reset-fonts-grids.css"/>
 
     <link rel="stylesheet"
         href="${request.static_url('finlin:static/main.css')}"
-        type="text/css" media="screen" charset="utf-8" />
-    <!-- this is a test -->
+        type="text/css"/>
+    
     <script src="${request.static_url('finlin:static/js/jquery.js')}"></script>
     <script src="${request.static_url('finlin:static/js/cufon-yui.js')}"></script>
-    <script src="${request.static_url('finlin:static/js/gotham_rounded_350.font.js')}"></script>
-    <script src="${request.static_url('finlin:static/js/Bembo_400-Bembo_700.font.js')}"></script>
     <script src="${request.static_url('finlin:static/js/Bembo_400-Bembo_700.font.js')}"></script>
 
     <script type="text/javascript">
-        Cufon.replace('#nav a', { fontFamily: 'gotham rounded' });
         Cufon.replace('h1', { fontFamily: 'Bembo' });
-        Cufon.replace('#index h2', { fontFamily: 'Bembo' });
-        Cufon.replace('#index h3', { fontFamily: 'Bembo' });
-        Cufon.replace('.bembo', { fontFamily: 'Bembo' });
     </script>
 
 
@@ -37,9 +30,9 @@
         <a id="logo" href="${request.application_url}">
             <img src="${request.static_url('finlin:static/logo.png')}" />
         </a>
-        <a style="float: right" href="${request.application_url}">
-            <img src="${request.static_url('finlin:static/otc.png')}" />
-        </a>
+        <p id="we-are">
+            We are over the counter stock market analysis 
+        </p>
 
         <div id="nav">
             <ul class="clearfix">
@@ -77,5 +70,6 @@
         </p>
     </div>
 </div>
+<script type="text/javascript"> Cufon.now(); </script>
 </body>
 </html>

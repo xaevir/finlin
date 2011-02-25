@@ -57,9 +57,7 @@ class CompanyForm(formencode.Schema):
             renderer='finlin:templates/home_page.pt')
 def home_page(context, request):
     main = get_renderer('finlin:templates/master.pt').implementation()
-
     return HTTPFound(location = resource_url(context, request, 'Tootie_Pie_Company_Inc_TOOT'))
-    return dict(main = main)    
 
 
 @view_config(context='finlin.models.Root',

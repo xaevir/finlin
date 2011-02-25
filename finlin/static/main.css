@@ -1,22 +1,10 @@
 html {
     background: transparent !important;
-	/*
-	border: 10px solid #cd0000;
-	border-top: 5px solid #cd0000;
-	*/
 }	
-
-
 body {
     /*font-family:verdana,sans-serif;*/
-    color: #303030;
-	/*background-color: #f7f7f7;*/
-	line-height: 1.5;
+    color: #111;
 	background-color: #F7F7F7;
-    font-size: 100%;
-    font-family: 'Times New Roman';
-	
-	
 }
 h1,h2,h3,h4,h5,h6,strong {
    /*bringing boldness back to headers and the strong element*/
@@ -37,8 +25,7 @@ h1 {
 }
 h2 {
     /*16px via YUI Fonts CSS foundation*/
-    font-size:123.1%;
-    font-size: 1.6em;
+    font-size: 16px;
 }
 h3 {
    /*14px via YUI Fonts CSS foundation*/
@@ -73,7 +60,6 @@ ol,ul,dl {
    /*bringing lists on to the page with breathing room */
   /*  margin-left:2em; */
 }
-
 ol li {
    /*giving OL's LIs generated numbers*/
    list-style: decimal inside;  
@@ -89,7 +75,6 @@ dl dd {
 dt {
 	font-weight: bold;
 }
-
 caption {
    /*coordinated marking to match cell's padding*/
    margin-bottom:.5em;
@@ -101,7 +86,6 @@ p,fieldset,table {
    margin-bottom:1em;
 	
 }
-
 input[type=submit], button {
     cursor: pointer;
 }
@@ -112,7 +96,6 @@ input[type=text], input[type=password], textarea{
 input, select {
    padding: 2px;
 }
-
 button, input[type=submit] {
 	/*padding: 4px 10px;*/
 }
@@ -133,7 +116,7 @@ a:hover {
 }
 
 p {
-	/*font-size: 12px;*/
+    line-height: 1.45;
 }
 /*-----------------------------------------------------------------------------------------
                                                                           TABLE
@@ -177,21 +160,7 @@ tr {
 }
 
 
-/*-----------------------------------------------------------------------------------------
-                                                                          CLASSES
--------------------------------------------------------------------------------------------*/
-
-.noDisplay {
-	display: none;
-}
-
-.clear-both {
-    clear: both;
-}
-.center {
-    text-align: center;
-}
-
+/*__________________________________________________________________Classes_*/
 .clearfix:after {
     content:".";
     display:block;
@@ -212,12 +181,12 @@ tr {
 .has-disc li{
    list-style-type: disc;     
 }
-
+/*
 .rounded {
 	-moz-border-radius:7px;
 	-webkit-border-radius:7px;
 }
-
+*/
 .spaced li{
 	margin-bottom: 1em;
 }
@@ -225,24 +194,17 @@ tr {
 .red {
 	color: #cd0000;
 }
-
 .footnote {
 	font-size: 10px;
 	text-decoration: none;
 }
-
 h2 a {
 	color:#0181E3;
 	text-decoration: none;
 }
-
 h2 a:hover {
 	background-color: #eef4ff;
 	color: #222;
-}
-
-.learn-more {
-	text-align: center;
 }
 
 .dropcap {
@@ -257,31 +219,22 @@ h2 a:hover {
 .error-message{
     color: red;
 }
+#flash {
+    padding: 20px;
+    text-align: center;
+    border: 3px solid yellow;
+}
 
 /*___________________________________________________________Main Div Setup_*/
 
 #doc2 {
 	margin-top: 20px;
 	width: 950px;
-    font-size: 1.3em;
-}
-
-#logo {
-	float: left;
-}
-
-#bull-bear {
-	float: right;
-}
-#bull-bear span{
-    font-family: georgia;
-    font-size: 18px;
-    font-style: italic;
 }
 #hd {
 	margin-bottom: 10px;
+    position: relative;
 }
-
 #bd {
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
@@ -289,34 +242,34 @@ h2 a:hover {
 	background-color: #fff;
 	padding:18px;
 }
-
-#company-view #analysis{
-    padding-bottom: 30px;
-
-}
-#company-view #toc-body {
-    border-left: 1px dotted #CCCCCC;
-    border-bottom: 1px dotted #ccc;
-    float: right;
-    width: 200px;
-    padding-left: 20px;
-    padding-bottom: 20px;
-
-}
-#company-view #toc-body li{
-    padding-bottom: 12px;
-}
-
-#company-view #toc-body a {
-    color: #666;
-    border-bottom: 1px dotted #666;
-}
-#footer {
-	font-size: 11px;
-	text-align: center;
+#ft {
+    padding-top: 20px;
 	margin-top: 20px;
 	margin-bottom: 20px;
 	clear: both;
+    position: relative;
+}
+
+/*___________________________________________________________________Header_*/
+
+#logo {
+	float: left;
+}
+#we-are {
+    float: right; 
+    font-family: verdana; 
+    position: relative;
+    top: 10px;
+	background: #fff url(/static/nav-hover.png) repeat-x bottom left;
+    border: 1px solid #eee;
+    padding: 5px 7px;
+}
+
+/*___________________________________________________________________Footer*/
+
+#ft #swag{
+    position: relative;
+    top: -10px;
 }
 
 /*__________________________________________________________Main Navigation_*/
@@ -328,218 +281,33 @@ h2 a:hover {
 	height: 46px;
 	padding-left: 20px;
 }
-
 #nav ul{
 	padding-top: 4px;
-    
 }
-
 #nav li {
 	float: left;
 	margin-left: 20px;
 	margin-right: 50px;
     list-style-type: none;
 }
-
 #nav a{
-	font-size: 14px;
+	font-size: 13px;
 	display:block;
 	text-decoration: none;
 	color: #222;
 	padding: 8px 10px;
 	padding-top: 6px;
 	border: 1px solid #eee;
+    font-family: verdana, arial, sans-serif;
 }
-
 #nav a:hover {
-	background: #fff url(/static/nav-hover.png) repeat-x top left;
-	border: 1px solid #dcdcdc;
-}
-
-/*-----------------------------------------------------------------------------------------
-                                                                          HOME
--------------------------------------------------------------------------------------------*/
-#banner-inner {
-	
-	
-}
-
-#banner {
-	margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-#home-bd {
-	/*
-	
-	height: 671px;
-	margin-top: 10px;
-	position: relative;
-	*/
-}
-
-#index h1 {
-	text-align: center;
-	font-size: 48px;
-	font-weight: bold;
-	color: #000;
-	color: #1690a7;
-	margin-bottom: 0;
-	margin-top: 10px;
-	border: none;
-}
-
-#index h2 {
-	font-size: 42px;
-	color: #1690a7;
-	/*letter-spacing: -.03em;*/
-	margin-bottom: .2em;
-	margin-top: 0;
-	text-align: center;
-	
-}
-
-#index h4 {
-	font-size: 18px;
-}
-
-#index h3{
-	font-size: 20px;
-	margin-top: 0;
-	margin-bottom: 1em;
-}
-
-.panel {
-	-moz-border-radius:7px;
-	-webkit-border-radius:7px;
-	float: left;
-	height: 480px;
-	border: 1px solid #e6e6e6;
+	/*background: #fff url(/static/nav-hover.png) repeat-x top left; */
 	background-color: #fff;
-	padding:18px;
+    border: 1px solid #dcdcdc;
 }
 
-.panel1, .panel2, .panel3 {
-	/*
-	background:#E6E6E6 url(/images/panel-bg-grey.png) repeat-x left top;
-	/*border:5px solid #E6E6E6;*/
-	/*
-	margin-bottom:70px;
-	*/
-}
-
-.panel-inner {
-	/*
-	background:#FFFFFF url(/images/panel-bg.png) repeat-x center bottom;
-	border-bottom:1px solid #999999;
-	
-	padding-bottom: 0;
-	height: 97.5%;*/
-}	
-
-.panel1 {
-	margin-right:.9%;
-	width:52%;	
-}
-
-.panel2 {
-	width: 39%;
-}
-
-.panel1 p{
-	/*font-size: 15px;*/
-}
-
-.module-top {
-	background: url(/images/gray-bg.png) repeat-x bottom left;
-	border: 2px solid #e6e6e6;
-	/*padding-left: 10px;*/
-	-webkit-border-top-left-radius:7pxx;
-	-moz-border-radius-topleft:7px;
-	-webkit-border-top-right-radius:7pxx;
-	-moz-border-radius-topright:7px;
-	padding-left: 18px;
-}
-
-#index ol {
-	margin-left: 25px;
-	 
-}
-#index ol li {
-	list-style-position: outside;
-	font-size: 16px;
-}
-
-#index ol li p {
-	font-family: verdana;
-	font-style: normal;
-	color: #2c2c2c;
-	font-size: 15px;
-}
-
-.module-body {
-	/*
-	background: url(/images/gradient-bottom.png) repeat-x bottom left;
-	border: 1px solid #666;
-	-moz-border-radius:15px;
-	-webkit-border-radius:15px;
-	background-color: #fff;
-	margin-bottom: 5px;
-	padding: 5px 18px 4px 18px;
-	position: absolute;
-	*/
-}
-
-/*-----------------------------------------------------------------------------------------
-                                                                          PRICING
--------------------------------------------------------------------------------------------*/
-#pricing .panel{
-	-moz-border-radius:7px;
-	-webkit-border-radius:7px;
-	paddding: 5px;
-	background:#CBCBCB url(/images/panel-bg-grey.png) repeat-x left top;
-	border:5px solid #F6F6F6;
-	margin-bottom:70px;
-	width: 750px;
-}
-
-#pricing .panel-inner {
-	background:#FFFFFF url(/images/panel-bg.png) repeat-x center bottom;
-	border-bottom:1px solid #999999;
-	padding:1em 1.5em;
-	padding-bottom: 0;
-	height: 97.5%;
-}	
-
-.panel-inner li {
-	margin-bottom: 1em;
-}
-
-/*-----------------------------------------------------------------------------------------
-                                                                          WHAT WE DO
--------------------------------------------------------------------------------------------*/
-
-#what-we-do .content li {
-	margin-bottom: 1em;
-	list-style-position: outside;
-	margin-left: 1.5em;
-}
-
-/*-----------------------------------------------------------------------------------------
-                                                                          Pricing
--------------------------------------------------------------------------------------------*/
-
-#pricing .content li{
-	list-style-position:outside;
-	margin-bottom:1em;
-	margin-left:1.5em;
-}
-
-/*-----------------------------------------------------------------------------------------
-                                                                          Contact
--------------------------------------------------------------------------------------------*/
+/*__________________________________________________________________Contact_*/
 #contact table{
-
     border: none !important;
 }
 #contact input[type=text], 
@@ -547,7 +315,6 @@ h2 a:hover {
 #contact textarea {
    width:295px;
 }
-
 #contact textarea {
       height: 200px;
 }
@@ -556,27 +323,31 @@ h2 a:hover {
 }
 
 
+/*_____________________________________________________________Company View_*/
 
-#ft {
-    padding-top: 20px;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	clear: both;
-    position: relative;
+#company-view #analysis{
+    padding-bottom: 30px;
 }
-#ft #swag{
-    position: relative;
-    top: -10px;
+#company-view #toc-body {
+    border-left: 1px dotted #CCCCCC;
+    border-bottom: 1px dotted #ccc;
+    float: right;
+    width: 200px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    margin-left: 10px;
+}
+#company-view #toc-body li{
+    padding-bottom: 12px;
+    list-style: none;
+}
+#company-view #toc-body a {
 }
 
+/*_____________________________________________________________Company Form_*/
 
-
-/*----------------------------------------------------------------------------
-                                                              New Company form
-----------------------------------------------------------------------------*/
 #company_form {
 }
-
 #company_form input[type="text"] {
     padding: .5em;
     width: 400px; 
@@ -587,79 +358,58 @@ h2 a:hover {
    font-family: monospace;
 }
 
-/*----------------------------------------------------------------------------
-                                                              Login Form
-----------------------------------------------------------------------------*/
+/*_______________________________________________________________Login Form_*/
+
 #login_form form {
     width: 500px;
     margin: 0 auto;
     border: 1px solid #ccc;
     padding: 20px 0;
 }
-
 #login_form table{
     margin: 0 auto;
 }
-
 #login_form td {
     border: none;
 }
-
-
-
 #login_form input[type="text"],
 #login_form input[type="password"] {
     font-size: 16px;
     width: 220px
 }
 
-
-/*----------------------------------------------------------------------------
-                                                              Comment Form
-----------------------------------------------------------------------------*/
-#flash {
-    padding: 20px;
-    text-align: center;
-    border: 3px solid yellow;
-}
-
+/*_____________________________________________________________Comment Form_*/
 #comment-form {
     font-size: 13px;
     border-top: 1px dotted #666;
     padding-top: 20px;
     margin-bottom: 20px;
 }
-
 #comment-form textarea{
    width:500px; 
    height: 100px;
 }
-
 #comment-form div {
     margin-top: 10px;
 }
-
 .button {
     font-size: 14px;
     font-weight: bold;
     padding: .5em 1.2em .55em !important;
     cursor: pointer;
 }
-
 .shadow {
     -moz-box-shadow: 2px 2px 2px #888;
     -webkit-box-shadow: 2px 2px 2px #888;
     box-shadow: 2px 2px 2px #888;
     behavior: url(/PIE.htc);
 }
-
 .roundify{
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
     behavior: url(/PIE.htc);
 }   
-
 .blue {
 	color: #fff;
 	border: solid 1px #0076a3;
@@ -667,41 +417,30 @@ h2 a:hover {
 	background: -moz-linear-gradient(top,  #00adee,  #0078a5);
     -pie-background: linear-gradient(#00adee,  #0078a5 top);
 }
-
 .blue:hover {
 	background: -webkit-gradient(linear, left top, left bottom, from(#0095cc), to(#00678e));
 	background: -moz-linear-gradient(top,  #0095cc,  #00678e);
     background: linear-gradient(#0095cc, #00678e top);
     -pie-background: linear-gradient(#0095cc, #00678e top);
 }
-
 .blue:active {
 	background: -webkit-gradient(linear, left top, left bottom, from(#0078a5), to(#00adee));
 	background: -moz-linear-gradient(top,  #0078a5,  #00adee);
     background: linear-gradient(#0078a5,  #00adee top);
     -pie-background: linear-gradient(#0095cc, #00678e top);
 }
-
-
 .comment-time{
     font-size: 12px;
 }
-
 .comment-username{
-
 }
-
-/*----------------------------------------------------------------------------
-                                                              Income Statment 
-----------------------------------------------------------------------------*/
+/*_________________________________________________________Income Statement_*/
 #income-statement th, #income-statement td {
     border: none;
 }
-
 #income-statement {
     font-size: 15px;
 }
-
 #income-statement .note {
     font-size: 13px;
     font-style: italic;
@@ -709,35 +448,26 @@ h2 a:hover {
     margin-left: 10px;
     color: #666;
 }
-
 #income-statement p {
     margin: 0;
 }
-
-
-
 #operating-expenses p{
 }
-
 #income-statement .num {
     text-align: right;    
     width: 100px;
     vertical-align: top;
 }
-
 .income-cat {
     font-weight: bold;
     padding-bottom: 0;
 }
-
 .income-subtotal td {
     font-weight: bold;
     padding-bottom: 40px;
     padding-top: 0;
 }
-
 .income-subtotal .num {
     padding-top: 2px;
     border-top: 1px solid #000 !important;
-
 }
