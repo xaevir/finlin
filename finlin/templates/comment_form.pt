@@ -5,7 +5,7 @@
 </p>
 <form action="${save_url}" method="post">
     <div>
-      <textarea name="body"></textarea>
+      <textarea name="comment"></textarea>
     </div>
     <div>
       <input type="text" name="username"/>

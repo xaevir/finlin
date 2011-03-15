@@ -7,7 +7,7 @@
     <link rel="shortcut icon"
         href="${request.static_url('finlin:static/favicon.ico')}" />
         
-    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.2r1/build/reset-fonts-grids/reset-fonts-grids.css"/>
+    <link metal:define-slot="head-css"/>
 
     <link rel="stylesheet"
         href="${request.static_url('finlin:static/main.css')}"
@@ -19,32 +19,34 @@
 
     <script type="text/javascript">
         Cufon.replace('h1', { fontFamily: 'Bembo' });
+        Cufon.replace('#logo #logo-img', { fontFamily: 'Bembo' });
     </script>
 
+    <script metal:define-slot="head-javascript"></script>
+    <script metal:define-slot="head-javascript-1"></script>
 
     </head>
 
 <body>
-<div id="doc2">
-    <div id="hd" class="clearfix">
-        <a id="logo" href="${request.application_url}">
-            <img src="${request.static_url('finlin:static/logo.png')}" />
-        </a>
-        <p id="we-are">
-            We are over the counter stock market analysis 
-        </p>
-
-        <div id="nav">
+<div id="hd">
+    <div class="content clearfix">        
+    <a id="logo" class="clearfix" href="${request.application_url}">
+        <span id="logo-img">FINLIN</span>
+        <span id="logo-desc">The broken window theory<br />applied to the OTC market</span>
+    </a>
+        <div id="nav" class="clearfix">
             <ul class="clearfix">
-                <li>
-                    <a class="roundify" href="${request.application_url}">Home</a>
-                </li>
-                <li> <a class="roundify" href="${request.application_url}">Company Analyses</a> </li>
-                <li> <a class="roundify" href="${request.application_url}">About</a> </li>
-                <li> <a class="roundify" href="${request.application_url}/contact">Contact</a>  </li> 
+                <li> <a href="${request.application_url}">Companies</a> </li>
+                <li> <a href="${request.application_url}">About</a> </li>
+                <li> <a href="${request.application_url}/contact">Contact</a>  </li> 
+                <li><a id="login" href="#">Create Account | Sign in</a></li>
             </ul>
         </div>    
     </div>
+</div>
+
+<div id="doc2">
+
     <div id="bd">
         <div id="flash" 
           tal:define="message request.session.pop_flash()"
@@ -57,19 +59,31 @@
           This is the body.
         </div>
     </div>
-    <div id="ft">
+</div>
+<div id="ft">
+    <div class="content">
+        <ul id="ft-nav">
+            <li><a href="about">About</a></li>
+            <li><a href="contact">Contact</a></li>
+        </ul>
         <p style="float: left;">
             &copy; Finlin 2011
         </p>
         <p style="float: right; padding-right:20px;" id="swag">
-            <img src="${request.static_url('finlin:static/pyramid.png')}"/>
-            <img src="${request.static_url('finlin:static/mongodb.png')}"/>
+            <a href="http://pylonsproject.org/">
+                <img src="${request.static_url('finlin:static/pyramid.png')}"/>
+            </a>
+            <a href="http://www.mongodb.org/">
+                <img src="${request.static_url('finlin:static/mongodb.png')}"/>
+            </a>
          </p>
         <p style="float:right; padding-right: 7px;">
             Powered with:
         </p>
     </div>
 </div>
+
 <script type="text/javascript"> Cufon.now(); </script>
+<script src="${request.static_url('finlin:static/js/main.js')}"></script>
 </body>
 </html>

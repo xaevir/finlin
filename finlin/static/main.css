@@ -1,31 +1,71 @@
-html {
-    background: transparent !important;
-}	
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
 body {
-    /*font-family:verdana,sans-serif;*/
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*_____________________________________________________________________Base_*/
+body {
     color: #111;
-	background-color: #F7F7F7;
+	/*background-color: #F7F7F7;*/
+    font: 13px/1.231 arial,helvetica,clean,sans-serif;
 }
 h1,h2,h3,h4,h5,h6,strong {
    /*bringing boldness back to headers and the strong element*/
-	font-family: 'Times New Roman', tahoma,"trebuchet ms",helvetica,arial,sans-serif;
     font-weight: bold;
     line-height: 1;
     margin-bottom: .3em;
-	
 }
 h1 {
-   /*18px via YUI Fonts CSS foundation*/
-    font-size:18px;  
-    font-size: 48px;
-	color: #b22222;
+    font-size: 33px;
+	color: #000;
 	/*margin-bottom: .25em;*/
-	border-bottom: 1px dotted #ccc;
     font-weight: normal;
 }
 h2 {
-    /*16px via YUI Fonts CSS foundation*/
-    font-size: 16px;
+    font-size: 14px;
 }
 h3 {
    /*14px via YUI Fonts CSS foundation*/
@@ -35,7 +75,6 @@ h2,h3 {
    /* top & bottom margin based on font size */
    margin-bottom: .3;
 }
-
 hr {
    border: none;
    height:1px;
@@ -84,7 +123,6 @@ caption {
 p,fieldset,table {
    /*so things don't run into each other*/
    margin-bottom:1em;
-	
 }
 input[type=submit], button {
     cursor: pointer;
@@ -109,18 +147,18 @@ a img {
    must also be changed */
 a {
 	color:#0181E3;
+    color: #0069AA;
+    color: #3366CC;
 	text-decoration: none;
 }
 a:hover {
     text-decoration: underline;
 }
-
 p {
     line-height: 1.45;
 }
-/*-----------------------------------------------------------------------------------------
-                                                                          TABLE
--------------------------------------------------------------------------------------------*/
+
+/*____________________________________________________________________Table_*/
 table{
     border-collapse: separate;
     border-spacing: 0;
@@ -158,7 +196,6 @@ td {
 tr {
 	align: top;
 }
-
 
 /*__________________________________________________________________Classes_*/
 .clearfix:after {
@@ -228,44 +265,86 @@ h2 a:hover {
 /*___________________________________________________________Main Div Setup_*/
 
 #doc2 {
-	margin-top: 20px;
-	width: 950px;
+	width: 970px;
+    margin: 0 auto;
 }
 #hd {
-	margin-bottom: 10px;
-    position: relative;
+    /*-moz-box-shadow: 0px 1px 3px #C2C2C2;
+	background: -moz-linear-gradient(top,  #AEE8FF,  #89cff0);*/
+    margin-bottom: 10px;
+	background: -moz-linear-gradient(top,  #fff,  #DFEEFF);
+    border: 1px solid #AFD5FF;
+}
+#hd .content {
+    width: 970px;
+    margin: 0 auto;
 }
 #bd {
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	border: 1px solid #e6e6e6;
-	background-color: #fff;
-	padding:18px;
+    /*-moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);*/
+	/*border: 1px solid #e6e6e6;*/
+    clear: both;
+
 }
 #ft {
-    padding-top: 20px;
 	margin-top: 20px;
 	margin-bottom: 20px;
 	clear: both;
     position: relative;
+    border-top: 1px solid #f3f3f3;
+}
+#ft .content {
+    width: 970px;
+    margin: 0 auto;
 }
 
 /*___________________________________________________________________Header_*/
 
-#logo {
-	float: left;
+#hd a{
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
 }
-#we-are {
-    float: right; 
-    font-family: verdana; 
-    position: relative;
-    top: 10px;
-	background: #fff url(/static/nav-hover.png) repeat-x bottom left;
-    border: 1px solid #eee;
-    padding: 5px 7px;
+#hd a:hover {
+    border-color: #AFD5FF;
+    text-decoration: none;
+	background: -moz-linear-gradient(top,  #EFF6FF,  #fff);
+}
+#logo{
+    float: left;
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+    margin-right: 20px;
+    padding: 0 3px;
+}
+#logo-img {
+    color: transparent;
+    font-size: 0; /*yahoo used this one and the one above. */
+	background: url(/static/logo.png) no-repeat center left;
+    width: 121px;
+    height: 30px;
+    float: left;
+    border-right: 1px solid #000;
+    padding-right: 5px;
+    margin-right: 5px;
+}
+#logo-desc {
+    margin-top: 1px; 
+    color: #000;
+    font-size: 9px;
+    float: left;
+    padding-right: 3px;
+    font-family: verdana, arial, sans-serif;
+}
+   
+/*___________________________________________________________________Footer*/
+
+#ft-nav {
+    padding-top: 10px;
 }
 
-/*___________________________________________________________________Footer*/
+#ft-nav li{
+   display: inline; 
+   padding-right: 15px;
+}
 
 #ft #swag{
     position: relative;
@@ -275,35 +354,24 @@ h2 a:hover {
 /*__________________________________________________________Main Navigation_*/
 
 #nav {
-	background: url(/static/navigation.png) no-repeat 0 0;
-	clear: both;
-	width: 950px;
-	height: 46px;
-	padding-left: 20px;
 }
 #nav ul{
-	padding-top: 4px;
+    text-align: left;
 }
 #nav li {
-	float: left;
-	margin-left: 20px;
-	margin-right: 50px;
     list-style-type: none;
 }
 #nav a{
 	font-size: 13px;
-	display:block;
-	text-decoration: none;
-	color: #222;
-	padding: 8px 10px;
-	padding-top: 6px;
-	border: 1px solid #eee;
-    font-family: verdana, arial, sans-serif;
+    float: left;
+    display: block;
+    text-decoration: none;
+    padding: 0 10px;
+    height: 30px;
+    line-height: 2;
 }
-#nav a:hover {
-	/*background: #fff url(/static/nav-hover.png) repeat-x top left; */
-	background-color: #fff;
-    border: 1px solid #dcdcdc;
+#nav a#login {
+    float: right;
 }
 
 /*__________________________________________________________________Contact_*/
@@ -325,36 +393,112 @@ h2 a:hover {
 
 /*_____________________________________________________________Company View_*/
 
-#company-view #analysis{
-    padding-bottom: 30px;
-}
-#company-view #toc-body {
-    border-left: 1px dotted #CCCCCC;
-    border-bottom: 1px dotted #ccc;
-    float: right;
-    width: 200px;
-    padding-left: 10px;
-    padding-bottom: 10px;
-    margin-left: 10px;
-}
-#company-view #toc-body li{
-    padding-bottom: 12px;
-    list-style: none;
-}
-#company-view #toc-body a {
+#company-view h1{
+    color: #fff;
+    padding-top: 10px;
+    padding-bottom: 7px;
 }
 
+#company-hd {
+	background: -moz-linear-gradient(top,  #00adee,  #0078a5);
+    padding: 5px 5px 0 5px;
+    -moz-border-radius-topleft: 8px;
+    -moz-border-radius-topright: 8px;
+    border: 1px solid #0076A3;
+    border-bottom: none;
+}
+
+#company-view hr{
+    border-bottom: 1px solid #89cff0;
+    clear: both;
+}
+
+/*_____________________________________________________________Company Nav*/
+
+#company-nav {
+}
+#company-nav li {
+    list-style-type: none;
+    float: left;
+    padding: 0 2px;
+}
+#company-nav a{
+	font-size: 13px;
+    float: left;
+    display: block;
+    text-decoration: none;
+    padding: 3px 10px 6px 10px;
+    color: #fff;
+    border: 1px solid #009CD6;
+    border-bottom: none;
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-topleft: 4px;
+	background: -moz-linear-gradient(top,  #00adee, #009CD6);
+    -moz-box-shadow: 0px -1px 0px #fff;
+}
+#company-nav a:hover{
+    color: #000;
+    border-color: #AFD5FF;
+	background: -moz-linear-gradient(top,  #EFF6FF,  #fff);
+}
+#company-nav #current{
+	background: -moz-linear-gradient(top,  #EFF6FF,  #fff);
+    color: #000;
+    border-color: #AFD5FF;
+}
+
+/*_____________________________________________________________________Tabs_*/
+
+.ui-widget-header {
+    border: 1px solid #AAAAAA;
+    border-bottom: 1px solid #AAAAAA;
+    color: #222222;
+    font-weight: bold;
+}
+.ui-widget {
+    font-family: Verdana,Arial,sans-serif;
+    font-size: inherit;class="roundify" 
+}
+.ui-widget-content {
+    background: none;
+    border: none;
+    color: inherit;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+	/*background: -moz-linear-gradient(top,  #fff,  #EEEEEE);*/
+    border: 1px solid #D3D3D3;
+    color: #555555;
+    font-weight: normal;
+}
+.ui-tabs .ui-tabs-nav li a {
+    float: left;
+    padding: 0.5em .5em;
+    text-decoration: none;
+}
+.ui-tabs .ui-tabs-nav {
+    margin: 0;
+    padding: 0.2em 0.2em 0 1em;
+}
+.ui-tabs .ui-tabs-nav li {
+    border-bottom: 0 none !important;
+    float: left;
+    list-style: none outside none;
+    margin: 0 .2em 1px .2em;
+    padding: 0;
+    position: relative;
+    top: 1px;
+    white-space: nowrap;
+}
 /*_____________________________________________________________Company Form_*/
 
-#company_form {
-}
 #company_form input[type="text"] {
     padding: .5em;
     width: 400px; 
 }
 #company_form textarea{
-   width:700px; 
-   height: 700px;
+   width:600px; 
+   height: 150px;
    font-family: monospace;
 }
 
@@ -379,11 +523,12 @@ h2 a:hover {
 }
 
 /*_____________________________________________________________Comment Form_*/
+
 #comment-form {
     font-size: 13px;
-    border-top: 1px dotted #666;
     padding-top: 20px;
     margin-bottom: 20px;
+    clear: both;
 }
 #comment-form textarea{
    width:500px; 

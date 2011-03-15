@@ -1,17 +1,37 @@
 <html metal:use-macro="main">
+<!--    
+      <link metal:fill-slot="head-css"
+        href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
+      <script metal:fill-slot="head-javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+      <script metal:fill-slot="head-javascript-1">
+          $(document).ready(function() {
+            $("#tabs").tabs();
+          });
+      </script>
+-->   
+
   <div metal:fill-slot="body" id="company-view">
-    <h1>${context['name']}</h1>
-    <div tal:condition="context.get('toc')" id="toc-body">
-      <h3>Table of Contents</h3>
-      <div tal:replace="structure context['toc']">
-          Table of Contents
-      </div>
+    <div id="company-hd">
+        <h1>${context['name']}</h1>
+        <ul id="company-nav" class="clearfix">
+            <li><a id="current" href="#">Dashboard</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Time to market</a></li>
+            <li><a href="#">Product Description</a></li>
+            <li><a href="#">Growth Strategy</a></li>
+            <li><a href="#">Management</a></li>
+        </ul>
     </div>
-    <div id="analysis">
-      <div tal:replace="structure context['analysis']">
-        Page text goes here.
-      </div>
-    </div>
+
+        <!--<div tal:replace="structure context['overview']"/>-->
+        <!--
+            <div tal:repeat="x context['person']">
+                <b tal:replace="x['name']"/>
+                <div tal:replace="structure x['bio']"/>
+            </div>
+        -->
+
     <div tal:replace="structure comment_form">
         Comment form 
     </div>

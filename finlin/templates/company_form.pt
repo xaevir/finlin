@@ -2,17 +2,65 @@
   <div metal:fill-slot="body" id="company_form">
     <form action="${save_url}" method="post">
       <div>
-        <label>Name:</label>
+        <label>Name</label>
       </div>
       <p>
         <input name="name" type="text"/>
       </p>
       <div>
-        <label>Analysis:</label>
+        <label>Overview</label>
       </div>
       <p>
-        <textarea name="analysis"></textarea>
+        <textarea name="overview"></textarea>
       </p>
+      <div>
+        <label>Product</label>
+      </div>
+      <p>
+        <textarea name="product"></textarea>
+      </p>
+
+      <div>
+        <label>Time till market</label>
+      </div>
+      <p>
+        <textarea name="time_till_mkt"></textarea>
+      </p>
+      <div>
+        <label>Growth Strategy</label>
+      </div>
+      <p>
+        <textarea name="growth_strategy"></textarea>
+      </p>
+      <div>
+        <label>Financial Overview</label>
+      </div>
+      <p>
+        <textarea name="financial_overview"></textarea>
+      </p>
+      <div>
+        <label>Questions Emailed</label>
+      </div>
+      <p>
+        <textarea name="questions_emailed"></textarea>
+      </p>
+      <h2>Management</h2>
+      <div>
+        <label>Name</label>
+      </div>        
+      <p>
+        <input type="text" name="person-0.name"/>
+      </p>
+       <div>
+        <label>Bio</label>
+      </div>        
+      <p>
+        <textarea name="person-0.bio"></textarea>
+      </p>
+
+
+
+
       <p class="field">
         <input type="submit" name="form.submitted" value="Save"/>
       </p>

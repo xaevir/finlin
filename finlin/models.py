@@ -32,6 +32,7 @@ class Root(object):
     def __init__(self, request):
         self.db = request.db 
     def __getitem__(self, key):
+        log.debug('Key is %s'% key)
         if key == 'user':
             return UserContainer(parent=self, name='user', db=self.db )
         doc = self.db.company.find_one({'slug':key})
@@ -57,12 +58,11 @@ def get_root(request):
 
 class Company(dict):
     def __init__ (self, data, parent=None):
-        self['_id']      = data.get('_id', ObjectId()) 
-        self['name']     = data['name']
-        self['slug']     = slugify(self['name'])
-        self['analysis'] = data['analysis'] 
-        self['created']  = data.get('created', datetime.datetime.now()) 
-
+        if not data['_id']:
+            self['slug']     = slugify(data['name'])
+            self['created']  = datetime.datetime.now() 
+        for key, value in data.items():
+            self[key] = value
         self.__name__    = self['slug']
         self.__parent__  = parent 
 

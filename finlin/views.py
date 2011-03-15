@@ -12,12 +12,18 @@ from pyramid.security import forget
 import cryptacular.bcrypt
 
 import formencode
-from formencode import validators
+from formencode.schema import Schema
+from formencode.validators import String, PlainText, MaxLength, MinLength, Email
+from formencode.validators import Invalid, FancyValidator 
+from formencode import variabledecode 
 from formencode import htmlfill
+from formencode.foreach import ForEach
+from formencode.api import NoDefault
 
-import markdown
+from markdown import markdown
 from BeautifulSoup import BeautifulSoup, Tag
 
+from finlin.models import Root
 from finlin.models import Company
 from finlin.models import User
 from finlin.models import Comment
@@ -26,126 +32,74 @@ import logging
 from pprint import pprint
 log = logging.getLogger(__name__)
 
-md = markdown.Markdown(
-        extensions=['toc'], 
-        safe_mode='remove',
-)
+   
+#___________________________________________________________________Homepage__
 
-
-class UniqueCompanyName(formencode.FancyValidator):
-    def _to_python(self, value, state):
-        result = state.db.company.find_one({'name':value})
-        if result is not None:
-            raise formencode.Invalid(
-                'That company name already exists',
-                 value, state)
-        return value
-
-class CompanyForm(formencode.Schema):
-    allow_extra_fields = True
-    filter_extra_fields = True
-    analysis = validators.String(
-        not_empty=True,
-        messages={
-            'empty':'Please enter some content for the page.'
-        }
-    )
-    name = formencode.All(validators.String(not_empty=True), 
-                             UniqueCompanyName()) 
-
-@view_config(context='finlin.models.Root',
-            renderer='finlin:templates/home_page.pt')
+@view_config(context=Root, renderer='finlin:templates/home_page.pt')
 def home_page(context, request):
     main = get_renderer('finlin:templates/master.pt').implementation()
     return HTTPFound(location = resource_url(context, request, 'Tootie_Pie_Company_Inc_TOOT'))
 
 
-@view_config(context='finlin.models.Root',
-            name='list',
-            renderer='finlin:templates/company_list.pt')
+#____________________________________________________________________Company__
+
+class UniqueCompanyName(FancyValidator):
+    def _to_python(self, value, state):
+        result = state.db.company.find_one({'name':value})
+        if result is not None:
+            raise Invalid(
+                'That company name already exists',
+                 value, state)
+        return value
+
+class Person(Schema):
+    name =  String()
+    bio = String()
+
+class CompanyForm(Schema):
+    allow_extra_fields = True
+    filter_extra_fields = True
+    pre_validators = [variabledecode.NestedVariables()]
+    name = formencode.All(String(not_empty=True), 
+                          UniqueCompanyName()) 
+    overview = String()
+    product = String()
+    time_till_mkt = String()
+    growth_strategy = String()
+    financial_overview = String()
+    questions_emailed = String()
+    person = ForEach(Person())
+ 
+
+@view_config(name='list', context=Root, renderer='templates/company_list.pt')
 def list_company(context, request):
     main = get_renderer('finlin:templates/master.pt').implementation()
     return dict(main = main)    
 
 
-class CommentForm(formencode.Schema):
-    allow_extra_fields = True
-    filter_extra_fields = True
-    username = formencode.All(validators.PlainText(not_empty=True),
-                              validators.MaxLength(50),
-                              validators.MinLength(2))
-    email = formencode.All(validators.Email(not_empty=True),
-                              validators.MaxLength(100),
-                              validators.MinLength(3))
-    body = formencode.All(validators.String(not_empty=True),
-                              validators.MaxLength(3000))
-
-
-
-@view_config(context='finlin.models.Company', name='')
+@view_config(name='', context=Company, renderer='templates/company_view.pt' )
 def view_company(context, request):
-    context['analysis'] = md.convert(context['analysis'])
-
-    html_of_analyis = BeautifulSoup(context['analysis'])
-    toc = html_of_analyis.find('div', 'toc')
-    try:
-        toc.extract()
-        li_list = toc.findAll('li')
-        li_list = reversed(li_list)
-        beautiful = BeautifulSoup()
-        ul = Tag(beautiful, "ul")
-        beautiful.insert(0, ul)
-        for li in li_list:
-            ul.insert(0, li)
-        toc = ul
-        context['analysis'] = html_of_analyis
-        context['toc'] = toc
-    except AttributeError: pass
-        
-        
-    comment = comment_form(context, request)
-    return render_to_response('finlin:templates/company_view.pt',
-            dict(
+    sections = ['analysis',
+                'overview', 
+                'product',
+                'time_till_mkt',
+                'growth_strategy',
+                'person']
+    for key in sections:
+        try:
+            context[key] = markdown(context[key])
+        except AttributeError: #person is list
+            for index, peep in enumerate(context['person']):
+                context['person'][index]['bio'] = markdown(peep['bio'])
+        except KeyError:
+            context[key] = ''
+    return dict(
                 main = get_renderer('templates/master.pt').implementation(),
-                comment_form = comment,
-               ),
-               request)
-
-def comment_form(context, request):
-    tpl = 'finlin:templates/comment_form.pt'
-    tpl_vars = { 
-        'save_url': resource_url(context, request, 'add_comment'),
-        'submit_label': 'add comment'} 
-    try:
-        errors = request.session.pop('errors')
-        values = request.session.pop('values')
-        log.debug(errors)
-        html = htmlfill.render(
-                            render(tpl, tpl_vars, request),
-                            defaults=values,
-                            errors=errors) 
-        return html
-    except KeyError:
-        return render(tpl, tpl_vars, request)
+                comment_form = comment_form(context, request),
+               )
 
 
-@view_config(context='finlin.models.Company', name='add_comment')
-def add_comment(context, request):
-    schema = CommentForm() 
-    try:
-        params = schema.to_python(request.params)
-    except formencode.Invalid, e:
-        request.session['errors'] = e.unpack_errors()
-        request.session['values'] = e.value
-        return HTTPFound(location = resource_url(context, request, anchor='comment-form'))
-    else:
-        comment = Comment(params, context)
-        request.db.comment.insert(comment) 
-        anchor = 'comment_' + str(comment['_id'])
-        return HTTPFound(location = resource_url(context, request, anchor=anchor))
-
-
-@view_config(name='add', context='finlin.models.Root')
+@view_config(name='add', context=Root)
 def add_company(context, request):
     tpl = 'finlin:templates/company_form.pt'
     tpl_vars = { 
@@ -174,7 +128,7 @@ def add_company(context, request):
     return Response(render(tpl, tpl_vars, request))
 
 
-@view_config(name='edit', context='finlin.models.Company')
+@view_config(name='edit', context=Company)
 def edit_company(context, request):
     tpl = 'finlin:templates/company_form.pt'
     tpl_vars = { 
@@ -183,7 +137,7 @@ def edit_company(context, request):
         'submit_label': 'edit'} 
     if 'form.submitted' in request.params:
         schema = CompanyForm() 
-        schema.fields['name'] = validators.String(not_empty=True)
+        schema.fields['name'] = String(not_empty=True)
         try:
             params = schema.to_python(request.params, request)
         except formencode.Invalid, e:
@@ -207,7 +161,7 @@ def edit_company(context, request):
     return Response(html)
 
 
-@view_config(name='delete', context='finlin.models.Company')
+@view_config(name='delete', context=Company)
 def delete_company(context, request):
     request.db.company.remove({'slug':context.__name__})
     request.session.flash(context['name'] + ' deleted')
@@ -216,6 +170,70 @@ def delete_company(context, request):
                                     request, 
                                     'list'))
 
+
+#__________________________________________________________Company Dashboard__
+class CompanyDashboard(Schema):
+    allow_extra_fields = True
+    filter_extra_fields = True
+    name = formencode.All(String(not_empty=True), 
+                          UniqueCompanyName()) 
+    overview = String()
+    product = String()
+    time_till_mkt = String()
+ 
+
+#____________________________________________________________________Comment__
+
+class CommentForm(formencode.Schema):
+    allow_extra_fields = True
+    filter_extra_fields = True
+    username = formencode.All(PlainText(not_empty=True),
+                              MaxLength(50),
+                              MinLength(2))
+    email = formencode.All(Email(not_empty=True),
+                              MaxLength(100),
+                              MinLength(3))
+    body = formencode.All(String(not_empty=True),
+                              MaxLength(3000))
+
+
+def comment_form(context, request):
+    tpl = 'finlin:templates/comment_form.pt'
+    tpl_vars = { 
+        'save_url': resource_url(context, request, 'add_comment'),
+        'submit_label': 'add comment'} 
+    try:
+        errors = request.session.pop('errors')
+        values = request.session.pop('values')
+        log.debug(errors)
+        html = htmlfill.render(
+                            render(tpl, tpl_vars, request),
+                            defaults=values,
+                            errors=errors) 
+        return html
+    except KeyError:
+        return render(tpl, tpl_vars, request)
+
+
+@view_config(name='add_comment', context=Company)
+def add_comment(context, request):
+    schema = CommentForm() 
+    try:
+        params = schema.to_python(request.params)
+    except formencode.Invalid, e:
+        request.session['errors'] = e.unpack_errors()
+        request.session['values'] = e.value
+        return HTTPFound(location = resource_url(context, request, anchor='comment-form'))
+    else:
+        comment = Comment(params, context)
+        request.db.comment.insert(comment) 
+        anchor = 'comment_' + str(comment['_id'])
+        return HTTPFound(location = resource_url(context, request, anchor=anchor))
+
+
+
+
+#___________________________________________________________________Register__
 
 class UniqueUsername(formencode.FancyValidator):
     def _to_python(self, value, state):
@@ -229,15 +247,15 @@ class UniqueUsername(formencode.FancyValidator):
 class AddAccountForm(formencode.Schema):
     allow_extra_fields = True
     filter_extra_fields = True
-    username = formencode.All(validators.PlainText(not_empty=True),
-                              validators.MaxLength(50),
-                              validators.MinLength(3),
+    username = formencode.All(PlainText(not_empty=True),
+                              MaxLength(50),
+                              MinLength(3),
                               UniqueUsername())
-    password = formencode.All(validators.PlainText(not_empty=True),
-                              validators.MaxLength(50),
-                              validators.MinLength(3))
+    password = formencode.All(PlainText(not_empty=True),
+                              MaxLength(50),
+                              MinLength(3))
 
-@view_config(name='add_account', context='finlin.models.Root')
+@view_config(name='add_account', context=Root)
 def add_account(context, request):
     tpl = 'finlin:templates/login_form.pt'
     tpl_vars = { 
@@ -264,13 +282,16 @@ def add_account(context, request):
     return Response(render(tpl, tpl_vars, request))
 
 
+#_____________________________________________________________________Login___
+
 class Login(formencode.Schema):
     allow_extra_fields = True
     filter_extra_fields = True
-    name = formencode.All(validators.PlainText(not_empty=True))
-    password = formencode.All(validators.PlainText(not_empty=True))
- 
-@view_config(context='finlin.models.Root', name='login')
+    name = formencode.All(PlainText(not_empty=True))
+    password = formencode.All(PlainText(not_empty=True))
+
+
+@view_config(name='login', context=Root)
 @view_config(context='pyramid.exceptions.Forbidden')
 def login(context, request):
     login_url = resource_url(request.context, request, 'login')
@@ -316,16 +337,20 @@ def login(context, request):
            return HTTPFound(location = came_from, headers = headers)
     return Response(render(tpl, tpl_vars, request))
 
+
+#____________________________________________________________________Contact__
+
+
 class ContactForm(formencode.Schema):
     allow_extra_fields = True
     filter_extra_fields = True
-    name = formencode.All(validators.PlainText(not_empty=True),
-                              validators.MaxLength(50),
-                              validators.MinLength(2))
-    email = formencode.All(validators.Email(not_empty=True),
-                              validators.MaxLength(100))
-    body = formencode.All(validators.String(not_empty=True),
-                              validators.MaxLength(3000))
+    name = formencode.All(PlainText(not_empty=True),
+                              MaxLength(50),
+                              MinLength(2))
+    email = formencode.All(Email(not_empty=True),
+                              MaxLength(100))
+    body = formencode.All(String(not_empty=True),
+                              MaxLength(3000))
 
 @view_config(context='finlin.models.Root', name='contact')
 def contact(context, request):
@@ -356,7 +381,7 @@ def contact(context, request):
             
             smtpObj = smtplib.SMTP('localhost')
             smtpObj.sendmail(sender, receivers, message)         
-            request.session.flash('Thank you for your correspondence')
+            request.session.flash('Thank you!')
 
             return HTTPFound(location = resource_url(
                                     context, 
