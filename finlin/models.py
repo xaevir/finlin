@@ -1,4 +1,6 @@
 from pyramid.threadlocal import get_current_request 
+from pyramid.url import resource_url
+
 import logging
 from pprint import pprint
 import re
@@ -8,22 +10,14 @@ from pymongo.objectid import ObjectId
 log = logging.getLogger(__name__)
 from bson.code import Code
 
+from zope.interface import implements
+from zope.interface import Interface
+
 
 def get_db():
     req =  get_current_request()
     return req.db 
  
-def slugify(name):
-    filter = { 
-        '&+' : 'and', # replace & with 'and'              
-        '[^a-zA-Z0-9]+' : '_', # non-alphanumeric characters with a hyphen
-        '-+' : '_' # replace multiple hyphens with a single hyphen
-    }
-    for k, v in filter.items():
-        name = re.sub(k, v, name)
-    name = name.strip('_') 
-    return name	
-
 
 
 class Root(object):
@@ -31,6 +25,7 @@ class Root(object):
     __parent__ = None
     def __init__(self, request):
         self.db = request.db 
+        self.request = request
     def __getitem__(self, key):
         log.debug('Key is %s'% key)
         if key == 'user':
@@ -38,7 +33,7 @@ class Root(object):
         doc = self.db.company.find_one({'slug':key})
         if doc is None:
             raise KeyError
-        return Company(doc, self)             
+        return Company(doc, key, self)             
 
     def get_homepage(self):
         return get_db().comment.find({'slug': 'H_H_Imports_aka_TV_Goods'})
@@ -56,16 +51,50 @@ def get_root(request):
     root = Root(request)
     return root 
 
-class Company(dict):
-    def __init__ (self, data, parent=None):
-        if not data['_id']:
-            self['slug']     = slugify(data['name'])
-            self['created']  = datetime.datetime.now() 
-        for key, value in data.items():
-            self[key] = value
-        self.__name__    = self['slug']
-        self.__parent__  = parent 
 
+class Company(object):
+    links = [('about', 'About'), 
+             ('time_to_market', 'Time to Market'), 
+             ('product', 'Product'),
+             ('growth_strategy', 'Growth Strategy'),
+             ('management',  'Managment')]
+
+    def __init__(self, data, name, parent):
+        self.__name__    = name
+        self.__parent__  = parent 
+        self.__data      = data
+        self.request     = parent.request
+        self.analysis    = data['analysis']
+        self.name        = data['name']
+        self.nav               = self.create_nav() 
+
+
+    def __getitem__(self, key):
+        log.debug('Key is %s'% key)
+        try:
+            [x[0] for x in self.links].index(key)
+        except ValueError:
+            raise KeyError
+        return CompanyPage(self.__data, key, self)
+
+    def create_nav(self):
+        nav = []
+        for x,y in self.links:
+            x =  resource_url(self, self.request, x)
+            nav.append((x,y))
+        nav.insert(0, (resource_url(self, self.request), 'Overview'))
+        return nav
+
+      
+class CompanyPage(object):
+    def __init__ (self, data, name, parent):
+        self.__name__    = name
+        self.__parent__  = parent 
+        self.name        = data['name']
+        self.page        = data.get(name, 'This section is empty')
+        self.nav         = parent.nav
+
+class CompanyData(dict):
     def get_comments(self):
         return get_db().comment.find({'company_id': self['_id']})
 

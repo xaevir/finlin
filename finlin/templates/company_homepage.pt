@@ -1,0 +1,126 @@
+<html metal:use-macro="company_layout">
+  <div metal:fill-slot="company-page" id="company" class="clearfix">
+    
+    <div class="col">
+        <div class="tile">
+            <div class="hd">
+                <h2>SWOT Analysis</h2>
+            </div>
+
+            <div class="bd">
+                <h3>What will it take for them to become profitable?</h3>
+                <p>
+                    Suspendisse eu cursus leo. Integer egestas vestibulum posuere. 
+                    Vivamus facilisis posuere sodales. Aenean est mauris, ornare et 
+                    volutpat ac, scelerisque ac tortor. Nam sodales est at turpis.
+                </p>
+                <h3>Strenghts</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin 
+                    orci neque, gravida at hendrerit id, dictum id urna. Etiam ut 
+                    ullamcorper nulla. Cras egestas, dui ac scelerisque porttitor. 
+                </p>
+                <h2>Weaknesses</h2>
+                <p>
+                    Pellentesque habitant morbi tristique senectus et netus et 
+                    malesuada fames ac turpis egestas. Ut dapibus orci vel ipsum 
+                    scelerisque condimentum. Vivamus consectetur egestas dui.
+                </p>
+                <h2>Opportunities</h2>
+                <p>
+                    Morbi tristique senectus et netus et malesuada fames ac turpis 
+                    egestas. Ut dapibus orci vel ipsum scelerisque condimentum. 
+                    Vivamus consectetur egestas dui, ac tempus sapien convallis eu. 
+                </p>
+                <h2>Threats</h2>
+                <p>
+                    Suspendisse eu cursus leo. Integer egestas vestibulum posuere. 
+                    Vivamus facilisis posuere sodales. Aenean est mauris, ornare et 
+                    volutpat ac, scelerisque ac tortor. Nam sodales est at turpis.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="tile">
+            <div class="hd">
+                <h2>Questions Unanswered</h2>  
+            </div>
+            <div class="bd">
+                <p>
+                <span class="question">Q.</span>How does it take for your average product to be ready for the market? 
+                I would guess at least a year seeing as you are just about ready to 
+                introduce some products and have been in business a year.
+                </p>
+            </div>
+        </div>
+        <div class="tile">
+            <div class="hd">
+                <h2>Income Statement</h2>  
+            </div>
+            <div class="bd income-statement">
+                <table>
+                    <tr>
+                        <td></td>
+                        <td>398,000</td>
+                        <td>Sales</td>
+                    </tr>
+                    <tr>
+                        <td>--</td>
+                        <td>793,000</td>
+                        <td>Expenses</td>
+                    </tr>
+                    <tr class="total">
+                        <td>$</td>
+                        <td style="color: #f00;">-1,191,000</td>
+                        <td>Net Income</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="sidebar" class="col">
+        <div id="ad">
+            <div id="ad-img">
+                <img src="/static/amex_ad.png"/>
+            </div>
+            <div id="adlnk">
+                <b>
+                    <a href="#">
+                        Apply Now
+                    </a>
+                </b> - 
+                <a href="#">
+                    Ad Feedback
+                </a>
+            </div>
+        </div>
+<div class="tile" id="sponsored-links">
+    <div class="hd">
+        <h3>Sponsored Links</h3>
+    </div>
+    <div class="bd">
+        <ul>
+                        <li class="ult-position first">
+                <a class="yltasis" href="http://us.lrd.yahoo.com/_ylt=AhQ1ZLHJ5avgOkcOhEByGrEVq594;_ylu=X3oDMTB2Z2oxbnY0BHBvcwMxBHNlYwNvdi1iBHNsawNjcmVkaXRyZXBhaXI-/SIG=1cnaahbjm/**http%3A//0.r.msn.com/%3Fld=4vxrI79KcGicPHA_SrbRtEeSu7D_hsz1pDNfvdlq2yoPgZcY3onADQti4mgUrOBfy3-FfgI2g5cBRF03xA0CnMKs_6wZf5Ki-yQa16RZULTjVvoI2QVf76iHleBQD4vK15iC-ggHXzQMNtD9Y9gRGFc7WOTTrbdYDK7davSdN09fG5xDtpE_uAUmeg8aOFFtP0Z1CHgKwsaqOj48wdhI0-VA14JNtSH4jrf7q6373H4NtBh9tTZgv_sLMtvyD-4tswjSVVKKYOmEcans_Bo89k5UszDetSYqv9UoWD3cPjxI81VAlM-jBdSNAZfE7ZkHfAOLJ42hAmY3M9hwSWYhU6T9FaDUJck-1Dy2XnrSg6eLMXky4XFEeBNy4">Credit Repair (Excellent)</a>
+                Fast and Effective Credit Report Repair. $39/month. BBB Mbr.                <a class="host yltasis" href="http://us.lrd.yahoo.com/_ylt=AnMUpankRyMzp2K5KY51QMUVq594;_ylu=X3oDMTB2YW5oYXEzBHBvcwMyBHNlYwNvdi1iBHNsawN3d3dvdmF0aW9uY3I-/SIG=1cnaahbjm/**http%3A//0.r.msn.com/%3Fld=4vxrI79KcGicPHA_SrbRtEeSu7D_hsz1pDNfvdlq2yoPgZcY3onADQti4mgUrOBfy3-FfgI2g5cBRF03xA0CnMKs_6wZf5Ki-yQa16RZULTjVvoI2QVf76iHleBQD4vK15iC-ggHXzQMNtD9Y9gRGFc7WOTTrbdYDK7davSdN09fG5xDtpE_uAUmeg8aOFFtP0Z1CHgKwsaqOj48wdhI0-VA14JNtSH4jrf7q6373H4NtBh9tTZgv_sLMtvyD-4tswjSVVKKYOmEcans_Bo89k5UszDetSYqv9UoWD3cPjxI81VAlM-jBdSNAZfE7ZkHfAOLJ42hAmY3M9hwSWYhU6T9FaDUJck-1Dy2XnrSg6eLMXky4XFEeBNy4">www.OvationCredit.com</a>
+            </li>
+                        <li class="ult-position">
+                <a class="yltasis" href="http://us.lrd.yahoo.com/_ylt=ArptlNJulnG2M9c8z4jdtzEVq594;_ylu=X3oDMTB2MDJmaG1oBHBvcwMzBHNlYwNvdi1iBHNsawNjYXJpbnN1cmFuY2U-/SIG=1cs7sdqij/**http%3A//552964.r.msn.com/%3Fld=4vptTBnKvPRTBTKK4yF_MEmA--khGql85WCabyrueM9RW-0ra_DOuuZT_pal1npSJNi0HATNb4tUZ4NWiFUbyVPlICGaf_BWePi6jaK1n07CiRd3B7rWoj_N0Z2LTANe675vB33EZvdLzwQZYV3lHzXe1sE_3ONIa-8vq_LM70j2-PMVg0MWVv0tlWOyivZ9WBQmttPUx2MqpDT93au_q9X2PIzjkxS7q-Lk-OgNB1m6E0m5eQMngEezzUsSj7qZF5FYo5LOKe5qzwop5vIb-uYiuBSrx9QoattAPcLofpGek1VAlM3XMyXa2qZFvM1K6IpsLU_BAmY3M9YcS4VT41WZvzBgG3Ys28v4N54ExiYcwz4DMxCp8HW0o">Car Insurance (EXPOSED)</a>
+                We investigated car insurance and what we found may shock you...                <a class="host yltasis" href="http://us.lrd.yahoo.com/_ylt=As6wIvXPCA3B2vJ4Lw6ZJckVq594;_ylu=X3oDMTB2ZmJmdTE0BHBvcwM0BHNlYwNvdi1iBHNsawN3d3duZXdzOWNvbnM-/SIG=1cs7sdqij/**http%3A//552964.r.msn.com/%3Fld=4vptTBnKvPRTBTKK4yF_MEmA--khGql85WCabyrueM9RW-0ra_DOuuZT_pal1npSJNi0HATNb4tUZ4NWiFUbyVPlICGaf_BWePi6jaK1n07CiRd3B7rWoj_N0Z2LTANe675vB33EZvdLzwQZYV3lHzXe1sE_3ONIa-8vq_LM70j2-PMVg0MWVv0tlWOyivZ9WBQmttPUx2MqpDT93au_q9X2PIzjkxS7q-Lk-OgNB1m6E0m5eQMngEezzUsSj7qZF5FYo5LOKe5qzwop5vIb-uYiuBSrx9QoattAPcLofpGek1VAlM3XMyXa2qZFvM1K6IpsLU_BAmY3M9YcS4VT41WZvzBgG3Ys28v4N54ExiYcwz4DMxCp8HW0o">www.news9consumer.com</a>
+            </li>
+                        <li class="ult-position">
+                <a class="yltasis" href="http://us.lrd.yahoo.com/_ylt=AhmmD4gbby4gh2va0r977lQVq594;_ylu=X3oDMTB2MDAyN3VqBHBvcwM1BHNlYwNvdi1iBHNsawNicmVha2luZ25ld3M-/SIG=1asc8aup9/**http%3A//948694.r.msn.com/%3Fld=4v1rmxXFM0QmELr8_z5PKQQHClg2H7Pcr5k-G-wXAUFn6gwQcmgUfKEcZsxZGvByk28VcLhBYc7TV1vkNghMhJMQ0Ja_PfAB3l9Fixk9k8xpl8JvO71r0A4uB52x3Q3Em5KMgvDu5HNt7oWOx7UPD9U3hc598RLhwyrChdP1LOovYTJloJ3d6oxvLw_6Nkl5AZkPBKNTocYODaRbZXJ4e3WELRdJMmdXDXG0OlV0SJP0M1VAlMIcjUhepaePDZHTlplHzbahAmY3M9k9lRLSlIHJWHeJ3agPO2_jOGC7EHfMfymK3Szz2H-jw">BREAKING NEWS:$25 Car Ins</a>
+                Do Not Buy Car Insurance until you see this shocking report!                <a class="host yltasis" href="http://us.lrd.yahoo.com/_ylt=At1vvTxeatL0Lou4Ee1d6.YVq594;_ylu=X3oDMTB2cnQ1YWdrBHBvcwM2BHNlYwNvdi1iBHNsawN3d3duZXdzN2JyZWE-/SIG=1asc8aup9/**http%3A//948694.r.msn.com/%3Fld=4v1rmxXFM0QmELr8_z5PKQQHClg2H7Pcr5k-G-wXAUFn6gwQcmgUfKEcZsxZGvByk28VcLhBYc7TV1vkNghMhJMQ0Ja_PfAB3l9Fixk9k8xpl8JvO71r0A4uB52x3Q3Em5KMgvDu5HNt7oWOx7UPD9U3hc598RLhwyrChdP1LOovYTJloJ3d6oxvLw_6Nkl5AZkPBKNTocYODaRbZXJ4e3WELRdJMmdXDXG0OlV0SJP0M1VAlMIcjUhepaePDZHTlplHzbahAmY3M9k9lRLSlIHJWHeJ3agPO2_jOGC7EHfMfymK3Szz2H-jw">www.News7BreakingNews.com</a>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+    </div>
+
+  </div>
+</html>
+ 

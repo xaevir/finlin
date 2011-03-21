@@ -149,6 +149,7 @@ a {
 	color:#0181E3;
     color: #0069AA;
     color: #3366CC;
+    color: #0058A6;
 	text-decoration: none;
 }
 a:hover {
@@ -162,10 +163,6 @@ p {
 table{
     border-collapse: separate;
     border-spacing: 0;
-	border:1px solid #7F7F7F !important;
-	background-color: #fff;	
-	color: #000;
-	font-family: arial;
 }
 
 thead {
@@ -174,15 +171,11 @@ thead {
 
 th {
 	font-weight: normal;
-	background: #D8D8DA url(http://yui.yahooapis.com/2.8.1/build/assets/skins/sam/sprite.png) repeat-x 0 0;
 	text-align:center;
-	border-right:1px solid #CBCBCB;
-	border-bottom:1px solid #7F7F7F;
 }
 
 tr.odd {
 	background-color:#EDF5FF;
-	
 }
 th,td {
     padding:4px 10px;
@@ -190,7 +183,6 @@ th,td {
 }
 
 td {
-	border-right: 1px solid #CBCBCB;
 }
 
 tr {
@@ -265,7 +257,7 @@ h2 a:hover {
 /*___________________________________________________________Main Div Setup_*/
 
 #doc2 {
-	width: 970px;
+	width: 990px;
     margin: 0 auto;
 }
 #hd {
@@ -314,6 +306,11 @@ h2 a:hover {
     border-left: 1px solid transparent;
     margin-right: 20px;
     padding: 0 3px;
+    left: 0;
+    position: relative;
+}
+#logo-svg{
+    float: left;
 }
 #logo-img {
     color: transparent;
@@ -325,6 +322,13 @@ h2 a:hover {
     border-right: 1px solid #000;
     padding-right: 5px;
     margin-right: 5px;
+}
+#pic-logo{
+	background: url(/static/medieval.png) no-repeat center left;
+    width: 23px;
+    height: 23px;
+    float: left;
+    margin-top: 3px;
 }
 #logo-desc {
     margin-top: 1px; 
@@ -346,9 +350,11 @@ h2 a:hover {
    padding-right: 15px;
 }
 
-#ft #swag{
-    position: relative;
-    top: -10px;
+#swag {
+    color: #666;
+}
+#ft #swag a{
+    color: #666;
 }
 
 /*__________________________________________________________Main Navigation_*/
@@ -391,9 +397,15 @@ h2 a:hover {
 }
 
 
-/*_____________________________________________________________Company View_*/
+/*___________________________________________________________Company Section*/
 
-#company-view h1{
+#company {
+}
+#company-section {
+    width: 600px;
+}   
+
+#company h1{
     color: #fff;
     padding-top: 10px;
     padding-bottom: 7px;
@@ -406,11 +418,6 @@ h2 a:hover {
     -moz-border-radius-topright: 8px;
     border: 1px solid #0076A3;
     border-bottom: none;
-}
-
-#company-view hr{
-    border-bottom: 1px solid #89cff0;
-    clear: both;
 }
 
 /*_____________________________________________________________Company Nav*/
@@ -445,6 +452,107 @@ h2 a:hover {
 	background: -moz-linear-gradient(top,  #EFF6FF,  #fff);
     color: #000;
     border-color: #AFD5FF;
+}
+
+/*__________________________________________________________Company Homepage*/
+
+#company .col {
+    width: 320px;
+    float: left;
+    margin: 4px 4px 11px;
+    margin-top: 10px;
+}
+
+.tile {
+    border: 3px solid #eee;
+    margin-bottom: 10px;
+    -moz-border-radius: 8px;
+}
+
+.tile .hd{
+    padding: 10px 5px 0px;
+    color: #666;
+}
+
+.tile .hd h2{
+    padding-bottom: 5px; 
+    border-bottom: 1px solid #eee;
+}
+.tile .bd{
+    padding: 8px;    
+}
+.question {
+    font-family: Georgia;
+    font-size: 24px;
+    padding-right: 3px;
+    color: #30A509;
+    font-weight: bold;
+}
+
+#company #sidebar {
+    width: 300px;    
+    float: right;
+}
+
+#sidebar #sponsored-links ul li {
+    color: #000000;
+    margin-top: 10px;
+    list-style: none;
+}
+
+/*____________________________________________________________Sponsored Link*/
+
+
+#sidebar #sponsored-links {
+    background-image: none;
+    border: 3px solid #EEEEEE;
+
+    -moz-box-shadow: none;
+}
+
+#sidebar #sponsored-links {
+}
+#sidebar #sponsored-links .hd {
+    background-color: #EEEEEE;
+    border: medium none;
+    padding: 3px 10px 4px;
+}
+
+#sidebar #sponsored-links .bd {
+    padding: 0 10px 10px;
+}
+
+#sidebar #sponsored-links h3 {
+    color: #2F4251;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    text-transform: lowercase;
+}
+
+#sidebar #sponsored-links ul li a {
+    display: block;
+    font-weight: bold;
+}
+
+#sidebar #sponsored-links ul li a.host {
+    color: #1DA612;
+    font-weight: normal;
+}
+
+#adlnk {
+    font: 7.5pt verdana;
+    margin-bottom: 10px;
+    margin-top: 2px;
+    text-align: center;
+}
+
+/*__________________________________________________Company Income Statement*/
+
+.income-statement .total td{
+    border-top: 1px solid #ccc;
+    padding-right: 0;
 }
 
 /*_____________________________________________________________________Tabs_*/

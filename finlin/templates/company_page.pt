@@ -1,0 +1,6 @@
+<html metal:use-macro="company_layout">
+  <div metal:fill-slot="company-page" id="company">
+    <div tal:replace="structure context.page"/>
+  </div>
+</html>
+        

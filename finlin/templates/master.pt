@@ -22,15 +22,13 @@
         Cufon.replace('#logo #logo-img', { fontFamily: 'Bembo' });
     </script>
 
-    <script metal:define-slot="head-javascript"></script>
-    <script metal:define-slot="head-javascript-1"></script>
-
     </head>
 
 <body>
 <div id="hd">
     <div class="content clearfix">        
     <a id="logo" class="clearfix" href="${request.application_url}">
+        <span id="logo-svg"></span>
         <span id="logo-img">FINLIN</span>
         <span id="logo-desc">The broken window theory<br />applied to the OTC market</span>
     </a>
@@ -69,21 +67,20 @@
         <p style="float: left;">
             &copy; Finlin 2011
         </p>
-        <p style="float: right; padding-right:20px;" id="swag">
-            <a href="http://pylonsproject.org/">
-                <img src="${request.static_url('finlin:static/pyramid.png')}"/>
-            </a>
-            <a href="http://www.mongodb.org/">
-                <img src="${request.static_url('finlin:static/mongodb.png')}"/>
-            </a>
+        <div id="swag">
+        <p style="float: right; padding-right:20px;">
+            <a href="http://pylonsproject.org/">Pyramid</a> |
+            <a href="http://www.mongodb.org/">mongoDB</a>
          </p>
         <p style="float:right; padding-right: 7px;">
             Powered with:
         </p>
+        </div>
     </div>
 </div>
 
 <script type="text/javascript"> Cufon.now(); </script>
+<script type="text/javascript" src="${request.static_url('finlin:static/js/raphael.js')}"></script>
 <script src="${request.static_url('finlin:static/js/main.js')}"></script>
 </body>
 </html>

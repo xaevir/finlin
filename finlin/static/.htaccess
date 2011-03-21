@@ -1,0 +1,13 @@
+RewriteEngine On
+
+RewriteCond %{HTTP_HOST} !^www\.finlin\.com
+RewriteRule ^(.*)$ http://www.finlin.com/$1 [R=301,L]
+
+# Check for maintenance file and redirect all requests
+
+RewriteCond %{DOCUMENT_ROOT}/system/maintenance.html -f
+RewriteCond %{SCRIPT_FILENAME} !maintenance.html
+RewriteCond %{REQUEST_URI} !/system/(.*)$
+RewriteCond %{SCRIPT_FILENAME} !\.(png|jpg)$
+RewriteRule ^.*$ /system/maintenance.html [L]
+

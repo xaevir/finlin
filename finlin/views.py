@@ -9,6 +9,8 @@ from pyramid.traversal import resource_path
 from pyramid.security import remember
 from pyramid.security import forget
 
+import datetime
+
 import cryptacular.bcrypt
 
 import formencode
@@ -32,8 +34,23 @@ import logging
 from pprint import pprint
 log = logging.getLogger(__name__)
 
+
+
+#____________________________________________________________________Utilities
+
+def slugify(name):
+    filter = { 
+        '&+' : 'and', # replace & with 'and'              
+        '[^a-zA-Z0-9]+' : '_', # non-alphanumeric characters with a hyphen
+        '-+' : '_' # replace multiple hyphens with a single hyphen
+    }
+    for k, v in filter.items():
+        name = re.sub(k, v, name)
+    name = name.strip('_') 
+    return name	
+
    
-#___________________________________________________________________Homepage__
+#_____________________________________________________________________Homepage
 
 @view_config(context=Root, renderer='finlin:templates/home_page.pt')
 def home_page(context, request):
@@ -77,26 +94,30 @@ def list_company(context, request):
     return dict(main = main)    
 
 
-@view_config(name='', context=Company, renderer='templates/company_view.pt' )
-def view_company(context, request):
-    sections = ['analysis',
-                'overview', 
-                'product',
-                'time_till_mkt',
-                'growth_strategy',
-                'person']
-    for key in sections:
-        try:
-            context[key] = markdown(context[key])
-        except AttributeError: #person is list
-            for index, peep in enumerate(context['person']):
-                context['person'][index]['bio'] = markdown(peep['bio'])
-        except KeyError:
-            context[key] = ''
-    return dict(
-                main = get_renderer('templates/master.pt').implementation(),
-                comment_form = comment_form(context, request),
-               )
+@view_config(name='', context='finlin.models.Company', 
+             renderer='templates/company_homepage.pt' )
+def homepage(context, request):
+    context.page = markdown(context.analysis)
+    return {
+        'main': get_renderer('templates/master.pt').implementation(),
+        'company_layout': get_renderer('templates/company_master.pt').implementation(),
+        }
+
+
+
+@view_config(name='', context='finlin.models.CompanyPage', 
+             renderer='templates/company_page.pt' )
+def view_page(context, request):
+    try:
+        context.page = markdown(context.page)
+    except AttributeError: #is list
+        management = {}
+        for index, value in enumerate(context.page):
+            management = markdown(value['bio'])
+    return {
+        'main': get_renderer('templates/master.pt').implementation(),
+        'company_layout': get_renderer('templates/company_master.pt').implementation(),
+        }
 
 
 @view_config(name='add', context=Root)
@@ -118,13 +139,14 @@ def add_company(context, request):
                                 errors=e.error_dict) 
             return Response(html)
         else:
-            company = Company(params)
-            request.db.company.save(company)
-            request.session.flash(company['name'] + ' created')
+            params['created'] = datetime.datetime.now()  
+            params['slug']    = slugify(params['name'])
+            request.db.company.save(params)
+            request.session.flash(params['name'] + ' created')
             return HTTPFound(location = resource_url(
                                     context, 
                                     request, 
-                                    company.__name__))
+                                    params['name']))
     return Response(render(tpl, tpl_vars, request))
 
 
@@ -175,11 +197,7 @@ def delete_company(context, request):
 class CompanyDashboard(Schema):
     allow_extra_fields = True
     filter_extra_fields = True
-    name = formencode.All(String(not_empty=True), 
-                          UniqueCompanyName()) 
-    overview = String()
-    product = String()
-    time_till_mkt = String()
+    analysis = String()
  
 
 #____________________________________________________________________Comment__
