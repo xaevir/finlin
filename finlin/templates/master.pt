@@ -9,18 +9,10 @@
         
     <link metal:define-slot="head-css"/>
 
-    <link rel="stylesheet"
-        href="${request.static_url('finlin:static/main.css')}"
-        type="text/css"/>
-    
-    <script src="${request.static_url('finlin:static/js/jquery.js')}"></script>
-    <script src="${request.static_url('finlin:static/js/cufon-yui.js')}"></script>
-    <script src="${request.static_url('finlin:static/js/Bembo_400-Bembo_700.font.js')}"></script>
+    <link rel="stylesheet" type="text/css" href="${request.static_url('finlin:static/Linux-Libertine-fontfacekit/stylesheet.css')}"/>
+    <link rel="stylesheet" type="text/css" href="${request.static_url('finlin:static/main.css')}"/>
 
-    <script type="text/javascript">
-        Cufon.replace('h1', { fontFamily: 'Bembo' });
-        Cufon.replace('#logo #logo-img', { fontFamily: 'Bembo' });
-    </script>
+    <script src="${request.static_url('finlin:static/js/jquery.js')}"></script>
 
     </head>
 
@@ -29,7 +21,7 @@
     <div class="content clearfix">        
     <a id="logo" class="clearfix" href="${request.application_url}">
         <span id="logo-svg"></span>
-        <span id="logo-img">FINLIN</span>
+        <span id="logo-font">FINLIN</span>
         <span id="logo-desc">The broken window theory<br />applied to the OTC market</span>
     </a>
         <div id="nav" class="clearfix">
@@ -79,7 +71,6 @@
     </div>
 </div>
 
-<script type="text/javascript"> Cufon.now(); </script>
 <script type="text/javascript" src="${request.static_url('finlin:static/js/raphael.js')}"></script>
 <script src="${request.static_url('finlin:static/js/main.js')}"></script>
 </body>

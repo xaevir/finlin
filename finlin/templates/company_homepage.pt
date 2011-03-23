@@ -1,48 +1,8 @@
 <html metal:use-macro="company_layout">
   <div metal:fill-slot="company-page" id="company" class="clearfix">
-    
-    <div class="col">
-        <div class="tile">
-            <div class="hd">
-                <h2>SWOT Analysis</h2>
-            </div>
 
-            <div class="bd">
-                <h3>What will it take for them to become profitable?</h3>
-                <p>
-                    Suspendisse eu cursus leo. Integer egestas vestibulum posuere. 
-                    Vivamus facilisis posuere sodales. Aenean est mauris, ornare et 
-                    volutpat ac, scelerisque ac tortor. Nam sodales est at turpis.
-                </p>
-                <h3>Strenghts</h3>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin 
-                    orci neque, gravida at hendrerit id, dictum id urna. Etiam ut 
-                    ullamcorper nulla. Cras egestas, dui ac scelerisque porttitor. 
-                </p>
-                <h2>Weaknesses</h2>
-                <p>
-                    Pellentesque habitant morbi tristique senectus et netus et 
-                    malesuada fames ac turpis egestas. Ut dapibus orci vel ipsum 
-                    scelerisque condimentum. Vivamus consectetur egestas dui.
-                </p>
-                <h2>Opportunities</h2>
-                <p>
-                    Morbi tristique senectus et netus et malesuada fames ac turpis 
-                    egestas. Ut dapibus orci vel ipsum scelerisque condimentum. 
-                    Vivamus consectetur egestas dui, ac tempus sapien convallis eu. 
-                </p>
-                <h2>Threats</h2>
-                <p>
-                    Suspendisse eu cursus leo. Integer egestas vestibulum posuere. 
-                    Vivamus facilisis posuere sodales. Aenean est mauris, ornare et 
-                    volutpat ac, scelerisque ac tortor. Nam sodales est at turpis.
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="tile">
+<!--
+        <div class="" style="width: 49%; float: left; ">
             <div class="hd">
                 <h2>Questions Unanswered</h2>  
             </div>
@@ -54,6 +14,100 @@
                 </p>
             </div>
         </div>
+        <div class="" style="width: 49%; float: right;">
+            <div class="hd">
+                <h2>Flags</h2>  
+            </div>
+            <div class="bd">
+                <p>
+                <span class="question">Q.</span>How does it take for your average product to be ready for the market? 
+                I would guess at least a year seeing as you are just about ready to 
+                introduce some products and have been in business a year.
+                </p>
+            </div>
+        </div>
+-->
+<!--
+        <div class="tile">
+            <div class="hd">
+                <h2>Road to Profiability</h2>  
+            </div>
+            <div class="bd">
+                <h3>What will it take for them to become profitable?</h3>
+                <p>
+                    Suspendisse eu cursus leo. Integer egestas vestibulum posuere. 
+                    Vivamus facilisis posuere sodales. Aenean est mauris, ornare et 
+                    volutpat ac, scelerisque ac tortor. Nam sodales est at turpis.
+                </p>
+            </div>
+        </div>
+-->
+
+    <div style="width: 640px; margin-top: 15px;">
+        <div id="four-corners">
+            <h2>4 Corners Analysis</h2>
+            <table>
+                <tr>
+                    <td> 
+                        <div class="corners">
+                            <span id="corner-1-top"></span>
+                            <span id="corner-1-left"></span>
+                            <h3>Drivers</h3>
+                            <div class="bd">
+                                <ul>
+                                    <li>Financial Goals</li>
+                                    <li>Corporate culture</li>
+                                    <li>Organizational structure</li>
+                                    <li>Leadership team backgrounds</li>
+                                    <li>External constrainsts</li>
+                                    <li>Business philosophy</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="corners">
+                            <span id="corner-2-top"></span>
+                            <span id="corner-2-right"></span>
+                            <h3>Current Strategy</h3>
+                            <div class="bd">
+                                <ul>
+                                    <li>How the business creates value</li>
+                                    <li>Where the business is choosing to invest</li>
+                                    <li>Relationships and networks the business has developed</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3>Management Assumptions</h3>
+                        <ul>
+                            <li>Company's perceptions of its strenghts and weaknesses</li>
+                            <li>Cultural traits</li>
+                            <li>Organizational value</li>
+                            <li>Perceived industry forces</li>
+                            <li>Belief about competitor's goals</li>
+                        </ul>
+                    </td>
+                    <td>
+
+                        <h3>Capabilities</h3>
+                        <ul>
+                            <li>Marketing skills</li>
+                            <li>Ability to service channels</li>
+                            <li>Skills and training to workforce</li>
+                            <li>Patents and copyrights</li>
+                            <li>Financial Strength</li>
+                            <li>Leadership qualities of CEO</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col">
         <div class="tile">
             <div class="hd">
                 <h2>Income Statement</h2>  

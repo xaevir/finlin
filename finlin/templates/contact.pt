@@ -1,6 +1,6 @@
 <html metal:use-macro="main">
   <div metal:fill-slot="body" id="contact">
-	<h1>Contact Us</h1>
+	<h1>Say <span>hello...</span></h1>
 
     <p style="margin-bottom: 3em;">
     	We'd love to hear from you, so if you have any questions about Finlin, <br />
