@@ -48,11 +48,12 @@
             <h2>4 Corners Analysis</h2>
             <table>
                 <tr>
-                    <td> 
+                    <td style="border-right: 1px solid #333;"> 
+                        <h3>What drives Tootie Pie</h3>
                         <div class="corners">
                             <span id="corner-1-top"></span>
                             <span id="corner-1-left"></span>
-                            <h3>Drivers</h3>
+                            <h3>(Future) Goals</h3>
                             <div class="bd">
                                 <ul>
                                     <li>Financial Goals</li>
@@ -66,12 +67,15 @@
                         </div>
                     </td>
                     <td>
+
+                        <h3>What is Tootie Pie doing and can do</h3>
                         <div class="corners">
                             <span id="corner-2-top"></span>
                             <span id="corner-2-right"></span>
                             <h3>Current Strategy</h3>
                             <div class="bd">
                                 <ul>
+                                    <li>How is the business currently competing</li>
                                     <li>How the business creates value</li>
                                     <li>Where the business is choosing to invest</li>
                                     <li>Relationships and networks the business has developed</li>
@@ -81,10 +85,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td style="border-right: 1px solid #333;"> 
                         <h3>Management Assumptions</h3>
                         <ul>
-                            <li>Company's perceptions of its strenghts and weaknesses</li>
+                            <li>Held about itself and the industry</li>
                             <li>Cultural traits</li>
                             <li>Organizational value</li>
                             <li>Perceived industry forces</li>
@@ -95,6 +99,8 @@
 
                         <h3>Capabilities</h3>
                         <ul>
+                            <li><b>Strengths</b></li>
+                            <li><b>Weaknesses</b></li>
                             <li>Marketing skills</li>
                             <li>Ability to service channels</li>
                             <li>Skills and training to workforce</li>
