@@ -35,10 +35,6 @@ class Root(object):
             raise KeyError
         return Company(doc, key, self)             
 
-    def get_homepage(self):
-        return get_db().comment.find({'slug': 'H_H_Imports_aka_TV_Goods'})
-
-
     def items(self):
         result = {}
         for obj in self.db.company.find():
@@ -64,9 +60,11 @@ class Company(object):
         self.__parent__  = parent 
         self.__data      = data
         self.request     = parent.request
-        self.analysis    = data['analysis']
         self.name        = data['name']
-        self.nav               = self.create_nav() 
+        self.nav         = self.create_nav() 
+        for k, v in data.items():
+            setattr(self, k, v)
+
 
 
     def __getitem__(self, key):

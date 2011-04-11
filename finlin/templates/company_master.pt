@@ -1,7 +1,8 @@
 <html metal:use-macro="main">
   <div metal:fill-slot="body" id="company">
-    <div id="company-hd">
+    <div id="hd">
         <h1>${context.name}</h1>
+        <div id="ticker">(${context.ticker})</div>
 
         <ul id="company-nav" class="clearfix"> 
             <li tal:repeat="(url, label) context.nav">
@@ -24,6 +25,12 @@
     <div metal:define-slot="company-page">
         Company Page goes here
     </div>
+
+
+  <div metal:fill-slot="footer-js" id="footer-js">
+    <div metal:define-slot="footer-js">
+    </div>
+  </div>
   </div>
 </html>
 

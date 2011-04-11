@@ -46,6 +46,9 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+b {
+    font-weight: bold;
+}
 /*_____________________________________________________________________Base_*/
 body {
     color: #111;
@@ -265,11 +268,18 @@ h2 a:hover {
 	background: -moz-linear-gradient(top,  #AEE8FF,  #89cff0);*/
     margin-bottom: 10px;
 	/*background: -moz-linear-gradient(top,  #fff,  #DFEEFF);*/
-	background-color: #DFEEFF;
-    border: 1px solid #AFD5FF;
+	/*background-color: #DFEEFF;*/
+    /* border: 1px solid #AFD5FF;*/
+   /*background: -moz-linear-gradient(center top , #FFFFFF, #F7FCFF ) repeat scroll 0 0 transparent;*/
+   border-bottom: 4px solid #B1DAF3;
+   /*border-right: 1px solid #B1DAF3;
+   border-left: 1px solid #B1DAF3;*/
+
+    width: 990px;
+    margin: 0 auto;
 }
 #hd .content {
-    width: 970px;
+    width: 990px;
     margin: 0 auto;
 }
 #bd {
@@ -296,49 +306,51 @@ h2 a:hover {
     border-right: 1px solid transparent;
     border-left: 1px solid transparent;
 }
-#hd a:hover {
-    border-color: #AFD5FF;
+#hd a:hover{
+    border-color: #B1DAF3;
     text-decoration: none;
 	/*background: -moz-linear-gradient(top,  #EFF6FF,  #fff);*/
-    background-color: #EFF6FF;
+    background-color: #B1DAF3;
+    color: #fff;
 }
+
+#logo:hover {
+    background-color: #B1DAF3;
+    filter: dropshadow(color=#FE7300,offX=1,offY=1);
+    text-shadow: #FE7300 1px 1px 0;
+    color: #fff;
+}
+
 #logo{
-    float: left; border-right: 1px solid transparent;
-    border-left: 1px solid transparent;
-    margin-right: 20px;
-    padding: 0 3px;
+    float: left; 
+    margin-right: 10px;
     position: relative;
+    margin-top: 2px;
+    font-family: 'times new roman','times', serif;
+    letter-spacing: 2px;
+    font-size: 24px;
+    padding-right: 3px;
+    filter: dropshadow(color=#fff,offX=1,offY=1);
+    text-shadow: #fff 1px 1px 0;
+    line-height: .9;
+    padding-left: 2px;
+    color: #FE7300;
+    display: block;
+    float: left;
+    padding-top: 2px;
+
 
 }
 #logo-svg{
-    float: left;
     line-height: 0;
+    position: absolute;
+    left: 44px;
+    top: 1px;
 }
-#logo-font {
-    font-family: LinuxLibertineORegular, arial, sans-serif;
-    letter-spacing: 2px;
-    font-size: 28px;
-    float: left;
-    padding-right: 3px;
-    filter: dropshadow(color=#fff,offX=1,offY=1);
-    text-shadow: #fff 1px 1px 0; 
-    line-height: .9;
-    padding-top: 4px;
-    color: #FF5100;
 
+#logo-font b{
+    font-weight: normal;
 }
-#logo-desc {
-    color: #FF5100;
-    font-size: 9px;
-    float: left;
-    padding-right: 3px;
-    font-family: verdana, arial, sans-serif;
-    padding-top: 3px;
-
-    filter: dropshadow(color=#fff,offX=1,offY=1);
-    text-shadow: #fff 1px 1px 0;
-}
-   
 /*___________________________________________________________________Footer*/
 
 #ft-nav {
@@ -374,6 +386,7 @@ h2 a:hover {
     text-decoration: none;
     padding: 0 10px;
     line-height: 2;
+    color: #00A1FF;
 }
 #nav a#login {
     float: right;
@@ -414,14 +427,23 @@ h2 a:hover {
 #company h1{
     color: #000;
     font-family: LinuxLibertineORegular, arial, sans-serif;
+    font-size: 42px;
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 15px;
 }
-#company-hd {
-    padding: 5px 5px 0 5px;
+
+#company #hd {
+    padding: 5px 5px 0 0;
     -moz-border-radius-topleft: 8px;
     -moz-border-radius-topright: 8px;
     border-bottom: none;
 }
 
+#company #ticker {
+    text-align: center;
+    margin-bottom: 15px;
+}
 /*_____________________________________________________________Company Nav*/
 
 #company-nav {
@@ -461,6 +483,14 @@ h2 a:hover {
 }
 
 /*__________________________________________________________Company Homepage*/
+#company .underline td{
+   border-bottom: 1px solid #eee; 
+}
+
+.y-border {
+    border-right: 1px solid #eee;
+}
+
 #four-corners h2{
     text-align: center;
     font-size: 20px;
@@ -563,7 +593,8 @@ h2 a:hover {
 }
 
 #company #sidebar {
-    width: 300px;    
+    width: 250px;    
+    margin-left: 15px;
     float: right;
 }
 

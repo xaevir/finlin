@@ -12,22 +12,23 @@
     <link rel="stylesheet" type="text/css" href="${request.static_url('finlin:static/Linux-Libertine-fontfacekit/stylesheet.css')}"/>
     <link rel="stylesheet" type="text/css" href="${request.static_url('finlin:static/main.css')}"/>
 
-    <script src="${request.static_url('finlin:static/js/jquery.js')}"></script>
 
     </head>
 
 <body>
 <div id="hd">
     <div class="content clearfix">        
-    <a id="logo" class="clearfix" href="${request.application_url}">
-        <span id="logo-svg"></span>
-        <span id="logo-font">FINLIN</span>
-        <span id="logo-desc">The broken window theory<br />applied to the OTC market</span>
-    </a>
+        <a id="logo" class="" href="${request.application_url}">
+            <span id="logo-svg"></span>
+            <span id="logo-font">
+                <b>FIN</b>
+                <b style="margin-left:15px;">LIN</b>
+            </span>
+        </a>
         <div id="nav" class="clearfix">
             <ul class="clearfix">
                 <li> <a href="${request.application_url}">Companies</a> </li>
-                <li> <a href="${request.application_url}">About</a> </li>
+                <li> <a href="${request.application_url}/strategy">Strategy</a> </li>
                 <li> <a href="${request.application_url}/contact">Contact</a>  </li> 
                 <li><a id="login" href="#">Create Account | Sign in</a></li>
             </ul>
@@ -36,7 +37,6 @@
 </div>
 
 <div id="doc2">
-
     <div id="bd">
         <div id="flash" 
           tal:define="message request.session.pop_flash()"
@@ -71,7 +71,16 @@
     </div>
 </div>
 
+<script src="${request.static_url('finlin:static/js/jquery.js')}"></script>
 <script type="text/javascript" src="${request.static_url('finlin:static/js/raphael.js')}"></script>
+
+    <p metal:define-slot="footer-js" ></p>
+
 <script src="${request.static_url('finlin:static/js/main.js')}"></script>
+
+
+
+
+
 </body>
 </html>

@@ -1,151 +1,115 @@
 <html metal:use-macro="company_layout">
-  <div metal:fill-slot="company-page" id="company" class="clearfix">
 
-<!--
-        <div class="" style="width: 49%; float: left; ">
-            <div class="hd">
-                <h2>Questions Unanswered</h2>  
-            </div>
-            <div class="bd">
-                <p>
-                <span class="question">Q.</span>How does it take for your average product to be ready for the market? 
-                I would guess at least a year seeing as you are just about ready to 
-                introduce some products and have been in business a year.
-                </p>
-            </div>
-        </div>
-        <div class="" style="width: 49%; float: right;">
-            <div class="hd">
-                <h2>Flags</h2>  
-            </div>
-            <div class="bd">
-                <p>
-                <span class="question">Q.</span>How does it take for your average product to be ready for the market? 
-                I would guess at least a year seeing as you are just about ready to 
-                introduce some products and have been in business a year.
-                </p>
-            </div>
-        </div>
--->
-<!--
-        <div class="tile">
-            <div class="hd">
-                <h2>Road to Profiability</h2>  
-            </div>
-            <div class="bd">
-                <h3>What will it take for them to become profitable?</h3>
-                <p>
-                    Suspendisse eu cursus leo. Integer egestas vestibulum posuere. 
-                    Vivamus facilisis posuere sodales. Aenean est mauris, ornare et 
-                    volutpat ac, scelerisque ac tortor. Nam sodales est at turpis.
-                </p>
-            </div>
-        </div>
--->
+    <div metal:fill-slot="footer-js" id="footer-js">
+           <script type="text/javascript" src="${request.static_url('finlin:static/js/raphael.js')}"></script>
+            <script type="text/javascript" src="${request.static_url('finlin:static/js/g.raphael.js')}"></script>
+            <script type="text/javascript" src="${request.static_url('finlin:static/js/g.line.js')}"></script>
+    </div>
+    <div metal:fill-slot="company-page" id="company" class="clearfix">
+    <!-- width of left used to be 720px -->
+    <div style="margin-top: 15px;">
+        <div>
+         
+            <div id="chart"></div>
+            <p>
+                <b>Last Quarter Revenue:</b>36,585
+            </p>
 
-    <div style="width: 640px; margin-top: 15px;">
-        <div id="four-corners">
-            <h2>4 Corners Analysis</h2>
             <table>
+                <tr class="underline">
+                    <td></td>
+                    <td><b>Summary</b></td>
+                    <td><b>Research</b></td>
+                </tr>
                 <tr>
-                    <td style="border-right: 1px solid #333;"> 
-                        <h3>What drives Tootie Pie</h3>
-                        <div class="corners">
-                            <span id="corner-1-top"></span>
-                            <span id="corner-1-left"></span>
-                            <h3>(Future) Goals</h3>
-                            <div class="bd">
-                                <ul>
-                                    <li>Financial Goals</li>
-                                    <li>Corporate culture</li>
-                                    <li>Organizational structure</li>
-                                    <li>Leadership team backgrounds</li>
-                                    <li>External constrainsts</li>
-                                    <li>Business philosophy</li>
-                                </ul>
-                            </div>
-                        </div>
+                    <td class="y-border"><b>What do they do</b></td>
+                    <td>
+                        <p>They sell shares of airplanes. They also sell hours with which you can use an aircraft.</p>
                     </td>
                     <td>
-
-                        <h3>What is Tootie Pie doing and can do</h3>
-                        <div class="corners">
-                            <span id="corner-2-top"></span>
-                            <span id="corner-2-right"></span>
-                            <h3>Current Strategy</h3>
-                            <div class="bd">
-                                <ul>
-                                    <li>How is the business currently competing</li>
-                                    <li>How the business creates value</li>
-                                    <li>Where the business is choosing to invest</li>
-                                    <li>Relationships and networks the business has developed</li>
-                                </ul>
-                            </div>
-                        </div>
+                        <p>
+                            Avantair is engaged in the sale of fractional ownership interests in, and flight hour card usage of, professionally piloted 
+                            aircraft for personal and business use, and the management of its aircraft fleet. According to AvData, Avantair is the fifth 
+                            largest company in the North American fractional aircraft industry. As of June 30, 2010, Avantair operated 55 aircraft within 
+                            its fleet, which is comprised of 46 aircraft for fractional ownership, 5 company owned core aircraft and 4 leased and company 
+                            managed aircraft. 
+                        </p>
                     </td>
                 </tr>
                 <tr>
-                    <td style="border-right: 1px solid #333;"> 
-                        <h3>Management Assumptions</h3>
-                        <ul>
-                            <li>Held about itself and the industry</li>
-                            <li>Cultural traits</li>
-                            <li>Organizational value</li>
-                            <li>Perceived industry forces</li>
-                            <li>Belief about competitor's goals</li>
-                        </ul>
+                    <td class="y-border"><b>Strategy</b></td>
+                    <td>
+                        <p>
+                            highest quality at lowest price 
+                        </p>
                     </td>
                     <td>
-
-                        <h3>Capabilities</h3>
-                        <ul>
-                            <li><b>Strengths</b></li>
-                            <li><b>Weaknesses</b></li>
-                            <li>Marketing skills</li>
-                            <li>Ability to service channels</li>
-                            <li>Skills and training to workforce</li>
-                            <li>Patents and copyrights</li>
-                            <li>Financial Strength</li>
-                            <li>Leadership qualities of CEO</li>
-                        </ul>
+                        <p>
+                            Avantair’s management believes that fractional and flight hour card aircraft operators compete on the basis of aircraft model and features, 
+                            price, customer service and scheduling flexibility. Avantair’s management believes that customers are generally willing to continue to use 
+                            the same aircraft operator so long as such operator provides satisfactory service with competitive pricing. Avantair’s management believes 
+                            that the quality of its aircraft and service, and the value it provides to its customers, enables it to compete effectively against its 
+                            larger competitors.               
+                            <b>page 7</b>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="y-border">Execution</td>
+                    <td>
+                        <p>
+                            They only use a propeller driven plane that has near jet-like speed, but with one third the fuel burn. 
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            The Piaggio Avanti has a unique design that uses forward wing technology which the Company believes allows it to both provide the fastest 
+                            speed of any turboprop and yet have an unusually large cabin relative to aircraft in its category. The Piaggio Avanti also compares 
+                            favorably to light jets as the Piaggio Avanti has the lowest fuel usage in the category. This aircraft also allows access to a 
+                            greater number of airports than most of the jets in its category since it has the capability to land on shorter runways.
+                        </p>
+                        <p>
+                            <a href="http://www.ainonline.com/news/single-news-page/article/avantair-shrugs-off-effects-of-recession-21639/">
+                                http://www.ainonline.com/news/single-news-page/article/avantair-shrugs-off-effects-of-recession-21639/</a>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="y-border">Customers</td>
+                    <td>high net worth individual</td>
+                    <td>The Company believes that for businesses and high net worth individuals, fractional ownership and flight hour card programs often 
+                        offer a balance between convenience and cost.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="y-border">Future Goals or Growth Strategy</td>
+                    <td>get to economies of scale and then reap financial benefits</td>
+                    <td>
+                        Avantair’s growth strategy involves increasing the number of available aircraft, fractional share owners, flight hour card and 
+                        membership program participants and fixed base operations. Achieving Avantair’s growth strategy is critical in order for its 
+                        business to achieve economies of scale and to achieve profitability.                    
+                    </td>
+                </tr>
+                <tr>
+                    <td class="y-border">Competition</td>
+                    <td><p>maybe check over netjets to see if they are also having the same problem selling fractional aircraft.</p>
+                        <p>They do not make as much, and may not really even cover costs with their hour cards</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="y-border">Marketing</td>
+                    <td><p>put their marketing, but the big question is what is the position they are marketing,
+                        also get a sample of their marketing
+                        </p>
                     </td>
                 </tr>
             </table>
-        </div>
-    </div>
-    <div class="col">
-        <div class="tile">
-            <div class="hd">
-                <h2>Income Statement</h2>  
-            </div>
-            <div class="bd income-statement">
-                <table>
-                    <tr>
-                        <td></td>
-                        <td>398,000</td>
-                        <td>Sales</td>
-                    </tr>
-                    <tr>
-                        <td>--</td>
-                        <td>793,000</td>
-                        <td>Expenses</td>
-                    </tr>
-                    <tr class="total">
-                        <td>$</td>
-                        <td style="color: #f00;">-1,191,000</td>
-                        <td>Net Income</td>
-                    </tr>
-                </table>
-            </div>
         </div>
 
     </div>
 
     <div id="sidebar" class="col">
         <div id="ad">
-            <div id="ad-img">
-                <img src="/static/amex_ad.png"/>
-            </div>
             <div id="adlnk">
                 <b>
                     <a href="#">

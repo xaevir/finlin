@@ -8,6 +8,13 @@
         <input name="name" type="text"/>
       </p>
       <div>
+        <label>Ticker</label>
+      </div>
+      <p>
+        <input name="ticker" type="text"/>
+      </p>
+
+      <div>
         <label>Overview</label>
       </div>
       <p>

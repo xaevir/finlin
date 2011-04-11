@@ -11,6 +11,7 @@ from pyramid.security import forget
 
 import datetime
 
+import re
 import cryptacular.bcrypt
 
 import formencode
@@ -55,7 +56,7 @@ def slugify(name):
 @view_config(context=Root, renderer='finlin:templates/home_page.pt')
 def home_page(context, request):
     main = get_renderer('finlin:templates/master.pt').implementation()
-    return HTTPFound(location = resource_url(context, request, 'Tootie_Pie_Company_Inc_TOOT'))
+    return HTTPFound(location = resource_url(context, request, 'Avantair'))
 
 
 #____________________________________________________________________Company__
@@ -79,6 +80,7 @@ class CompanyForm(Schema):
     pre_validators = [variabledecode.NestedVariables()]
     name = formencode.All(String(not_empty=True), 
                           UniqueCompanyName()) 
+    ticker = String()
     overview = String()
     product = String()
     time_till_mkt = String()
@@ -96,8 +98,8 @@ def list_company(context, request):
 
 @view_config(name='', context='finlin.models.Company', 
              renderer='templates/company_homepage.pt' )
-def homepage(context, request):
-    context.page = markdown(context.analysis)
+def company_homepage(context, request):
+    #context.page = markdown(context.analysis)
     return {
         'main': get_renderer('templates/master.pt').implementation(),
         'company_layout': get_renderer('templates/company_master.pt').implementation(),
@@ -407,4 +409,12 @@ def contact(context, request):
                                     'contact'))
     return Response(render(tpl, tpl_vars, request))
 
-    
+
+
+#____________________________________________________________________Strategy_
+
+@view_config(name='strategy', context='finlin.models.Root', 
+             renderer='templates/strategy.pt')
+def strategy(context, request):
+    return { 'main': get_renderer('templates/master.pt').implementation() }
+   
