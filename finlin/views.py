@@ -35,6 +35,8 @@ import logging
 from pprint import pprint
 log = logging.getLogger(__name__)
 
+import locale
+locale.setlocale(locale.LC_ALL, '')
 
 
 #____________________________________________________________________Utilities
@@ -59,7 +61,7 @@ def home_page(context, request):
     return HTTPFound(location = resource_url(context, request, 'Avantair'))
 
 
-#____________________________________________________________________Company__
+#______________________________________________________________________Company
 
 class UniqueCompanyName(FancyValidator):
     def _to_python(self, value, state):
@@ -96,10 +98,81 @@ def list_company(context, request):
     return dict(main = main)    
 
 
+
+#negative net income uses ()
+def normalize_num(elem):
+    elem = elem.replace(",", "")
+    if elem.find("(") is not -1:
+        elem = elem.strip("()")
+        elem = float(elem)
+        return  -elem
+    return float(elem)
+
+def normalize(x):
+    for key in x:
+        x[key].reverse()
+        if key == 'dates':
+            x[key] = [datetime.datetime.strptime(elem, "%b %d, %Y") for elem in x[key]]
+        elif key == 'rev':
+            x[key] = [float(elem.replace(",", "")) for elem in x[key]] 
+        elif key =='net':
+            x[key] = [normalize_num(elem) for elem in x[key] ]
+    return x
+
+def percent_change(Vpresent, Vpast):
+    percent = (Vpresent-Vpast)/Vpast*100
+    return round(percent, 2)
+
+def change_quarterly(x):
+    growth = {}
+    for key in x:
+        if key is not 'dates':
+            first  = x[key][0]
+            second = x[key][1]
+            third  = x[key][2]
+            fourth = x[key][3]
+
+            yr_chg = percent_change(fourth, first)
+            qtr_chg = percent_change(fourth, third) 
+            growth[key] = {'qtr_chg': qtr_chg, 'yr_chg':yr_chg}
+    return growth
+
 @view_config(name='', context='finlin.models.Company', 
              renderer='templates/company_homepage.pt' )
 def company_homepage(context, request):
-    #context.page = markdown(context.analysis)
+    #quarterly 
+    q = {}
+    q['dates'] = ['Dec 31, 2010', 'Sep 30, 2010', 'Jun 30, 2010', 'Mar 31, 2010']
+    q['rev'] = ['36,585', '35,782', '36,027', '36,009']
+    q['net'] = ['(4,066)', '(4,814)', '(1,646)', '(774)'] 
+    #annually
+    a = {}
+    a['dates'] = ['Jun 30, 2010', 'Jun 30, 2009', 'Jun 30, 2008']
+    a['rev'] = ['143,007', '136,827', '115,619']
+    a['net'] = ['(3,969)', '(4,461)', '(18,882)']
+
+    q = normalize(q)
+    a = normalize(a)
+
+    q['exp'] = [i-j for i,j in zip(q['rev'], q['net'])]
+
+    context.growth = change_quarterly(q)
+    q['dates'] =  [datetime.datetime.strftime(elem, "%b %d, %Y") for elem in q['dates']]
+
+    conv = locale.localeconv()  # get map of conventions
+    conv['frac_digits'] = 0
+    q['rev'] = [ locale.format("%s%.*f", (conv['currency_symbol'], conv['frac_digits'], elem), grouping=True) 
+        for elem in q['rev'] ] 
+    
+    q['net'] = [locale.format("%s%.*f", (conv['currency_symbol'], conv['frac_digits'], elem), grouping=True) 
+        for elem in q['net'] ]
+
+    q['exp'] = [locale.format("%s%.*f", (conv['currency_symbol'], conv['frac_digits'], elem), grouping=True) 
+        for elem in q['net'] ]
+
+
+    context.q = q
+
     return {
         'main': get_renderer('templates/master.pt').implementation(),
         'company_layout': get_renderer('templates/company_master.pt').implementation(),

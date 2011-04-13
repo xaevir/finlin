@@ -9,9 +9,112 @@
     <!-- width of left used to be 720px -->
     <div style="margin-top: 15px;">
         <div>
-         
-            <div id="chart"></div>
-            <p>
+            <div id="what-they-do">
+                <h2>What they do</h2>
+                <p>
+                    Avantair is engaged in the sale of fractional ownership interests in, and flight hour card usage of, professionally piloted 
+                    aircraft for personal and business use, and the management of its aircraft fleet.
+                </p>
+            </div>
+            <div id="growth-rates">
+                <h2>Growth Rates</h2>
+                <table>
+                    <tr>
+                        <td>
+                            Revenue
+                        </td>
+                    </tr>
+                    <tr class="data">
+                        <td class="indent">
+                            last quarter
+                        </td>
+                        <td>
+                            ${context.growth['rev']['qtr_chg']}&#37;
+                        </td>
+                    </tr>
+                    <tr class="data">
+                        <td class="indent">
+                            last year
+                        </td>
+                        <td>
+                            ${context.growth['rev']['yr_chg']}&#37;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Net Income
+                        </td>
+                    </tr>
+                    <tr class="data">
+                        <td class="indent">
+                            last quarter
+                        </td>
+                        <td>
+                            ${context.growth['rev']['qtr_chg']}&#37;
+                        </td>
+                    </tr>
+                    <tr class="data">
+                        <td class="indent">last year</td>
+                        <td>
+                            ${context.growth['rev']['yr_chg']}&#37;
+                        </td>
+                    </tr>
+   
+                </table>
+
+            </div>
+            <div id="financial-overview">
+                <h2>Financial Overview</h2>
+                <p>All numbers in thousands</p>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>
+                            4th Qtr<br />
+                            <span>${context.q['dates'][3]}</span>
+                        </th>
+                        <th>
+                            3rd Qtr<br />
+                            <span>${context.q['dates'][2]}</span>
+                        </th>
+                        <th>2nd Qtr<br />
+                            <span>${context.q['dates'][1]}</span>
+                        </th>
+
+                        <th>1st Qtr<br />
+                            <span>${context.q['dates'][0]}</span>
+                        </th>
+                    </tr>
+                    <tr >
+                        <td class="th">Revenue</td>
+                        <td>${context.q['rev'][3]}</td>
+                        <td>${context.q['rev'][2]}</td>
+                        <td>${context.q['rev'][1]}</td>
+                        <td>${context.q['rev'][0]}</td>
+                    </tr>
+                    <tr style="height: 40px">
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="th">Net Income</td>
+                        <td>${context.q['net'][3]}</td>
+                        <td>${context.q['net'][2]}</td>
+                        <td>${context.q['net'][1]}</td>
+                        <td>${context.q['net'][0]}</td>
+                    </tr>
+                            
+
+                </table>
+                <p>                
+                    
+                    Note: cost of revenue has been fairly flat<br />
+
+
+                    
+                </p>
+            </div>
+             
+            <p style="clear: both;">
                 <b>Last Quarter Revenue:</b>36,585
             </p>
 
@@ -24,12 +127,11 @@
                 <tr>
                     <td class="y-border"><b>What do they do</b></td>
                     <td>
-                        <p>They sell shares of airplanes. They also sell hours with which you can use an aircraft.</p>
+                        <p></p>
                     </td>
                     <td>
                         <p>
-                            Avantair is engaged in the sale of fractional ownership interests in, and flight hour card usage of, professionally piloted 
-                            aircraft for personal and business use, and the management of its aircraft fleet. According to AvData, Avantair is the fifth 
+                             According to AvData, Avantair is the fifth 
                             largest company in the North American fractional aircraft industry. As of June 30, 2010, Avantair operated 55 aircraft within 
                             its fleet, which is comprised of 46 aircraft for fractional ownership, 5 company owned core aircraft and 4 leased and company 
                             managed aircraft. 

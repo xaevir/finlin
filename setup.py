@@ -14,6 +14,7 @@ requires = ['pyramid',
             'ElementTree',
             'Markdown',
             'BeautifulSoup',
+            'python-dateutil',
 
 ]
 

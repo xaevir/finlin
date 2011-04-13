@@ -444,6 +444,36 @@ h2 a:hover {
     text-align: center;
     margin-bottom: 15px;
 }
+
+#what-they-do {
+    width: 300px;
+    float: left;
+}
+#financial-overview{
+    width: 400px;
+    float: right;
+}
+#financial-overview span{
+   font-size: 9px; 
+}
+#growth-rates{
+    float: left;
+    width: 200px;
+}
+
+#growth-rates .data td{
+    padding-top: 0;
+    padding-bottom: 0;
+}
+#growth-rates .indent{
+   padding-left: 25px; 
+}
+#growth-summary th, 
+#growth-summary .th {
+    font-weight: bold;
+}
+
+
 /*_____________________________________________________________Company Nav*/
 
 #company-nav {
@@ -483,9 +513,8 @@ h2 a:hover {
 }
 
 /*__________________________________________________________Company Homepage*/
-#company .underline td{
-   border-bottom: 1px solid #eee; 
-}
+
+
 
 .y-border {
     border-right: 1px solid #eee;

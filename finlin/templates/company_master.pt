@@ -3,24 +3,7 @@
     <div id="hd">
         <h1>${context.name}</h1>
         <div id="ticker">(${context.ticker})</div>
-
-        <ul id="company-nav" class="clearfix"> 
-            <li tal:repeat="(url, label) context.nav">
-        
-                <a href="${url}">${label}</a>
-            </li>
-        </ul>
     </div>
-
-<!--
-            <li><a id="current" href="${request.application_url}/">Dashboard</a></li>
-            <li><a href="${request.application_url}/about">About</a></li>
-            <li><a href="${request.application_url}/time_to_market">Time to market</a></li>
-            <li><a href="${request.application_url}/product">Product Description</a></li>
-            <li><a href="${request.application_url}/growth_strategy">Growth Strategy</a></li>
-            <li><a href="${request.application_url}/management">Management</a></li>
-
--->
 
     <div metal:define-slot="company-page">
         Company Page goes here
