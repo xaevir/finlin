@@ -100,29 +100,29 @@ def list_company(context, request):
 
 
 #negative net income uses ()
-def normalize_num(elem):
-    elem = elem.replace(",", "")
+def remove_parens(elem):
     if elem.find("(") is not -1:
         elem = elem.strip("()")
-        elem = float(elem)
-        return  -elem
-    return float(elem)
+        elem = '-%s' % elem
+    return elem
 
-def normalize(x):
+def make_usable(x):
     for key in x:
         x[key].reverse()
         if key == 'dates':
             x[key] = [datetime.datetime.strptime(elem, "%b %d, %Y") for elem in x[key]]
         elif key == 'rev':
-            x[key] = [float(elem.replace(",", "")) for elem in x[key]] 
+            x[key] = [locale.atof(elem) for elem in x[key]] 
         elif key =='net':
-            x[key] = [normalize_num(elem) for elem in x[key] ]
-    return x
+            x[key] = [locale.atof(remove_parens(elem)) for elem in x[key] ]
+    return x 
 
 def percent_change(Vpresent, Vpast):
     percent = (Vpresent-Vpast)/Vpast*100
-    return round(percent, 2)
+    percent = round(percent, 2)
+    return percent
 
+ 
 def change_quarterly(x):
     growth = {}
     for key in x:
@@ -151,8 +151,7 @@ def company_homepage(context, request):
     a['rev'] = ['143,007', '136,827', '115,619']
     a['net'] = ['(3,969)', '(4,461)', '(18,882)']
 
-    q = normalize(q)
-    a = normalize(a)
+    q = make_usable(q)
 
     q['exp'] = [i-j for i,j in zip(q['rev'], q['net'])]
 
@@ -160,7 +159,9 @@ def company_homepage(context, request):
     q['dates'] =  [datetime.datetime.strftime(elem, "%b %d, %Y") for elem in q['dates']]
 
     conv = locale.localeconv()  # get map of conventions
+    locale.LC_MONETARY
     conv['frac_digits'] = 0
+    conv['n_sign_posn'] = 0
     q['rev'] = [ locale.format("%s%.*f", (conv['currency_symbol'], conv['frac_digits'], elem), grouping=True) 
         for elem in q['rev'] ] 
     
@@ -168,7 +169,7 @@ def company_homepage(context, request):
         for elem in q['net'] ]
 
     q['exp'] = [locale.format("%s%.*f", (conv['currency_symbol'], conv['frac_digits'], elem), grouping=True) 
-        for elem in q['net'] ]
+        for elem in q['exp'] ]
 
 
     context.q = q
