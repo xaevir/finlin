@@ -100,7 +100,7 @@ blockquote,ul,ol,dl {
 }
 ol,ul,dl {
    /*bringing lists on to the page with breathing room */
-  /*  margin-left:2em; */
+    margin-left:2em; 
 }
 ol li {
    /*giving OL's LIs generated numbers*/
@@ -266,7 +266,6 @@ h2 a:hover {
 #hd {
     /*-moz-box-shadow: 0px 1px 3px #C2C2C2;
 	background: -moz-linear-gradient(top,  #AEE8FF,  #89cff0);*/
-    margin-bottom: 10px;
 	/*background: -moz-linear-gradient(top,  #fff,  #DFEEFF);*/
 	/*background-color: #DFEEFF;*/
     /* border: 1px solid #AFD5FF;*/
@@ -277,6 +276,7 @@ h2 a:hover {
 
     width: 990px;
     margin: 0 auto;
+    margin-bottom: 10px;
 }
 #hd .content {
     width: 990px;
@@ -327,7 +327,7 @@ h2 a:hover {
     position: relative;
     margin-top: 2px;
     font-family: 'times new roman','times', serif;
-    letter-spacing: 2px;
+    letter-spacing: .08em;
     font-size: 24px;
     padding-right: 3px;
     filter: dropshadow(color=#fff,offX=1,offY=1);
@@ -338,8 +338,6 @@ h2 a:hover {
     display: block;
     float: left;
     padding-top: 2px;
-
-
 }
 #logo-svg{
     line-height: 0;
@@ -392,6 +390,38 @@ h2 a:hover {
     float: right;
 }
 
+/*_____________________________________________________________________Home_*/
+#home {
+    text-align: center;
+}
+
+#home #logo-font{
+    margin-top: -.4em;
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+#home #logo {
+    font-size: 96px;
+    float: none;
+    color: #fff;
+    background-color: #B1DAF3;
+    filter: dropshadow(color=#FE7300,offX=1,offY=1);
+    text-shadow: #FE7300 2px 2px 0;
+    text-decoration: underline;
+
+}
+#home #logo-svg{
+    position: relative;
+    left: 0;
+    top: .4em;
+
+}
+#coming-soon{
+    font-size: 64px;
+    font-family: LinuxLibertineORegular,arial,sans-serif;
+    margin-bottom: 0;
+}   
 /*__________________________________________________________________Contact_*/
 #contact h1{
     color: #ff5100;
@@ -457,7 +487,7 @@ h2 a:hover {
    font-size: 9px; 
 }
 #growth-rates{
-    float: left;
+    float: right;
     width: 200px;
 }
 
@@ -738,11 +768,13 @@ h2 a:hover {
     width: 400px; 
 }
 #company_form textarea{
-   width:600px; 
-   height: 150px;
+   width: 990px; 
+   height: 600px;
    font-family: monospace;
 }
-
+#company_form label{
+    font-size: 18px;
+}
 /*_______________________________________________________________Login Form_*/
 
 #login_form form {

@@ -1,10 +1,11 @@
 <html metal:use-macro="main">
-  <ul metal:fill-slot="body" id="company_form">
-    <li tal:repeat="item context.items()">
-      ${item}
-        <a href="${request.application_url}/${item}">view</a>
-        <a href="${request.application_url}/${item}/edit">edit</a>
-        <a href="${request.application_url}/${item}/delete">delete</a>
-    </li>
-  </ul>
+  <table metal:fill-slot="body" id="company_form">
+    
+    <tr tal:repeat="item context.items()">
+        <td>${item}</td>
+        <td><a href="${request.application_url}/${item}">view</a></td>
+        <td><a href="${request.application_url}/${item}/edit">edit</a></td>
+        <td><a href="${request.application_url}/${item}/delete">delete</a></td>
+    </tr>
+  </table>
 </html>

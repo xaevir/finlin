@@ -1,8 +1,8 @@
 <html metal:use-macro="main">
   <div metal:fill-slot="body" id="company">
     <div id="hd">
-        <h1>${context.name}</h1>
-        <div id="ticker">(${context.ticker})</div>
+        <h1>${context.data['name']}</h1>
+        <div id="ticker">(${context.data['ticker']})</div>
     </div>
 
     <div metal:define-slot="company-page">

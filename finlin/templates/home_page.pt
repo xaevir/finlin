@@ -1,6 +1,13 @@
 <html metal:use-macro="main">
-  <div metal:fill-slot="body">
-    <h1>Home page, need stuff to put on it</h1>
-    <p>This is a compelling homepage</p>
-  </div>
+    <div metal:fill-slot="hd">
+    </div>
+    <div metal:fill-slot="body" id="home">
+        <p id="coming-soon">Coming Soon</p>
+        <a id="logo" class="" href="${request.application_url}">
+            
+            <p id="logo-font">
+                <b>FIN</b><b id="logo-svg"></b><b>LIN</b>
+            </p>
+        </a>
+    </div>
 </html>

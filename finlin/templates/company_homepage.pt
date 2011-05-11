@@ -8,70 +8,17 @@
     <div metal:fill-slot="company-page" id="company" class="clearfix">
     <!-- width of left used to be 720px -->
     <div style="margin-top: 15px;">
-        <div>
-            <div id="what-they-do">
-                <h2>Revenue Strategy</h2>
-                <p>
-                    Avantair generates revenues primarily through the sale of fractional ownership shares of aircraft, by providing management 
-                    and maintenance services related to these aircraft, and from the sale of flight hour cards providing either 15 or 25 hours 
-                    of flight time per year of access to its aircraft fleet (either individually or through the Company’s Axis Club Membership program). 
-                    The Company markets and sells fractional ownership interests to individuals and businesses with a minimum share size of a one-sixteenth 
-                    ownership interest. Under management and maintenance agreements with fractional owners, Avantair provides pilots, maintenance, fuel and 
-                    hangar space for the aircraft. 
-                </p>
-                <h2>Pricing Strategy</h2>
-                <p>
-                    Avantair believes that the pricing structure afforded by utilizing the Piaggio Avanti allows Avantair to attract a customer 
-                    desiring quality at a lower price point. Offering the cabin cross section of a mid-size aircraft and fuel efficiency of a 
-                    turboprop, along with no hourly fees, allows Avantair to lower the cost of private air travel for a broader range of consumers. 
-                </p>
-                <h2>Growth Strategy</h2>
-                <p>
-                    Avantair’s primary growth strategy is to continue to increase the number of fractional share owners and aircraft under management 
-                    as well as increase the number of flight hour cards and Axis Club Memberships sold. At June 30, 2010, the Company had 28.5 fractional 
-                    aircraft shares available for sale. In addition to the cost of acquiring aircraft, Avantair’s primary expenses are related to fuel, 
-                    aircraft repositioning (i.e., moving an aircraft to another location to accommodate a customer’s need and for demonstration flights 
-                    for sales purposes), maintenance, charters and insurance. To finance its growth strategy, the Company will continue to actively pursue 
-                    additional funds through some or a combination of equity financing, including the sale of additional shares of common and preferred stock, 
-                    asset sales, accelerated payments of management and maintenance fees or debt financing.
-                </p>
-                <h2>Product Strategy</h2>
-                <p>
-                    Avantair’s management believes its card program to be a means of introducing potential purchasers to its fractional ownership program. 
-                    Avantair’s card program currently is priced at $105,000 for a 25 hour card. Additionally, Avantair created an introductory 25 hour 
-                    card for a first flight hour card purchaser currently at a rate of $95,000. 
-                </p>
-                <p>
-                    In 2006, Avantair introduced the Edge Card Program, which allows a purchaser to access Avantair’s aircraft for 15 or 25 hours of flight time without the requirement to purchase ownership shares in an aircraft. The card holder purchases the entire card amount in advance and receives the same service as a fractional owner. After the card holder has exhausted the hours purchased, the holder has no further obligations to Avantair. The program offers an alternative to fractional ownership for individuals and businesses seeking to experience private aircraft travel. 
-                </p>
+        <div class="col-1">
+            <h2>Overview</h2>  
+            <div tal:replace="structure context.data['overview']"/>
+    
+            <h2>Growth Strategy</h2>
+            <div tal:replace="structure context.data['growth_strategy']"/>
 
-                <h2>Pure Competition on Operation Efficiency</h2>
-                <p>
-                    Avantair’s management believes that fractional and flight hour card aircraft operators compete on the basis of aircraft model and 
-                    features, price, customer service and scheduling flexibility. Avantair’s management believes that customers are generally willing to 
-                    continue to use the same aircraft operator so long as such operator provides satisfactory service with competitive pricing. Avantair’s 
-                    management believes that the quality of its aircraft and service, and the value it provides to its customers, enables it to compete 
-                    effectively against its larger competitors. 
-                </p>
-                <p>
-                    Interstingly they are the low cost provider. Now there add shows a cost decision.
-                </p>
-                <p>
-                    Avantair’s growth strategy involves increasing the number of available aircraft, fractional share owners, flight hour card 
-                    and membership program participants and fixed base operations. Achieving Avantair’s growth strategy is critical in order for 
-                    its business to achieve economies of scale and to achieve profitability. Any condition that would deny, limit or delay its 
-                    ability to acquire additional aircraft, sell fractional shares, flight hour cards and/or memberships and open additional 
-                    fixed base operations in the future will constrain Avantair’s ability to grow. Acquiring additional aircraft, selling 
-                    fractional shares, flight hour cards and/or memberships and opening fixed base operations requires Avantair to commit a 
-                    substantial amount of resources. Expansion is also dependent upon Avantair’s ability to maintain a safe and secure operation 
-                    and will require additional personnel, equipment and facilities. 
-                </p>
-                <p>
-                    <b>This is</b>
-                </p>
+            <h2>Competitive Advantage</h2>
+            <div tal:replace="structure context.data['competitive_advantage']"/>
 
-            </div>
-            <div id="growth-rates">
+<!--            <div id="growth-rates">
                 <h2>Growth Rates</h2>
                 <table>
                     <tr>
@@ -163,142 +110,12 @@
                 <p>                
                     
                     Note: cost of revenue has been fairly flat<br />
-
-
                     
                 </p>
             </div>
-             
-            <p style="clear: both;">
-                <b>Last Quarter Revenue:</b>36,585
-            </p>
-
-            <table>
-                <tr class="underline">
-                    <td></td>
-                    <td><b>Strategy</b></td>
-                    <td><b>Research</b></td>
-                </tr>
-                <tr>
-                    <td class="y-border"><b>Product</b></td>
-                    <td>
-                        <p></p>
-                    </td>
-                    <td>
-                        <p>
-
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="y-border"><b>Strategy</b></td>
-                    <td>
-                        <p>
-                            highest quality at lowest price 
-                        </p>
-                    </td>
-                    <td>
-                        <p>
-                            Avantair’s management believes that fractional and flight hour card aircraft operators compete on the basis of aircraft model and features, 
-                            price, customer service and scheduling flexibility. Avantair’s management believes that customers are generally willing to continue to use 
-                            the same aircraft operator so long as such operator provides satisfactory service with competitive pricing. Avantair’s management believes 
-                            that the quality of its aircraft and service, and the value it provides to its customers, enables it to compete effectively against its 
-                            larger competitors.               
-                            <b>page 7</b>
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="y-border">Execution</td>
-                    <td>
-                        <p>
-                            They only use a propeller driven plane that has near jet-like speed, but with one third the fuel burn. 
-                        </p>
-                    </td>
-                    <td>
-                        <p>
-                            The Piaggio Avanti has a unique design that uses forward wing technology which the Company believes allows it to both provide the fastest 
-                            speed of any turboprop and yet have an unusually large cabin relative to aircraft in its category. The Piaggio Avanti also compares 
-                            favorably to light jets as the Piaggio Avanti has the lowest fuel usage in the category. This aircraft also allows access to a 
-                            greater number of airports than most of the jets in its category since it has the capability to land on shorter runways.
-                        </p>
-                        <p>
-                            <a href="http://www.ainonline.com/news/single-news-page/article/avantair-shrugs-off-effects-of-recession-21639/">
-                                http://www.ainonline.com/news/single-news-page/article/avantair-shrugs-off-effects-of-recession-21639/</a>
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="y-border">Customers</td>
-                    <td>high net worth individual</td>
-                    <td>The Company believes that for businesses and high net worth individuals, fractional ownership and flight hour card programs often 
-                        offer a balance between convenience and cost.
-                    </td>
-                </tr>
-                <tr>
-                    <td class="y-border">Future Goals or Growth Strategy</td>
-                    <td>get to economies of scale and then reap financial benefits</td>
-                    <td>
-                        Avantair’s growth strategy involves increasing the number of available aircraft, fractional share owners, flight hour card and 
-                        membership program participants and fixed base operations. Achieving Avantair’s growth strategy is critical in order for its 
-                        business to achieve economies of scale and to achieve profitability.                    
-                    </td>
-                </tr>
-                <tr>
-                    <td class="y-border">Competition</td>
-                    <td><p>maybe check over netjets to see if they are also having the same problem selling fractional aircraft.</p>
-                        <p>They do not make as much, and may not really even cover costs with their hour cards</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="y-border">Marketing</td>
-                    <td><p>put their marketing, but the big question is what is the position they are marketing,
-                        also get a sample of their marketing
-                        </p>
-                    </td>
-                </tr>
-            </table>
+            --> 
         </div>
-
     </div>
-
-    <div id="sidebar" class="col">
-        <div id="ad">
-            <div id="adlnk">
-                <b>
-                    <a href="#">
-                        Apply Now
-                    </a>
-                </b> - 
-                <a href="#">
-                    Ad Feedback
-                </a>
-            </div>
-        </div>
-<div class="tile" id="sponsored-links">
-    <div class="hd">
-        <h3>Sponsored Links</h3>
-    </div>
-    <div class="bd">
-        <ul>
-                        <li class="ult-position first">
-                <a class="yltasis" href="http://us.lrd.yahoo.com/_ylt=AhQ1ZLHJ5avgOkcOhEByGrEVq594;_ylu=X3oDMTB2Z2oxbnY0BHBvcwMxBHNlYwNvdi1iBHNsawNjcmVkaXRyZXBhaXI-/SIG=1cnaahbjm/**http%3A//0.r.msn.com/%3Fld=4vxrI79KcGicPHA_SrbRtEeSu7D_hsz1pDNfvdlq2yoPgZcY3onADQti4mgUrOBfy3-FfgI2g5cBRF03xA0CnMKs_6wZf5Ki-yQa16RZULTjVvoI2QVf76iHleBQD4vK15iC-ggHXzQMNtD9Y9gRGFc7WOTTrbdYDK7davSdN09fG5xDtpE_uAUmeg8aOFFtP0Z1CHgKwsaqOj48wdhI0-VA14JNtSH4jrf7q6373H4NtBh9tTZgv_sLMtvyD-4tswjSVVKKYOmEcans_Bo89k5UszDetSYqv9UoWD3cPjxI81VAlM-jBdSNAZfE7ZkHfAOLJ42hAmY3M9hwSWYhU6T9FaDUJck-1Dy2XnrSg6eLMXky4XFEeBNy4">Credit Repair (Excellent)</a>
-                Fast and Effective Credit Report Repair. $39/month. BBB Mbr.                <a class="host yltasis" href="http://us.lrd.yahoo.com/_ylt=AnMUpankRyMzp2K5KY51QMUVq594;_ylu=X3oDMTB2YW5oYXEzBHBvcwMyBHNlYwNvdi1iBHNsawN3d3dvdmF0aW9uY3I-/SIG=1cnaahbjm/**http%3A//0.r.msn.com/%3Fld=4vxrI79KcGicPHA_SrbRtEeSu7D_hsz1pDNfvdlq2yoPgZcY3onADQti4mgUrOBfy3-FfgI2g5cBRF03xA0CnMKs_6wZf5Ki-yQa16RZULTjVvoI2QVf76iHleBQD4vK15iC-ggHXzQMNtD9Y9gRGFc7WOTTrbdYDK7davSdN09fG5xDtpE_uAUmeg8aOFFtP0Z1CHgKwsaqOj48wdhI0-VA14JNtSH4jrf7q6373H4NtBh9tTZgv_sLMtvyD-4tswjSVVKKYOmEcans_Bo89k5UszDetSYqv9UoWD3cPjxI81VAlM-jBdSNAZfE7ZkHfAOLJ42hAmY3M9hwSWYhU6T9FaDUJck-1Dy2XnrSg6eLMXky4XFEeBNy4">www.OvationCredit.com</a>
-            </li>
-                        <li class="ult-position">
-                <a class="yltasis" href="http://us.lrd.yahoo.com/_ylt=ArptlNJulnG2M9c8z4jdtzEVq594;_ylu=X3oDMTB2MDJmaG1oBHBvcwMzBHNlYwNvdi1iBHNsawNjYXJpbnN1cmFuY2U-/SIG=1cs7sdqij/**http%3A//552964.r.msn.com/%3Fld=4vptTBnKvPRTBTKK4yF_MEmA--khGql85WCabyrueM9RW-0ra_DOuuZT_pal1npSJNi0HATNb4tUZ4NWiFUbyVPlICGaf_BWePi6jaK1n07CiRd3B7rWoj_N0Z2LTANe675vB33EZvdLzwQZYV3lHzXe1sE_3ONIa-8vq_LM70j2-PMVg0MWVv0tlWOyivZ9WBQmttPUx2MqpDT93au_q9X2PIzjkxS7q-Lk-OgNB1m6E0m5eQMngEezzUsSj7qZF5FYo5LOKe5qzwop5vIb-uYiuBSrx9QoattAPcLofpGek1VAlM3XMyXa2qZFvM1K6IpsLU_BAmY3M9YcS4VT41WZvzBgG3Ys28v4N54ExiYcwz4DMxCp8HW0o">Car Insurance (EXPOSED)</a>
-                We investigated car insurance and what we found may shock you...                <a class="host yltasis" href="http://us.lrd.yahoo.com/_ylt=As6wIvXPCA3B2vJ4Lw6ZJckVq594;_ylu=X3oDMTB2ZmJmdTE0BHBvcwM0BHNlYwNvdi1iBHNsawN3d3duZXdzOWNvbnM-/SIG=1cs7sdqij/**http%3A//552964.r.msn.com/%3Fld=4vptTBnKvPRTBTKK4yF_MEmA--khGql85WCabyrueM9RW-0ra_DOuuZT_pal1npSJNi0HATNb4tUZ4NWiFUbyVPlICGaf_BWePi6jaK1n07CiRd3B7rWoj_N0Z2LTANe675vB33EZvdLzwQZYV3lHzXe1sE_3ONIa-8vq_LM70j2-PMVg0MWVv0tlWOyivZ9WBQmttPUx2MqpDT93au_q9X2PIzjkxS7q-Lk-OgNB1m6E0m5eQMngEezzUsSj7qZF5FYo5LOKe5qzwop5vIb-uYiuBSrx9QoattAPcLofpGek1VAlM3XMyXa2qZFvM1K6IpsLU_BAmY3M9YcS4VT41WZvzBgG3Ys28v4N54ExiYcwz4DMxCp8HW0o">www.news9consumer.com</a>
-            </li>
-                        <li class="ult-position">
-                <a class="yltasis" href="http://us.lrd.yahoo.com/_ylt=AhmmD4gbby4gh2va0r977lQVq594;_ylu=X3oDMTB2MDAyN3VqBHBvcwM1BHNlYwNvdi1iBHNsawNicmVha2luZ25ld3M-/SIG=1asc8aup9/**http%3A//948694.r.msn.com/%3Fld=4v1rmxXFM0QmELr8_z5PKQQHClg2H7Pcr5k-G-wXAUFn6gwQcmgUfKEcZsxZGvByk28VcLhBYc7TV1vkNghMhJMQ0Ja_PfAB3l9Fixk9k8xpl8JvO71r0A4uB52x3Q3Em5KMgvDu5HNt7oWOx7UPD9U3hc598RLhwyrChdP1LOovYTJloJ3d6oxvLw_6Nkl5AZkPBKNTocYODaRbZXJ4e3WELRdJMmdXDXG0OlV0SJP0M1VAlMIcjUhepaePDZHTlplHzbahAmY3M9k9lRLSlIHJWHeJ3agPO2_jOGC7EHfMfymK3Szz2H-jw">BREAKING NEWS:$25 Car Ins</a>
-                Do Not Buy Car Insurance until you see this shocking report!                <a class="host yltasis" href="http://us.lrd.yahoo.com/_ylt=At1vvTxeatL0Lou4Ee1d6.YVq594;_ylu=X3oDMTB2cnQ1YWdrBHBvcwM2BHNlYwNvdi1iBHNsawN3d3duZXdzN2JyZWE-/SIG=1asc8aup9/**http%3A//948694.r.msn.com/%3Fld=4v1rmxXFM0QmELr8_z5PKQQHClg2H7Pcr5k-G-wXAUFn6gwQcmgUfKEcZsxZGvByk28VcLhBYc7TV1vkNghMhJMQ0Ja_PfAB3l9Fixk9k8xpl8JvO71r0A4uB52x3Q3Em5KMgvDu5HNt7oWOx7UPD9U3hc598RLhwyrChdP1LOovYTJloJ3d6oxvLw_6Nkl5AZkPBKNTocYODaRbZXJ4e3WELRdJMmdXDXG0OlV0SJP0M1VAlMIcjUhepaePDZHTlplHzbahAmY3M9k9lRLSlIHJWHeJ3agPO2_jOGC7EHfMfymK3Szz2H-jw">www.News7BreakingNews.com</a>
-            </li>
-                    </ul>
-    </div>
-</div>
-
-    </div>
-
   </div>
 </html>
  

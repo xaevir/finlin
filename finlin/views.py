@@ -58,7 +58,7 @@ def slugify(name):
 @view_config(context=Root, renderer='finlin:templates/home_page.pt')
 def home_page(context, request):
     main = get_renderer('finlin:templates/master.pt').implementation()
-    return HTTPFound(location = resource_url(context, request, 'Avantair'))
+    return {'main': main} 
 
 
 #______________________________________________________________________Company
@@ -72,24 +72,16 @@ class UniqueCompanyName(FancyValidator):
                  value, state)
         return value
 
-class Person(Schema):
-    name =  String()
-    bio = String()
 
 class CompanyForm(Schema):
     allow_extra_fields = True
     filter_extra_fields = True
-    pre_validators = [variabledecode.NestedVariables()]
     name = formencode.All(String(not_empty=True), 
                           UniqueCompanyName()) 
     ticker = String()
     overview = String()
-    product = String()
-    time_till_mkt = String()
+    competitive_advantage = String()
     growth_strategy = String()
-    financial_overview = String()
-    questions_emailed = String()
-    person = ForEach(Person())
  
 
 @view_config(name='list', context=Root, renderer='templates/company_list.pt')
@@ -140,6 +132,11 @@ def change_quarterly(x):
 @view_config(name='', context='finlin.models.Company', 
              renderer='templates/company_homepage.pt' )
 def company_homepage(context, request):
+    
+    context.data['competitive_advantage'] = markdown(context.data['competitive_advantage'])
+    context.data['growth_strategy'] = markdown(context.data['growth_strategy'])
+    context.data['overview'] = markdown(context.data['overview'])
+
     #quarterly 
     q = {}
     q['dates'] = ['Dec 31, 2010', 'Sep 30, 2010', 'Jun 30, 2010', 'Mar 31, 2010']
@@ -235,6 +232,7 @@ def edit_company(context, request):
         'submit_label': 'edit'} 
     if 'form.submitted' in request.params:
         schema = CompanyForm() 
+        # look into below. If I take it out, it says the company name already exists
         schema.fields['name'] = String(not_empty=True)
         try:
             params = schema.to_python(request.params, request)
@@ -245,24 +243,35 @@ def edit_company(context, request):
                                 errors=e.error_dict) 
             return Response(htmlfilled)
         else:
+            #need to use context bc the _id is already set
+            data = {}
             for key, value in params.items():
-                context[key] = value
-            request.db.company.save(context)
-            request.session.flash(context['name'] + ' saved')
+                try:
+                    #check to see if a value exists and if it has changed
+                    original_value = context.data[key]
+                    edited_value = params[key]
+                    if original_value != edited_value:
+                        data[key] = edited_value 
+                except AttributeError:
+                    #the value does not already exist, so set it
+                    data[key] = value  
+
+            request.db.company.update({'_id': context.data['_id']}, {'$set': data })
+            request.session.flash(context.data['name'] + ' saved')
             return HTTPFound(location = resource_url(
                                             context.__parent__, 
                                             request, 
                                             context.__name__))
     html = htmlfill.render(
                       render(tpl, tpl_vars, request),
-                      defaults=context,)
+                      defaults=context.data)
     return Response(html)
 
 
 @view_config(name='delete', context=Company)
 def delete_company(context, request):
     request.db.company.remove({'slug':context.__name__})
-    request.session.flash(context['name'] + ' deleted')
+    request.session.flash(context.name + ' deleted')
     return HTTPFound(location = resource_url(
                                     context.__parent__, 
                                     request, 

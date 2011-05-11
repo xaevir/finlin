@@ -58,12 +58,11 @@ class Company(object):
     def __init__(self, data, name, parent):
         self.__name__    = name
         self.__parent__  = parent 
-        self.__data      = data
+        self.data        = data
         self.request     = parent.request
-        self.name        = data['name']
         self.nav         = self.create_nav() 
-        for k, v in data.items():
-            setattr(self, k, v)
+        #for k, v in data.items():
+        #    setattr(self, k, v)
 
 
 
