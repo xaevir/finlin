@@ -10,15 +10,15 @@
     <div style="margin-top: 15px;">
         <div class="col-1">
             <h2>Overview</h2>  
-            <div tal:replace="structure context.data['overview']"/>
-    
-            <h2>Growth Strategy</h2>
-            <div tal:replace="structure context.data['growth_strategy']"/>
+            <p tal:replace="structure context.data['overview']"/>
+        
+            <h2>Summary: Growth Strategy</h2>
+            <p tal:replace="structure context.data['growth_strategy_summary']"/>
 
-            <h2>Competitive Advantage</h2>
-            <div tal:replace="structure context.data['competitive_advantage']"/>
-
+            <h2>Summary: Competitive Advantage</h2>
+            <p tal:replace="structure context.data['competitive_advantage_summary']"/>
         </div>
+
     </div>
   </div>
 </html>

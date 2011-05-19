@@ -12,19 +12,16 @@
     <link rel="stylesheet" type="text/css" href="${request.static_url('finlin:static/Linux-Libertine-fontfacekit/stylesheet.css')}"/>
     <link rel="stylesheet" type="text/css" href="${request.static_url('finlin:static/main.css')}"/>
 
-
     </head>
 
 <body>
 <div id="hd" metal:define-slot="hd">
     <div class="content clearfix">        
+
         <a id="logo" class="" href="${request.application_url}">
-            <span id="logo-svg"></span>
-            <span id="logo-font">
-                <b>FIN</b>
-                <b style="margin-left:.65em;">LIN</b>
-            </span>
+            <img src="${request.static_url('finlin:static/logo.png')}" />
         </a>
+
         <div id="nav" class="clearfix">
             <ul class="clearfix">
                 <li> <a href="${request.application_url}">Companies</a> </li>
@@ -33,6 +30,7 @@
                 <!--<li><a id="login" href="#">Create Account | Sign in</a></li>-->
             </ul>
         </div>    
+        <hr />
     </div>
 </div>
 
@@ -72,9 +70,8 @@
 </div>
 
 <script src="${request.static_url('finlin:static/js/jquery.js')}"></script>
-<script type="text/javascript" src="${request.static_url('finlin:static/js/raphael.js')}"></script>
 
-    <p metal:define-slot="footer-js" ></p>
+<div metal:define-slot="footer-js" ></div>
 
 <script src="${request.static_url('finlin:static/js/main.js')}"></script>
 

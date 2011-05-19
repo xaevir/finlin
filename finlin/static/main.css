@@ -256,6 +256,22 @@ h2 a:hover {
     text-align: center;
     border: 3px solid yellow;
 }
+/*resizable textarea*/
+div.grippie {
+    background:#EEEEEE url(/static/js/TextArea_Resizer_1.0.4/grippie.png) no-repeat scroll center 2px;
+    border-color:#DDDDDD;
+    border-style:solid;
+    border-width:0pt 1px 1px;
+    cursor:s-resize;
+    height:9px;
+    overflow:hidden;
+}
+.resizable-textarea textarea {
+    display:block;
+    margin-bottom:0pt;
+    width:95%;
+    height: 20%;
+}
 
 /*___________________________________________________________Main Div Setup_*/
 
@@ -270,18 +286,24 @@ h2 a:hover {
 	/*background-color: #DFEEFF;*/
     /* border: 1px solid #AFD5FF;*/
    /*background: -moz-linear-gradient(center top , #FFFFFF, #F7FCFF ) repeat scroll 0 0 transparent;*/
-   border-bottom: 4px solid #B1DAF3;
+   /*border-bottom: 1px solid #00A1FF;*/
    /*border-right: 1px solid #B1DAF3;
    border-left: 1px solid #B1DAF3;*/
 
     width: 990px;
     margin: 0 auto;
-    margin-bottom: 10px;
 }
 #hd .content {
     width: 990px;
     margin: 0 auto;
+    position: relative;
 }
+#hd hr {
+   height:15px;
+   margin:0;
+   background: -moz-linear-gradient(center top , #EFF6FF, #FFFFFF) repeat scroll 0 0 transparent;
+}
+
 #bd {
     /*-moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);*/
 	/*border: 1px solid #e6e6e6;*/
@@ -315,39 +337,43 @@ h2 a:hover {
 }
 
 #logo:hover {
+/*
     background-color: #B1DAF3;
     filter: dropshadow(color=#FE7300,offX=1,offY=1);
     text-shadow: #FE7300 1px 1px 0;
     color: #fff;
+*/
 }
 
 #logo{
+    display: block;
     float: left; 
     margin-right: 10px;
-    position: relative;
     margin-top: 2px;
-    font-family: 'times new roman','times', serif;
-    letter-spacing: .08em;
-    font-size: 24px;
-    padding-right: 3px;
-    filter: dropshadow(color=#fff,offX=1,offY=1);
-    text-shadow: #fff 1px 1px 0;
+    /*font-family: 'times new roman','times', serif;*/
+    font-family: LinuxLibertineORegular, arial, sans-serif;
+    /*letter-spacing: .08em;*/
+    font-size: 30px;
+    /*filter: dropshadow(color=#fff,offX=1,offY=1);*/
+    /*text-shadow: #BFC1C3 0px 1px 0;*/
     line-height: .9;
-    padding-left: 2px;
     color: #FE7300;
-    display: block;
-    float: left;
-    padding-top: 2px;
+    color: #00A1FF;
+    color: #BFC1C3;
+    color: #6D6C6D;
+    color: #00A1FF;
+	/*background: url(/static/navigation.png) no-repeat 0 0;*/
 }
 #logo-svg{
+    margin-top: .05em;
+    margin-left: .02em;
     line-height: 0;
-    position: absolute;
-    left: 44px;
-    top: 1px;
 }
 
-#logo-font b{
+#logo b{
     font-weight: normal;
+    float: left;
+    display: block;
 }
 /*___________________________________________________________________Footer*/
 
@@ -384,7 +410,8 @@ h2 a:hover {
     text-decoration: none;
     padding: 0 10px;
     line-height: 2;
-    color: #00A1FF;
+    color: #3366CC;
+    margin-top: 10px;
 }
 #nav a#login {
     float: right;
@@ -460,19 +487,27 @@ h2 a:hover {
     font-size: 42px;
     text-align: center;
     margin-bottom: 0;
-    margin-top: 15px;
 }
-
+/*
 #company #hd {
     padding: 5px 5px 0 0;
     -moz-border-radius-topleft: 8px;
     -moz-border-radius-topright: 8px;
     border-bottom: none;
 }
+*/
+#company h1 span {
+    font-size: 16px;
+}
 
-#company #ticker {
-    text-align: center;
-    margin-bottom: 15px;
+#company .col-1{
+    width: 640px;
+    float: left;
+}
+/*20px gutter*/
+#company .col-2{
+    width: 330px;
+    float: right;
 }
 
 #what-they-do {
@@ -511,7 +546,7 @@ h2 a:hover {
     clear: both;
 }
 #company-nav {
-    text-align: left;
+    text-align: center;
 }
 #company-nav li {
     list-style-type: none;
@@ -521,8 +556,6 @@ h2 a:hover {
 	font-size: 13px;
 	font-family: verdana, arial, sans-serif;
     line-height: 14px;
-    float: left;
-    display: block;
     /*margin: 0 40px 4px 40px;*/
     text-decoration: none;
     padding: 5px 10px 5px;
@@ -763,17 +796,47 @@ h2 a:hover {
 }
 /*_____________________________________________________________Company Form_*/
 
+#company_form input, #company_form textarea {
+   display: block; 
+}
+#company_form input {
+    margin-bottom: 1em;
+}
+#company_form .resizable-textarea{
+    margin-bottom: 1em;
+}
+
 #company_form input[type="text"] {
     padding: .5em;
     width: 400px; 
 }
 #company_form textarea{
    width: 990px; 
-   height: 600px;
    font-family: monospace;
 }
 #company_form label{
     font-size: 18px;
+    display: block;
+}
+
+#company_form textarea#overview{
+    height: 50px;
+}
+
+#company_form textarea#growth_strategy{
+    height: 150px;
+}
+
+#company_form textarea#growth_strategy_summary{
+    height: 50px;
+}
+
+#company_form textarea#competitive_advantage{
+    height: 300px;
+}
+
+#company_form textarea#competitive_advantage_summary{
+    height: 75px;
 }
 /*_______________________________________________________________Login Form_*/
 

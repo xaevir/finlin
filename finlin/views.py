@@ -81,7 +81,9 @@ class CompanyForm(Schema):
     ticker = String()
     overview = String()
     competitive_advantage = String()
+    competitive_advantage_summary = String()
     growth_strategy = String()
+    growth_strategy_summary = String()
  
 
 @view_config(name='list', context=Root, renderer='templates/company_list.pt')
@@ -133,8 +135,8 @@ def change_quarterly(x):
              renderer='templates/company_homepage.pt' )
 def company_homepage(context, request):
     
-    context.data['competitive_advantage'] = markdown(context.data['competitive_advantage'])
-    context.data['growth_strategy'] = markdown(context.data['growth_strategy'])
+    context.data['competitive_advantage_summary'] = markdown(context.data['competitive_advantage_summary'])
+    context.data['growth_strategy_summary'] = markdown(context.data['growth_strategy_summary'])
     context.data['overview'] = markdown(context.data['overview'])
 
     #quarterly 
@@ -252,7 +254,7 @@ def edit_company(context, request):
                     edited_value = params[key]
                     if original_value != edited_value:
                         data[key] = edited_value 
-                except AttributeError:
+                except KeyError:
                     #the value does not already exist, so set it
                     data[key] = value  
 

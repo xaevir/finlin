@@ -1,40 +1,35 @@
 <html metal:use-macro="main">
-  <div metal:fill-slot="body" id="company_form">
-    <form action="${save_url}" method="post">
-      <div>
-        <label>Name</label>
-      </div>
-      <p>
-        <input name="name" type="text"/>
-      </p>
-      <div>
-        <label>Ticker</label>
-      </div>
-      <p>
-        <input name="ticker" type="text" style="width:5em"/>
-      </p>
-      <div>
-        <label>Overview</label>
-      </div>
-      <p>
-        <textarea name="overview"></textarea>
-      </p>
-      <div>
-        <label>Growth Strategy</label>
-      </div>
-      <p>
-        <textarea name="growth_strategy"></textarea>
-      </p>
-      <div>
-        <label>Competitive Advantage</label>
-      </div>
-      <p>
-        <textarea name="competitive_advantage"></textarea>
-      </p>
+    <div metal:fill-slot="body" id="company_form">
+        <form action="${save_url}" method="post">
 
-      <p class="field">
-        <input type="submit" name="form.submitted" value="Save"/>
-      </p>
-    </form>
-  </div>
+            <label>Name</label>
+            <input name="name" id="name" type="text"/>
+
+            <label>Ticker</label>
+            <input name="ticker" id="ticker" type="text" style="width:5em"/>
+
+            <label>Overview</label>
+            <textarea class="resizable" name="overview" id="overview"></textarea>
+
+            <label>Growth Strategy</label>
+            <textarea class="resizable" name="growth_strategy" id="growth_strategy"></textarea>
+
+            <label>Summary: Growth Strategy</label>
+            <textarea class="resizable" name="growth_strategy_summary" id="growth_strategy_summary"></textarea>
+
+            <label>Competitive Advantage</label>
+            <textarea class="resizable" name="competitive_advantage" id="competitive_advantage"></textarea>
+
+            <label>Summary: Competitive Advantage</label>
+            <textarea class="resizable" name="competitive_advantage_summary" id="competitive_advantage_summary"></textarea>
+
+            <input type="submit" name="form.submitted" value="Save"/>
+        </form>
+    </div>
+    <div metal:fill-slot="footer-js" id="footer-js">
+        <script src="${request.static_url('finlin:static/js/TextArea_Resizer_1.0.4/jquery.textarearesizer.compressed.js')}"></script>
+        <script type="text/javascript">
+            $('textarea.resizable:not(.processed)').TextAreaResizer();
+        </script>
+    </div>
 </html>

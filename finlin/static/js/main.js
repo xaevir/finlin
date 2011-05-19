@@ -1,24 +1,26 @@
+//must be the original dimensions
 w = 35
 h = 41
+
 if ($("#home").length == 0) {
-    var paper = new Raphael(document.getElementById('logo-svg'), w*.75, h*.75);  
-    var inner = paper.path("M17.239,39.167c-1.29-1.074-4.528-3.873-7.729-7.455"
-            +"c-2.392-2.676-4.293-5.256-5.652-7.67c-1.659-2.948-2.5-5.635-2.5-7.988c0-2.542,0.419-4.81,1.246-6.74"
-            +"c0.766-1.787,1.891-3.308,3.343-4.52c2.729-2.275,6.633-3.478,11.293-3.478c4.659,0,8.563,1.203,11.292,3.478"
-            +"c1.453,1.211,2.578,2.732,3.344,4.52c0.827,1.931,1.246,4.198,1.246,6.74c0,2.353-0.841,5.04-2.501,7.988"
-            +"c-1.358,2.414-3.26,4.994-5.652,7.67C21.768,35.294,18.528,38.093,17.239,39.167L17.239,39.167Z")
-    inner.attr({'fill': '#fff', 'stroke':'none', 'scale':'.75, .75, 0, 0'})
+    dim = .8
 }
 else {
-    var paper = new Raphael(document.getElementById('logo-svg'), w*3, h*3);  
-    var inner = paper.path("M17.239,39.167c-1.29-1.074-4.528-3.873-7.729-7.455"
-            +"c-2.392-2.676-4.293-5.256-5.652-7.67c-1.659-2.948-2.5-5.635-2.5-7.988c0-2.542,0.419-4.81,1.246-6.74"
-            +"c0.766-1.787,1.891-3.308,3.343-4.52c2.729-2.275,6.633-3.478,11.293-3.478c4.659,0,8.563,1.203,11.292,3.478"
-            +"c1.453,1.211,2.578,2.732,3.344,4.52c0.827,1.931,1.246,4.198,1.246,6.74c0,2.353-0.841,5.04-2.501,7.988"
-            +"c-1.358,2.414-3.26,4.994-5.652,7.67C21.768,35.294,18.528,38.093,17.239,39.167L17.239,39.167Z")
-    inner.attr({'fill': '#fff', 'stroke':'none', 'scale':'3, 3, 0, 0'})
-
+    dim = 3
 }
+
+var paper = new Raphael(document.getElementById('logo-svg'), w*dim, h*dim);  
+
+var inner = paper.path("M17.239,39.167c-1.29-1.074-4.528-3.873-7.729-7.455"
+        +"c-2.392-2.676-4.293-5.256-5.652-7.67c-1.659-2.948-2.5-5.635-2.5-7.988c0-2.542,0.419-4.81,1.246-6.74"
+        +"c0.766-1.787,1.891-3.308,3.343-4.52c2.729-2.275,6.633-3.478,11.293-3.478c4.659,0,8.563,1.203,11.292,3.478"
+        +"c1.453,1.211,2.578,2.732,3.344,4.52c0.827,1.931,1.246,4.198,1.246,6.74c0,2.353-0.841,5.04-2.501,7.988"
+        +"c-1.358,2.414-3.26,4.994-5.652,7.67C21.768,35.294,18.528,38.093,17.239,39.167L17.239,39.167Z")
+
+inner.attr({'fill': '90-#fff-#fff', 'stroke':'none'})
+//scale has to be a string if used in above attr
+inner.scale(dim, dim, 0, 0)
+
 //EC7403-#FBB300-#EC7403
 
 var lion = paper.set();
@@ -48,17 +50,34 @@ lion.push(
         +"c-1.358,2.414-3.26,4.994-5.652,7.67C21.768,35.294,18.528,38.093,17.239,39.167L17.239,39.167Z")
     )
 
-lion.attr({'stroke': 'none', 'fill':'#FE7300'})
+lion.attr({'stroke': 'none', 'fill':'#000'})
+lion.scale(dim, dim, 0, 0)
 
-if ($("#home").length == 0) {
-    lion.attr({'scale':'.75, .75, 0, 0'})
-}
-else {
-    lion.attr({'scale':'3, 3, 0, 0'})
-}
+/*
+var lion_clone = lion.clone();
+lion_clone.attr({'stroke': 'none', 'fill':'#00A1FF'})
+lion_clone.toBack();
+*/
+/*inner.toBack();*/
 
+/*
+var lion_clone2 = lion.clone();
+lion_clone2.attr({'stroke': 'none', 'fill':'#000'})
+lion_clone2.translate(0, 1.5);
+lion_clone2.toBack();
+*/
 
+/*var lion_clone3 = lion.clone();
+lion_clone3.attr({'stroke': 'none', 'fill':'#000'})
+lion_clone3.translate(0, 2);
+lion_clone3.toBack();
+*/
 
+/*lion_clone.attr('fill':'#00A1FF')
+inner_clone.attr('fill':'#00A1FF')
+lion_clone.translate(1, 1);
+inner_clone.translate(1, 1);
+*/
 
 /*$("#logo").hover(
   function () {

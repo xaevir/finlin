@@ -49,11 +49,8 @@ def get_root(request):
 
 
 class Company(object):
-    links = [('about', 'About'), 
-             ('time_to_market', 'Time to Market'), 
-             ('product', 'Product'),
-             ('growth_strategy', 'Growth Strategy'),
-             ('management',  'Managment')]
+    links = [('growth_strategy', 'Growth Strategy'), 
+             ('competitive_advantage', 'Competitive Advantage')]
 
     def __init__(self, data, name, parent):
         self.__name__    = name
@@ -64,15 +61,13 @@ class Company(object):
         #for k, v in data.items():
         #    setattr(self, k, v)
 
-
-
     def __getitem__(self, key):
         log.debug('Key is %s'% key)
         try:
             [x[0] for x in self.links].index(key)
         except ValueError:
             raise KeyError
-        return CompanyPage(self.__data, key, self)
+        return CompanyPage(self.data, key, self)
 
     def create_nav(self):
         nav = []
@@ -87,7 +82,7 @@ class CompanyPage(object):
     def __init__ (self, data, name, parent):
         self.__name__    = name
         self.__parent__  = parent 
-        self.name        = data['name']
+        self.data        = data
         self.page        = data.get(name, 'This section is empty')
         self.nav         = parent.nav
 
