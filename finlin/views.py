@@ -138,7 +138,7 @@ def company_homepage(context, request):
     context.data['competitive_advantage_summary'] = markdown(context.data['competitive_advantage_summary'])
     context.data['growth_strategy_summary'] = markdown(context.data['growth_strategy_summary'])
     context.data['overview'] = markdown(context.data['overview'])
-
+    raise Exception
     #quarterly 
     q = {}
     q['dates'] = ['Dec 31, 2010', 'Sep 30, 2010', 'Jun 30, 2010', 'Mar 31, 2010']

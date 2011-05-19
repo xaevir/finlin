@@ -1,10 +1,5 @@
 <html metal:use-macro="company_layout">
 
-    <div metal:fill-slot="footer-js" id="footer-js">
-           <script type="text/javascript" src="${request.static_url('finlin:static/js/raphael.js')}"></script>
-            <script type="text/javascript" src="${request.static_url('finlin:static/js/g.raphael.js')}"></script>
-            <script type="text/javascript" src="${request.static_url('finlin:static/js/g.line.js')}"></script>
-    </div>
     <div metal:fill-slot="company-page" id="company" class="clearfix">
     <!-- width of left used to be 720px -->
     <div style="margin-top: 15px;">
