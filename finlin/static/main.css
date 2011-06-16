@@ -50,22 +50,32 @@ b {
     font-weight: bold;
 }
 /*_____________________________________________________________________Base_*/
+html {
+	/*background: -moz-linear-gradient(top,  #EFF6FF,  #fff);*/
+    /*background-color: #F7FAFF;*/
+    height: 100%;
+}
+
 body {
-    color: #111;
+    color: #272727;
 	/*background-color: #F7F7F7;*/
-    font: 13px/1.231 arial,helvetica,clean,sans-serif;
+    font-size: 13px; /*/1.231 arial,helvetica,clean,sans-serif;*/
+    line-height: 1.231;
+    /*background-color: #E1E8EE;*/
+    font-family: Lucida Grande,Verdana,Lucida Sans Regular,Lucida Sans Unicode,Arial,sans-serif;
+    /*background: -moz-linear-gradient(top , #E2F0FD, white 30%) no-repeat;*/
 }
 h1,h2,h3,h4,h5,h6,strong {
    /*bringing boldness back to headers and the strong element*/
     font-weight: bold;
-    line-height: 1;
     margin-bottom: .3em;
+    font-family: arial,helvetica,clean,sans-serif;
 }
 h1 {
     font-size: 33px;
-	color: #000;
+	color: #666;
 	/*margin-bottom: .25em;*/
-    font-weight: normal;
+    font-weight: bold;
 }
 h2 {
     font-size: 14px;
@@ -81,9 +91,11 @@ h2,h3 {
 hr {
    border: none;
    height:1px;
-   margin:10px 0;
-   background-color: #262626;
-   color: #262626;
+   background-color: DeepSkyblue;
+   background-color: #DFECFF;
+   clear: both;
+   position: relative;
+   top: -8px;
 }
 abbr,acronym {
    /*indicating to users that more info is available */
@@ -149,17 +161,14 @@ a img {
 /* if you change, the link color in the caption 
    must also be changed */
 a {
-	color:#0181E3;
-    color: #0069AA;
-    color: #3366CC;
-    color: #0058A6;
+    color: #0087D2;
 	text-decoration: none;
 }
 a:hover {
     text-decoration: underline;
 }
 p {
-    line-height: 1.45;
+    line-height: 1.5;
 }
 
 /*____________________________________________________________________Table_*/
@@ -192,7 +201,43 @@ tr {
 	align: top;
 }
 
+/*_____________________________________________________________________Form_*/
+input, textarea {
+   display: block; 
+    margin-bottom: 1em;
+}
+input {
+    margin-bottom: 1em;
+}
+textarea{
+
+}
+
+input[type="text"] {
+    padding: .5em;
+    width: 400px; 
+}
+textarea{
+   width: 840px; 
+   font-family: monospace;
+}
+label{
+    font-size: 18px;
+    display: block;
+}
+
 /*__________________________________________________________________Classes_*/
+
+.clear {
+    clear: both;
+    float: none;
+    font-size: 0;
+    height: 1px;
+    line-height: 0;
+    overflow: hidden;
+    width: 1px;
+}
+
 .clearfix:after {
     content:".";
     display:block;
@@ -276,9 +321,14 @@ div.grippie {
 /*___________________________________________________________Main Div Setup_*/
 
 #doc2 {
-	width: 990px;
+	width: 980px;
     margin: 0 auto;
+    background-color: transparent;
+    padding: 0 40px 0 40px;
+    /*-moz-box-shadow: 0px 0px 4px #999;*/
+    border-top: none;
 }
+
 #hd {
     /*-moz-box-shadow: 0px 1px 3px #C2C2C2;
 	background: -moz-linear-gradient(top,  #AEE8FF,  #89cff0);*/
@@ -289,44 +339,30 @@ div.grippie {
    /*border-bottom: 1px solid #00A1FF;*/
    /*border-right: 1px solid #B1DAF3;
    border-left: 1px solid #B1DAF3;*/
+    padding-top: 3px;
+    margin-bottom: 15px;
 
-    width: 990px;
-    margin: 0 auto;
 }
-#hd .content {
-    width: 990px;
-    margin: 0 auto;
-    position: relative;
-}
-#hd hr {
-   height:15px;
-   margin:0;
-   background: -moz-linear-gradient(center top , #EFF6FF, #FFFFFF) repeat scroll 0 0 transparent;
-}
-
 #bd {
     /*-moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);*/
 	/*border: 1px solid #e6e6e6;*/
-    clear: both;
-
+    padding: 10px;
+    margin-top: -3px;
+    background-color: #f7f7f7;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 #ft {
 	margin-top: 20px;
 	margin-bottom: 20px;
-	clear: both;
-    position: relative;
     border-top: 1px solid #f3f3f3;
 }
-#ft .content {
-    width: 970px;
-    margin: 0 auto;
-}
-
 /*___________________________________________________________________Header_*/
 
 #hd a{
-    border-right: 1px solid transparent;
+    /*border-right: 1px solid transparent;
     border-left: 1px solid transparent;
+    */
 }
 #hd a:hover{
     border-color: #B1DAF3;
@@ -347,22 +383,7 @@ div.grippie {
 
 #logo{
     display: block;
-    float: left; 
-    margin-right: 10px;
-    margin-top: 2px;
-    /*font-family: 'times new roman','times', serif;*/
-    font-family: LinuxLibertineORegular, arial, sans-serif;
-    /*letter-spacing: .08em;*/
-    font-size: 30px;
-    /*filter: dropshadow(color=#fff,offX=1,offY=1);*/
-    /*text-shadow: #BFC1C3 0px 1px 0;*/
-    line-height: .9;
-    color: #FE7300;
-    color: #00A1FF;
-    color: #BFC1C3;
-    color: #6D6C6D;
-    color: #00A1FF;
-	/*background: url(/static/navigation.png) no-repeat 0 0;*/
+    float: left;
 }
 #logo-svg{
     margin-top: .05em;
@@ -386,33 +407,44 @@ div.grippie {
    padding-right: 15px;
 }
 
-#swag {
-    color: #666;
-}
-#ft #swag a{
-    color: #666;
-}
-
 /*__________________________________________________________Main Navigation_*/
 
 #nav {
-}
-#nav ul{
-    text-align: left;
+    margin: 0;
+    /*border-bottom: 1px solid DeepSkyBlue;*/
+    float: left;
+    /*margin: -30px 0 0 140px;*/
+    margin-top: 15px;
+    padding-left: 0;
+    margin-left: 5px;
+    width: 681px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+/*	background: -moz-linear-gradient(top, #fff, #EFF6FF);
+    border-top: 1px solid #EFF6FF;
+    border-right: 1px solid #DFECFF;
+    border-left: 1px solid #EFF6FF;
+    border-bottom: 1px solid DeepSkyBlue;*/
 }
 #nav li {
     list-style-type: none;
 }
+
 #nav a{
-	font-size: 13px;
-    float: left;
-    display: block;
+	font-size: 14px;
     text-decoration: none;
-    padding: 0 10px;
-    line-height: 2;
-    color: #3366CC;
-    margin-top: 10px;
+    margin-left: 25px;
+    display: block;
+    float: left;
+    padding-top: 5px;
+    color: DeepSkyBlue;
 }
+#nav .active a{
+    /*font-weight: bold;*/
+    /*border-bottom: 2px solid DeepSkyBlue;*/
+
+}
+
 #nav a#login {
     float: right;
 }
@@ -482,11 +514,8 @@ div.grippie {
 #company {
 }
 #company h1{
-    color: #000;
-    font-family: LinuxLibertineORegular, arial, sans-serif;
-    font-size: 42px;
-    text-align: center;
-    margin-bottom: 0;
+    color: #333;
+    font-size: 30px;
 }
 /*
 #company #hd {
@@ -500,15 +529,143 @@ div.grippie {
     font-size: 16px;
 }
 
-#company .col-1{
-    width: 640px;
+#company h3 {
+    font-size: 13px;    
+    font-weight: bold;
+}
+
+#company #left-column{
     float: left;
+    width: 665px;
+}
+
+#company #right-column{
+    float: left;
+    width: 295px;
+}
+
+#company .box{
+    -moz-border-radius: 7px 7px 7px 7px;
+    -moz-box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.2);
+    background-color: #FFFFFF;
+
+    margin: 10px;
+    padding: 10px;
+}
+#company .box .bd {
+    background: -moz-linear-gradient(center top , #eeeeee, white);
+    min-height: 150px;
+    padding: 2px 10px;
+     -moz-border-radius: 5px 5px 5px 5px;
+
+}
+
+#company #right-column h3{
+    color: #7A7A78;
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+#company #right-column h3#overview {
+    color: #33332F; 
+}
+
+#company #main-content{
+    -moz-border-radius: 7px 7px 7px 7px;
+    /*-moz-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);*/
+    -moz-box-shadow: 0px 1px 2px #888;
+    background-color: #FFFFFF;
+    clear: both;
+    padding: 10px;   
+}
+
+#company #main-content img{
+    padding-right: 1em;
+    padding-bottom: 1em;
+    float: left;
+}
+
+#company .td_left{
+    font-weight: bold;
+}
+
+#company #questions {
+    font-size: 18px;
+    font-family: Georgia;
+    color: #666;
+    
+}
+
+#company #questions li{
+    list-style: none;
+    margin-bottom: 1em;
+}
+
+
+#company .col-1{
+    /*width: 640px;
+    float: left;
+    */
 }
 /*20px gutter*/
 #company .col-2{
     width: 330px;
     float: right;
 }
+
+.full-strategy{
+    margin-top: -1em;
+    display: block;
+    margin-bottom: 1em;
+}
+
+
+#company .hd {
+    margin-bottom: 10px;
+}
+
+
+
+#company .section {
+    margin-bottom: 25px;
+}
+
+#company .section h2 {
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+
+.left_quote{
+    float: left;
+}
+.right_quote{
+    float: right;
+}
+
+
+.bqstart {
+     float: left;
+     height: 45px;
+     margin-top: -20px;
+     padding-top: 45px;
+     margin-bottom: -50px;
+     font-size: 700%;
+     color: #FF0000;
+     font-family: georgia, serif;
+}
+
+ .bqend {
+     float: right;
+     height: 25px;
+     margin-top: 0px;
+     padding-top: 45px;
+     font-size: 700%;
+     color: #FF0000;
+
+     font-family: georgia, serif;
+ }
 
 #what-they-do {
     width: 300px;
@@ -744,6 +901,9 @@ div.grippie {
     text-align: center;
 }
 
+
+
+
 /*__________________________________________________Company Income Statement*/
 
 .income-statement .total td{
@@ -811,7 +971,7 @@ div.grippie {
     width: 400px; 
 }
 #company_form textarea{
-   width: 990px; 
+   width: 840px; 
    font-family: monospace;
 }
 #company_form label{
@@ -951,4 +1111,12 @@ div.grippie {
 .income-subtotal .num {
     padding-top: 2px;
     border-top: 1px solid #000 !important;
+}
+
+
+
+/*_______________________________________________________________ Questions_*/
+
+#questions-list li{
+    margin-bottom: 1em; 
 }

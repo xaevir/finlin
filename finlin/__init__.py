@@ -4,6 +4,7 @@ from pyramid.events import NewRequest
 from pyramid.session import UnencryptedCookieSessionFactoryConfig
 from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
+from pyramid.renderers import get_renderer
 
 from finlin.security import groupfinder
 from finlin.models import get_root
@@ -13,6 +14,7 @@ import logging
 from gridfs import GridFS
 import pymongo
 
+from pyramid.url import resource_url
 
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
@@ -33,7 +35,9 @@ def main(global_config, **settings):
                           settings=settings,
                           session_factory = my_session_factory,
                           authentication_policy=authn_policy,
-                          authorization_policy=authz_policy
+                          authorization_policy=authz_policy,
+                          renderer_globals_factory=renderer_globals_factory
+
                           )
 
     config.registry.settings['db_conn'] = conn
@@ -43,6 +47,10 @@ def main(global_config, **settings):
     config.scan('finlin')
     return config.make_wsgi_app()
 
+def renderer_globals_factory(system):
+    return {'main': get_renderer('finlin:templates/master.pt').implementation(),
+            'resource_url' : resource_url  
+    }
 
 def add_mongo_db(event):
     settings = event.request.registry.settings

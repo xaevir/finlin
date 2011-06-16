@@ -4,38 +4,31 @@
 <head>
     <title>Finlin</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-    <link rel="shortcut icon"
-        href="${request.static_url('finlin:static/favicon.ico')}" />
+    <link rel="shortcut icon" href="${request.static_url('finlin:static/favicon.png')}" />
         
     <link metal:define-slot="head-css"/>
 
     <link rel="stylesheet" type="text/css" href="${request.static_url('finlin:static/Linux-Libertine-fontfacekit/stylesheet.css')}"/>
     <link rel="stylesheet" type="text/css" href="${request.static_url('finlin:static/main.css')}"/>
-
     </head>
 
 <body>
-<div id="hd" metal:define-slot="hd">
-    <div class="content clearfix">        
 
+<div id="doc2" class="clearfix">
+    <div id="hd" class="clearfix">
         <a id="logo" class="" href="${request.application_url}">
             <img src="${request.static_url('finlin:static/logo.png')}" />
         </a>
-
-        <div id="nav" class="clearfix">
-            <ul class="clearfix">
-                <li> <a href="${request.application_url}">Companies</a> </li>
-                <!-- <li> <a href="${request.application_url}/strategy">Strategy</a> </li>-->
-                <li> <a href="${request.application_url}/contact">Contact</a>  </li> 
-                <!--<li><a id="login" href="#">Create Account | Sign in</a></li>-->
-            </ul>
-        </div>    
-        <hr />
+        <ul id="nav" class="clearfix" metal:define-slot="main-nav">
+            <li> <a href="${request.application_url}">Companies</a> </li>
+            <!-- <li> <a href="${request.application_url}/strategy">Strategy</a> </li>-->
+            <li> <a href="${request.application_url}/contact">Contact</a>  </li> 
+            <!--<li><a id="login" href="#">Create Account | Sign in</a></li>-->
+        </ul>
     </div>
-</div>
+    
+    <div id="bd" >
 
-<div id="doc2">
-    <div id="bd">
         <div id="flash" 
           tal:define="message request.session.pop_flash()"
           tal:condition="message">
@@ -46,33 +39,28 @@
         <div metal:define-slot="body" id="bd-content">
           This is the body.
         </div>
+
+        <div class="clear"></div>
     </div>
-</div>
-<div id="ft">
-    <div class="content">
+
+
+    <div id="ft">
         <ul id="ft-nav">
             <!--<li><a href="about">About</a></li>-->
             <li><a href="contact">Contact</a></li>
         </ul>
-        <p style="float: left;">
+        <p>
             &copy; Finlin 2011
         </p>
-        <div id="swag">
-        <p style="float: right; padding-right:20px;">
-            <a href="http://pylonsproject.org/">Pyramid</a> |
-            <a href="http://www.mongodb.org/">mongoDB</a>
-         </p>
-        <p style="float:right; padding-right: 7px;">
-            Powered with:
-        </p>
-        </div>
     </div>
+
 </div>
 
 <script src="${request.static_url('finlin:static/js/jquery.js')}"></script>
 
 <div metal:define-slot="footer-js" ></div>
 
+<script src="${request.static_url('finlin:static/js/raphael.js')}"></script>
 <script src="${request.static_url('finlin:static/js/main.js')}"></script>
 
 </body>

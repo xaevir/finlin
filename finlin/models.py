@@ -1,12 +1,16 @@
 from pyramid.threadlocal import get_current_request 
 from pyramid.url import resource_url
 
+from pyramid.renderers import render
+
 import logging
 from pprint import pprint
 import re
 import datetime
 import cryptacular.bcrypt
 from pymongo.objectid import ObjectId
+from pymongo.errors import InvalidId
+
 log = logging.getLogger(__name__)
 from bson.code import Code
 
@@ -19,25 +23,26 @@ def get_db():
     return req.db 
  
 
-
 class Root(object):
     __name__ = None
     __parent__ = None
     def __init__(self, request):
-        self.db = request.db 
         self.request = request
+
     def __getitem__(self, key):
         log.debug('Key is %s'% key)
         if key == 'user':
             return UserContainer(parent=self, name='user', db=self.db )
-        doc = self.db.company.find_one({'slug':key})
+        if key == 'cms':
+            return Cms(key, self, self.request)
+        doc = self.request.db.company.find_one({'slug':key})
         if doc is None:
             raise KeyError
-        return Company(doc, key, self)             
+        return Company(doc, key, self, self.request)             
 
     def items(self):
         result = {}
-        for obj in self.db.company.find():
+        for obj in self.request.db.company.find():
             obj['__parent__']= self
             result[obj['slug']] = obj
         return result
@@ -48,43 +53,78 @@ def get_root(request):
     return root 
 
 
-class Company(object):
-    links = [('growth_strategy', 'Growth Strategy'), 
-             ('competitive_advantage', 'Competitive Advantage')]
+class Cms(object):
+    def __init__(self, name, parent, request):
+        self.__name__    = name
+        self.__parent__  = parent 
+        self.request     = request
+        self.url         = resource_url(self, self.request) 
+        self.request.nav = render('finlin:templates/cms/nav.pt', {'context': self}, self.request)
 
-    def __init__(self, data, name, parent):
+    def __getitem__(self, key):
+        log.debug('Key of Cms is %s'% key)
+        if key == 'questions':
+            doc = self.request.db.questions.find()
+            if doc is None:
+                raise KeyError
+            return QuestionsIndex(doc, key, self, self.request)
+
+
+class QuestionsIndex(object):
+    def __init__ (self, data, name, parent, request):
+        self.__name__    = name
+        self.__parent__  = parent 
+        self.request     = request
+        self.data        = data
+        self.url         = resource_url(self, self.request) 
+
+    def __getitem__(self, key):
+        log.debug('Key of QuestionsIndex is %s'% key)
+        try:
+            id =  ObjectId(key)
+        except InvalidId: #needs to be at least a number I suppose
+            raise KeyError
+        doc = self.request.db.questions.find_one({'_id': id})
+        if doc is None:
+            raise KeyError
+        return Question(doc, key, self, self.request)
+
+
+class Question(object):
+    def __init__ (self, data, name, parent, request):
+        self.__name__    = name
+        self.__parent__  = parent 
+        self.request     = parent.request
+        self.data        = data
+        self.url         = resource_url(self, self.request) 
+
+
+class Company(object):
+    resources = {'growth_strategy': True, 
+                 'competitive_advantage': True,
+                 'overview': True,
+                 'questions': True,
+                 }             
+
+    def __init__(self, data, name, parent, request):
         self.__name__    = name
         self.__parent__  = parent 
         self.data        = data
-        self.request     = parent.request
-        self.nav         = self.create_nav() 
-        #for k, v in data.items():
-        #    setattr(self, k, v)
-
+        self.request     = request
+        
     def __getitem__(self, key):
         log.debug('Key is %s'% key)
-        try:
-            [x[0] for x in self.links].index(key)
-        except ValueError:
-            raise KeyError
-        return CompanyPage(self.data, key, self)
-
-    def create_nav(self):
-        nav = []
-        for x,y in self.links:
-            x =  resource_url(self, self.request, x)
-            nav.append((x,y))
-        nav.insert(0, (resource_url(self, self.request), 'Overview'))
-        return nav
+        self.resources[key]
+        return CompanyPage(self.data, key, self, self.request)
 
       
 class CompanyPage(object):
-    def __init__ (self, data, name, parent):
+    def __init__ (self, data, name, parent, request):
         self.__name__    = name
         self.__parent__  = parent 
         self.data        = data
+        self.request     = request
         self.page        = data.get(name, 'This section is empty')
-        self.nav         = parent.nav
 
 class CompanyData(dict):
     def get_comments(self):
