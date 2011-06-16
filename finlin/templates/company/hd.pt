@@ -1,0 +1,2 @@
+<h1>${context.data['name']}<span>(${context.data['ticker']})</span></h1>
+

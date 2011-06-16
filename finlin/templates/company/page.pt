@@ -1,0 +1,14 @@
+<html metal:use-macro="main">
+    <div metal:fill-slot="body" id="company">
+        <div tal:content="structure hd"/>
+        <div id="container">
+            <h3>From Financial Report</h3>
+            <blockquote>
+                <span class="left_quote"></span>
+                <div tal:replace="structure context.page"/>
+                <span class="right_quote"></span>
+            </blockquote>
+          </div>
+      </div>
+</html>
+        

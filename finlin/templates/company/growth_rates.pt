@@ -1,0 +1,111 @@
+            <div class="section">
+                <h2>Overview</h2>  
+                <p tal:replace="structure context.data['overview']"/>
+            </div>
+            
+            <div class="section">
+                <h2>Growth Strategy</h2>
+                <p tal:replace="structure context.data['growth_strategy_summary']"/>
+
+                <a href="${context.nav['growth_strategy']['href']}" class="full-strategy"
+                    >&gt; excerpt from financial statement</a>
+            </div>
+
+            <div class="section">
+                <h2>Competitive Advantage</h2>
+                <p tal:replace="structure context.data['competitive_advantage_summary']"/>
+                    <a href="${context.nav['competitive_advantage']['href']}" class="full-strategy"
+                        >&gt; excerpt from financial statement</a>
+            </div>
+
+
+
+            <div id="growth-rates">
+                <h2>Growth Rates</h2>
+                <table>
+                    <tr>
+                        <td>
+                            Revenue
+                        </td>
+                    </tr>
+                    <tr class="data">
+                        <td class="indent">
+                            last quarter
+                        </td>
+                        <td>
+                            ${context.growth['rev']['qtr_chg']}&#37;
+                        </td>
+                    </tr>
+                    <tr class="data">
+                        <td class="indent">
+                            last year
+                        </td>
+                        <td>
+                            ${context.growth['rev']['yr_chg']}&#37;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Net Income
+                        </td>
+                    </tr>
+                    <tr class="data">
+                        <td class="indent">
+                            last quarter
+                        </td>
+                        <td>
+                            ${context.growth['rev']['qtr_chg']}&#37;
+                        </td>
+                    </tr>
+                    <tr class="data">
+                        <td class="indent">last year</td>
+                        <td>
+                            ${context.growth['rev']['yr_chg']}&#37;
+                        </td>
+                    </tr>
+   
+                </table>
+
+            </div>
+            <div id="financial-overview">
+                <h2>Financial Overview</h2>
+                <p>All numbers in thousands</p>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>
+                            4th Qtr<br />
+                            <span>${context.q['dates'][3]}</span>
+                        </th>
+                        <th>
+                            3rd Qtr<br />
+                            <span>${context.q['dates'][2]}</span>
+                        </th>
+                        <th>2nd Qtr<br />
+                            <span>${context.q['dates'][1]}</span>
+                        </th>
+
+                        <th>1st Qtr<br />
+                            <span>${context.q['dates'][0]}</span>
+                        </th>
+                    </tr>
+                    <tr >
+                        <td class="th">Revenue</td>
+                        <td>${context.q['rev'][3]}</td>
+                        <td>${context.q['rev'][2]}</td>
+                        <td>${context.q['rev'][1]}</td>
+                        <td>${context.q['rev'][0]}</td>
+                    </tr>
+                    <tr style="height: 40px">
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="th">Net Income</td>
+                        <td>${context.q['net'][3]}</td>
+                        <td>${context.q['net'][2]}</td>
+                        <td>${context.q['net'][1]}</td>
+                        <td>${context.q['net'][0]}</td>
+                    </tr>
+                </table>
+            </div>
+

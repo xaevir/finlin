@@ -1,0 +1,17 @@
+<html metal:use-macro="main">
+    <div metal:fill-slot="body">
+        <h1>Companies</h1>
+        <p>
+            <a href="${resource_url(context,request)}add">Add New</a>
+        </p>
+
+        <table id="company_form">
+            <tr tal:repeat="item context.items()">
+                <td>${item}</td>
+                <td><a href="${request.application_url}/${item}">view</a></td>
+                <td><a href="${request.application_url}/${item}/edit">edit</a></td>
+                <td><a href="${request.application_url}/${item}/delete">delete</a></td>
+            </tr>
+        </table>
+    </div>
+</html>
