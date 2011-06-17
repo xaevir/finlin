@@ -1,0 +1,13 @@
+<ul id="nav" class="clearfix" >
+    <li>
+        <a href="${resource_url(context, request, 'overview')}"
+            >Overview</a>
+    </li>
+     <li>
+
+        <a href="${resource_url(context, request, 'questions')}"
+            >Questions</a>
+    </li>
+   
+</ul>
+

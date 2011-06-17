@@ -2,7 +2,7 @@
     <div metal:fill-slot="body" id="company">
         <div class="hd">
             <!--<div tal:content="structure hd"/>-->
-            <h1>Avantair, the pursuit of quality and low cost</h1>
+            <h1 style="text-align: center">Avantair</h1>
         </div>
         
         <div class="bd clearfix">

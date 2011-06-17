@@ -54,12 +54,12 @@ class CompanyForm(Schema):
     competitive_advantage_summary = String()
     growth_strategy = String()
     growth_strategy_summary = String()
+    questions = String()
  
 
 @view_config(name='list', context=Root, renderer='finlin:templates/company/list.pt')
 def list_company(context, request):
-    main = get_renderer('finlin:templates/master.pt').implementation()
-    return dict(main = main)    
+    return {}    
 
 
 @view_config(name='', context='finlin.models.Company', 
@@ -80,3 +80,92 @@ def view_page(context, request):
 
 def header_view(request):
     return render('finlin:templates/company/hd.pt', '', request)
+
+def editing_nav_view(request):
+    return render('finlin:templates/company/editing_nav.pt', '', request)
+
+@view_config(name='add', context=Root)
+def add_company(context, request):
+    tpl = 'finlin:templates/company/form.pt'
+    tpl_vars = {
+        'editing_nav': editing_nav_view(request),
+        'save_url': request.path_url,
+        'submit_label': 'add company'}
+
+    if 'form.submitted' in request.params:
+        schema = CompanyForm()
+        try:
+            params = schema.to_python(request.params, request)
+        except formencode.Invalid, e:
+            html = htmlfill.render(
+                                render(tpl, tpl_vars, request),
+                                defaults=e.value,
+                                errors=e.error_dict)
+            return Response(html)
+        else:
+            params['created'] = datetime.datetime.now()
+            params['slug'] = slugify(params['name'])
+            request.db.company.save(params)
+            request.session.flash(params['name'] + ' created')
+            return HTTPFound(location = resource_url(
+                                    context,
+                                    request,
+                                    params['name']))
+    return Response(render(tpl, tpl_vars, request))
+
+
+@view_config(name='edit', context=Company)
+def edit_company(context, request):
+    tpl = 'finlin:templates/company_form.pt'
+    tpl_vars = {
+        'main': get_renderer('templates/master.pt').implementation(),
+        'save_url': request.path_url,
+        'submit_label': 'edit'}
+    if 'form.submitted' in request.params:
+        schema = CompanyForm()
+        # look into below. If I take it out, it says the company name already exists
+        schema.fields['name'] = String(not_empty=True)
+        try:
+            params = schema.to_python(request.params, request)
+        except formencode.Invalid, e:
+            htmlfilled = htmlfill.render(
+                                render(tpl, tpl_vars, request),
+                                defaults=e.value,
+                                errors=e.error_dict)
+            return Response(htmlfilled)
+        else:
+            #need to use context bc the _id is already set
+            data = {}
+            for key, value in params.items():
+                try:
+                    #check to see if a value exists and if it has changed
+                    original_value = context.data[key]
+                    edited_value = params[key]
+                    if original_value != edited_value:
+                        data[key] = edited_value
+                except KeyError:
+                    #the value does not already exist, so set it
+                    data[key] = value
+
+            request.db.company.update({'_id': context.data['_id']}, {'$set': data })
+            request.session.flash(context.data['name'] + ' saved')
+            return HTTPFound(location = resource_url(
+                                            context.__parent__,
+                                            request,
+                                            context.__name__))
+    html = htmlfill.render(
+                      render(tpl, tpl_vars, request),
+                      defaults=context.data)
+    return Response(html)
+
+
+@view_config(name='delete', context=Company)
+def delete_company(context, request):
+    request.db.company.remove({'slug':context.__name__})
+    request.session.flash(context.name + ' deleted')
+    return HTTPFound(location = resource_url(
+                                    context.__parent__,
+                                    request,
+                                    'list'))
+
+   

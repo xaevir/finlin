@@ -1,5 +1,5 @@
 <html metal:use-macro="main">
-    <div metal:fill-slot="main-nav" tal:content="structure cms_nav" />
+    <div metal:fill-slot="main-nav" tal:content="structure editing_nav" />
     <div metal:fill-slot="body" id="company_form">
         <form action="${save_url}" method="post">
 
@@ -11,6 +11,9 @@
 
             <label>Overview</label>
             <textarea class="resizable" name="overview" id="overview"></textarea>
+
+            <label>Questions</label>
+            <textarea class="resizable" name="questions" id="questions"></textarea>
 
             <label>Growth Strategy</label>
             <textarea class="resizable" name="growth_strategy" id="growth_strategy"></textarea>
