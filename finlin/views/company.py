@@ -11,6 +11,8 @@ from pyramid.security import forget
 
 import datetime
 
+import re
+
 import formencode
 from formencode.schema import Schema
 from formencode.validators import String, PlainText, MaxLength, MinLength, Email
@@ -32,6 +34,20 @@ log = logging.getLogger(__name__)
 import locale
 locale.setlocale(locale.LC_ALL, '')
 
+#____________________________________________________________________Utilities
+
+def slugify(name):
+    filter = { 
+        '&+' : 'and', # replace & with 'and'              
+        '[^a-zA-Z0-9]+' : '_', # non-alphanumeric characters with a hyphen
+        '-+' : '_' # replace multiple hyphens with a single hyphen
+    }
+    for k, v in filter.items():
+        name = re.sub(k, v, name)
+    name = name.strip('_') 
+    return name	
+
+
 
 class UniqueCompanyName(FancyValidator):
     def _to_python(self, value, state):
@@ -46,15 +62,18 @@ class UniqueCompanyName(FancyValidator):
 class CompanyForm(Schema):
     allow_extra_fields = True
     filter_extra_fields = True
-    name = formencode.All(String(not_empty=True), 
-                          UniqueCompanyName()) 
+    name = formencode.All(String(not_empty=True), UniqueCompanyName()) 
     ticker = String()
-    overview = String()
-    competitive_advantage = String()
-    competitive_advantage_summary = String()
-    growth_strategy = String()
-    growth_strategy_summary = String()
+    website = String()
+    description = String()
+    significant_developments = String()
+    business_strategy = String()
+    competition = String()
     questions = String()
+    street = String()
+    city = String()
+    state = String()
+    zip = String()
  
 
 @view_config(name='list', context=Root, renderer='finlin:templates/company/list.pt')
@@ -65,9 +84,11 @@ def list_company(context, request):
 @view_config(name='', context='finlin.models.Company', 
              renderer='finlin:templates/company/homepage.pt' )
 def company_homepage(context, request):
-    context.data['competitive_advantage_summary'] = markdown(context.data['competitive_advantage_summary'])
-    context.data['growth_strategy_summary'] = markdown(context.data['growth_strategy_summary'])
-    context.data['overview'] = markdown(context.data['overview'])
+    context.data['description'] = markdown(context.data['description'])
+    context.data['significant_developments'] = markdown(context.data['significant_developments'])
+    context.data['business_strategy'] = markdown(context.data['business_strategy'])
+    context.data['competition'] = markdown(context.data['competition'])
+    context.data['questions'] = markdown(context.data['questions'])
     return {'hd': header_view(request)}
 
 
@@ -88,7 +109,6 @@ def editing_nav_view(request):
 def add_company(context, request):
     tpl = 'finlin:templates/company/form.pt'
     tpl_vars = {
-        'editing_nav': editing_nav_view(request),
         'save_url': request.path_url,
         'submit_label': 'add company'}
 
@@ -116,9 +136,8 @@ def add_company(context, request):
 
 @view_config(name='edit', context=Company)
 def edit_company(context, request):
-    tpl = 'finlin:templates/company_form.pt'
+    tpl = 'finlin:templates/company/form.pt'
     tpl_vars = {
-        'main': get_renderer('templates/master.pt').implementation(),
         'save_url': request.path_url,
         'submit_label': 'edit'}
     if 'form.submitted' in request.params:

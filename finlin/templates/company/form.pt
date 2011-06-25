@@ -1,5 +1,4 @@
 <html metal:use-macro="main">
-    <div metal:fill-slot="main-nav" tal:content="structure editing_nav" />
     <div metal:fill-slot="body" id="company_form">
         <form action="${save_url}" method="post">
 
@@ -9,23 +8,35 @@
             <label>Ticker</label>
             <input name="ticker" id="ticker" type="text" style="width:5em"/>
 
-            <label>Overview</label>
-            <textarea class="resizable" name="overview" id="overview"></textarea>
+            <label>Website</label>
+            <input name="website" type="text"/>
+
+            <label>Street</label>
+            <input name="street" type="text"/>
+
+            <label>City</label>
+            <input name="city" type="text"/>
+
+            <label>State</label>
+            <input name="state" type="text"/>
+
+            <label>Zip</label>
+            <input name="zip" type="text"/>
+
+            <label>Description</label>
+            <textarea name="description" id="description"></textarea>
+
+            <label>Significant developments</label>
+            <textarea name="significant_developments"></textarea>
+
+            <label>Business Strategy</label>
+            <textarea name="business_strategy"></textarea>
+
+            <label>Competition</label>
+            <textarea name="competition"></textarea>
 
             <label>Questions</label>
-            <textarea class="resizable" name="questions" id="questions"></textarea>
-
-            <label>Growth Strategy</label>
-            <textarea class="resizable" name="growth_strategy" id="growth_strategy"></textarea>
-
-            <label>Summary: Growth Strategy</label>
-            <textarea class="resizable" name="growth_strategy_summary" id="growth_strategy_summary"></textarea>
-
-            <label>Competitive Advantage</label>
-            <textarea class="resizable" name="competitive_advantage" id="competitive_advantage"></textarea>
-
-            <label>Summary: Competitive Advantage</label>
-            <textarea class="resizable" name="competitive_advantage_summary" id="competitive_advantage_summary"></textarea>
+            <textarea name="questions" id="questions"></textarea>
 
             <input type="submit" name="form.submitted" value="Save"/>
         </form>

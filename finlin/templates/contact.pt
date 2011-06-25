@@ -2,26 +2,15 @@
   <div metal:fill-slot="body" id="contact">
 	<h1>Say <span>hello...</span></h1>
 
-    <p style="margin-bottom: 3em;">
-    	We'd love to hear from you, so if you have any questions about Finlin, <br />
-    	the otc market, or any other aspects of 
-        a website, just email us at the address below or fill out the form.<br />
-        <span style="font-style:italic">Thank you!</span>
+    <p>
+    	We would love to hear from you.<br />
     </p>
-
-	<div style="width: 300px; float: left;">
-	           
-	            <p>
-	            	<b>Email: </b>info@finlin.com
-	            </p>
+        <p>
+            <b>email: </b>info@finlin.com
+        </p>
 	            
-	      	</div>
 	
-	<div style="width:500px; float: left; 
-				margin-left: 15px; 
-				border-left: 1px dotted #D3D3D3;
-				padding-left: 50px;
-				">
+	<div >
         <form action="${save_url}" method="post">
         <table>
             <tr>
@@ -40,6 +29,7 @@
             <tr>
                 <td></td>
                 <td><input type="submit" name="form.submitted" 
+                           class="button roundify blue shadow"
                         value="${submit_label}"/>
                 </td>
             </tr>

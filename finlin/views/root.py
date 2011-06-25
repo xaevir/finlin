@@ -56,10 +56,100 @@ def slugify(name):
    
 #_____________________________________________________________________Homepage
 
-@view_config(context=Root, renderer='finlin:templates/home_page.pt')
+class HomepageForm(formencode.Schema):
+    allow_extra_fields = True
+    filter_extra_fields = True
+    email = formencode.All(Email(not_empty=True),
+                              MaxLength(100))
+
+
+@view_config(context='finlin.models.Root')
 def home_page(context, request):
-    main = get_renderer('finlin:templates/master.pt').implementation()
-    return {'main': main} 
+    tpl = 'finlin:templates/home_page.pt'
+    tpl_vars = { 
+        'save_url': request.path_url} 
+
+    if 'form.submitted' in request.params:
+        schema = HomepageForm() 
+        try:
+            params = schema.to_python(request.params, request)
+        except formencode.Invalid, e:
+            html = htmlfill.render(
+                                render(tpl, tpl_vars, request),
+                                defaults=e.value,
+                                errors=e.error_dict) 
+            return Response(html)
+        else:
+            import smtplib
+
+            sender = params['email']
+            receivers = ['bobby.chambers33@gmail.com']
+
+            message = "email: %s ----"  % params['email']
+            #message += params['body']
+            
+            smtpObj = smtplib.SMTP('localhost')
+            smtpObj.sendmail(sender, receivers, message)         
+            request.session.flash('Thank you!')
+
+            return HTTPFound(location = resource_url(
+                                    context, 
+                                    request))
+    return Response(render(tpl, tpl_vars, request))
+
+
+
+#____________________________________________________________________Contact__
+
+
+class ContactForm(formencode.Schema):
+    allow_extra_fields = True
+    filter_extra_fields = True
+    name = formencode.All(PlainText(not_empty=True),
+                              MaxLength(50),
+                              MinLength(2))
+    email = formencode.All(Email(not_empty=True),
+                              MaxLength(100))
+    body = formencode.All(String(not_empty=True),
+                              MaxLength(3000))
+
+@view_config(context='finlin.models.Root', name='contact')
+def contact(context, request):
+    tpl = 'finlin:templates/contact.pt'
+    tpl_vars = { 
+        'main': get_renderer('finlin:templates/master.pt').implementation(),
+        'save_url': request.path_url,
+        'submit_label': 'Send'} 
+
+    if 'form.submitted' in request.params:
+        schema = ContactForm() 
+        try:
+            params = schema.to_python(request.params, request)
+        except formencode.Invalid, e:
+            html = htmlfill.render(
+                                render(tpl, tpl_vars, request),
+                                defaults=e.value,
+                                errors=e.error_dict) 
+            return Response(html)
+        else:
+            import smtplib
+
+            sender = params['email']
+            receivers = ['bobby.chambers33@gmail.com']
+
+            message = "name: %s ----"  % params['name']
+            message += params['body']
+            
+            smtpObj = smtplib.SMTP('localhost')
+            smtpObj.sendmail(sender, receivers, message)         
+            request.session.flash('Thank you!')
+
+            return HTTPFound(location = resource_url(
+                                    context, 
+                                    request,
+                                    'contact'))
+    return Response(render(tpl, tpl_vars, request))
+
 
 
 
@@ -221,57 +311,6 @@ def login(context, request):
            return HTTPFound(location = came_from, headers = headers)
     return Response(render(tpl, tpl_vars, request))
 
-
-#____________________________________________________________________Contact__
-
-
-class ContactForm(formencode.Schema):
-    allow_extra_fields = True
-    filter_extra_fields = True
-    name = formencode.All(PlainText(not_empty=True),
-                              MaxLength(50),
-                              MinLength(2))
-    email = formencode.All(Email(not_empty=True),
-                              MaxLength(100))
-    body = formencode.All(String(not_empty=True),
-                              MaxLength(3000))
-
-@view_config(context='finlin.models.Root', name='contact')
-def contact(context, request):
-    tpl = 'finlin:templates/contact.pt'
-    tpl_vars = { 
-        'main': get_renderer('finlin:templates/master.pt').implementation(),
-        'save_url': request.path_url,
-        'submit_label': 'Send'} 
-
-    if 'form.submitted' in request.params:
-        schema = ContactForm() 
-        try:
-            params = schema.to_python(request.params, request)
-        except formencode.Invalid, e:
-            html = htmlfill.render(
-                                render(tpl, tpl_vars, request),
-                                defaults=e.value,
-                                errors=e.error_dict) 
-            return Response(html)
-        else:
-            import smtplib
-
-            sender = params['email']
-            receivers = ['bobby.chambers33@gmail.com']
-
-            message = "name: %s ----"  % params['name']
-            message += params['body']
-            
-            smtpObj = smtplib.SMTP('localhost')
-            smtpObj.sendmail(sender, receivers, message)         
-            request.session.flash('Thank you!')
-
-            return HTTPFound(location = resource_url(
-                                    context, 
-                                    request,
-                                    'contact'))
-    return Response(render(tpl, tpl_vars, request))
 
 
 

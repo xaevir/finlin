@@ -15,16 +15,15 @@
 <body>
 
 <div id="doc2" class="clearfix">
-    <div id="hd" class="clearfix">
+    <div id="hd" class="clearfix" metal:define-slot="hd">
         <a id="logo" class="" href="${request.application_url}">
             <img src="${request.static_url('finlin:static/logo.png')}" />
         </a>
+        <!--
         <ul id="nav" class="clearfix" metal:define-slot="main-nav">
-            <li> <a href="${request.application_url}">Companies</a> </li>
-            <!-- <li> <a href="${request.application_url}/strategy">Strategy</a> </li>-->
             <li> <a href="${request.application_url}/contact">Contact</a>  </li> 
-            <!--<li><a id="login" href="#">Create Account | Sign in</a></li>-->
         </ul>
+        -->
     </div>
     
     <div id="bd" >

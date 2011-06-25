@@ -2,302 +2,44 @@
     <div metal:fill-slot="body" id="company">
         <div class="hd">
             <!--<div tal:content="structure hd"/>-->
-            <h1 style="text-align: center">Avantair</h1>
+            <h1 style="text-align: center">${context.data['name']}</h1>
         </div>
         
         <div class="bd clearfix">
             <div id="left-column">
                 <div id="main-content">
-                    <p>
-                        <img src="${request.application_url}/static/avantair-photo.jpg" />
-                        <p>
-                        Where are the seeds of an entrepreneur born? 
-                        Sometimes by sharing what you love. 
-                        If you are Jeff Santos, of Avantair,  
-                        your journey starts while flying a personal plane.  
-                        The sun brushes warm strokes of golden rays across the
-                        ocean landscape. The ocean blue now shimmers gold. The cockpit
-                        fills with warm light.  
+                    <h2>Business Strategy</h2>
+                    <p tal:replace="structure context.data['business_strategy']"/>
 
-                        This must be heaven on earth you think to yourself, I wish I could share this experiencce.
-    
-                        In the days and nights that follow, the thought of sharing your experience never leaves you. 
+                    <h2>Competition</h2>
+                    <p tal:replace="structure context.data['competition']"/>
 
-                        Ok destiny, now how do I make you a reality?
-                        How do you give the experience of personal flight to as many people as possible?
-                        The answer comes to you as the fractional aircraft industry.
-                        Rather than buying an entire a plane, you basically buy a "share" or fraction
-                        of the plane. This is lowers the price point and removes much of the hassle of owning it yourself. 
-                        Historically, spreading the cost of someting over many people, has spawned many industries, think mutual funds.
-
-                        Ok, now I know my industry, but how do I break throught tne entry barriers and make a profit?
-                        The fractional aircraft industry is competititve and already a decade old when you decide to take it on.
-
-                        Looking over Contemplations on Business Strategy.
-                        I remember the takeaway: The essence of strategy is choosing what not to do.
-
-                        Your possible strategies battle it out in the mental thought arena.
-                        Which of the factors that the industry takes for granted should be eliminated?
-
-                        Maybe some of the luxury could be dropped a notch.
-                        This thought gets battled back by the idea that the the private aircraft are 
-                        too expensive at a base level. The cost of maintenance, pilot, crew, naturally precludes 
-                        the idea of even a slight drop in luxury. Only wealthy will be able to partake.
-                        Not to mention the fact that hedging luxury is not distinct enough to give you enough 
-                        momentum to get lift off.
-                        
-                        Are there services you could add? Do not be all things to all people. No.
-                        Something must be removed. 
-
-                        I decide to do some research and talk to the customers of netjets. Some are defecting. 
-                        Costs are too high and they are variable, making your monthly bill a guess.
-                        
-                        Low cost is always a classic strategy, but the problem with your
-                        industry is that you can usually only have low cost or luxury. 
-                        It difficult to get both.
-                        
-                        What about my plane costs, how can I drop the cost of jet.
-
-                        This one question never leaves your mind. Always in the arena fighting.
-                        Always never more than a thought away while tying your shoes, making breakfast, spinning your legs on the treadmill.
-
-                        Then it hits me, sitting in my chair reclined after a long day.
-                        How can i lower the cost of jet withought dropping quality?
-                        A shift in my perspective, which always takes plenty of time to develop.
-                        Ditch the jet. 
-
-                        What have you given up with this decision? In any good strategy you must not try to be all things to all people, you 
-                        must give up something significant. Else we could not call it strategy. Its the pleasure and pain of life 
-                        that creates the rich texture, the drama and comedy that make for cinema. 
-
-                        In scrapping the jet engine, you give up a measure of ego satifying desire. 
-                        And from a technical standpoint, you give up some speed.
-
-                        But what do you gain. 
-                        
-                        <ul>
-                            <li>lowest fuel surcharge in the industry</li>
-                            <li>Stand-up Cabin – A stand-up cabin and a private lavatory, which is unique in its category.</li>
-                            <li>Flying Capacity – Ability to fly 1,300 nautical miles with five passengers, luggage and a full fuel load.</li>
-                            <li>Speed – Fastest turboprop manufactured, with jet-like speed of 458 mph.</li>
-                            <li>Runway capability – Ability to land on shorter runways allowing access to a greater number of airports.</li>
-                            <li>Comfortable Ride – Sound dampening interior and rear mounted props, which help deliver a quiet ride.</li>
-                            <li>Safety – Since its introduction in 1989, there has not been a fatal accident involving a Piaggio Avanti. In addition, the Avanti’s wing design reduces the effects of turbulence and its de-icing system reduces the impact of inclement weather on aircraft operation.
-                            </li>
-                        </ul>
-
-
-
-                        You are armed with these and various other case studies by Porter or the blue ocean strategy 
-                         
-
-                        So you are able to give your customers no hourly charges. Bc your
-                        fuel is lower than your rivals, you can charge everything up front. 
-                        As long as your passengers are willing to travel X miles an hour less, they can save money.
-                        
-                        Its the journey not the destination. 
-
-
-                        How do you carry this out from a marketing perspective. 
-                        Does your marketing position aligned with your competitive
-                        advantage. According to this ad on fortune. 
-                        Avantair is carrying through.
-
-                        Then you get a break in 2010, fat cats on jets get caught.
-                        Giving you a new strategic advantage.
-
-
-
-                        Rating your strategy:
-                        Steven Santo, Chief Executive Officer of Avantair said, “During this quarter we realized record third quarter revenues and demonstrated our continued strong sales, renewed traction among the fractional market, and improvement to our bottom line. Despite the seasonally slower third quarter sales cycle, we achieved sequential quarter fractional sales growth, which we believe is indicative of an uptrend in the fractional market.  
-
-                        “Fiscal year-to-date we have sold 18 new fractional shares and an additional 5.5 shares from our newly introduced fractional Axis Lease Program, which adds another layer to our attractive fractional offering with the added incentive of no upfront costs. This compares with only 7 fractional shares sold for the same period last year. Flight hour card sales also remain strong and we expect all of our programs will continue to foster continued sales growth.  During the period we also took delivery of an additional aircraft to strengthen our fleet and have since put down deposits for the delivery of three additional aircraft in the coming months. With our accelerated maintenance schedule completed and additional aircraft to support heightened demand for our services, we are now beginning to see how our operational strategies are translating to increased efficiency and will further narrow our net loss as we work to achieve sustainable profitability,” Santo concluded. 
-                        http://www.avantair.com/press-release/avantair-inc.-reports-third-quarter-fiscal-2011-financial-results.html
-
-                        Analysis on quarterly earning. Did they exceed expectations or at least last years
-                        numbers?
-                       
-                       They have the lowest entry cost in the fractional market. But I dont want to use this.
-
-
-                        How achieved. They offer a different product than their competitors?
-
-                        How is it going? Sales appear to be up. This is something you can ask the company themselves?
-                        
-                         
-                        **BIG: Ask Avantair a question?
-                         
-                        
-
-                                               </p>
-                       <p>
-                        So thats their tradeoff. They went with an inferior technology, not exactly.
-                        Thats the amazing aspect of the turboprop. Its stacks up remarkably well versus a light jet.
-                      </p> 
-                      <p>
-                        The major disadvantage is in long distance or high speed travel. 
-                        They advantages become their disadvantages at supersonice speeds.
-                        A more subtle disadvantage is that they can not climb as high which can make for 
-                        a more turbulent ride as they cannot climb above the weather. 
-                        </p>
-                        Now the advantages.
-    
-                       http://www.stratosjets.com/blog/tag/turboprop-vs-light-jet 
-
-
-                        
-
-                         
-                                                
-
-                        
-
-
-
-                        They are growing with public companies as per that one tampa bay article.
-
-                        Growth Stategy: They are not too specific in their 10k but from this article, it would 
-                        appear that they are targeting public companies.
-
-
-
-
-
-
-                        The industry standand is to use jets.
-                        Downside, high fuel cost, upside, they are larger, travel farther and are faster.
-
-
-                        Low cost leader in industry. They give up some of the quality of the jet such as speed or reduced travel time
-                        for cost. 
-
-
-                        They dont just forgo quality, in a very luxurious product, they just reduce some of it like speed for instance.
-
-
-                        Having discussed their competitive advantage, how are they growing, sales are up for last quarter.
-                        More interested in is whether their marketing supports their position.
-
-                        According to CEO, the jets got a bad rap and so props are taking off. They are cost effectivew as compared to 
-                        commercial air travel supposedly at least.
-
-
-                        
-
-                        Avantair differentiates itself from its competitors and therefore creates a competitive advantage by
-                        not using jets. Instead it uses a propeller driven plane. 
-                        There are many advantages created by this move. 
-                        They are far cheaper. They have the lowest fuel surcharge in the industry.
-                        They can reach more airports. 
-                        Interestingly they have not given up much in return. The plane is just as spacious
-                        as travels at near jet speeds. 
-                        This enables them to operate at a lower cost. 
-                        Then they enforce this strategy by not having an hourly charge, 
-                    </p>
-                    <p>
-                        Donec facilisis vulputate libero, id accumsan purus accumsan eu. Donec vitae libero a metus cursus malesuada. Ut scelerisque pellentesque purus, quis tempor sem rhoncus non. Ut quis orci diam, a sagittis lacus. Aliquam interdum pretium velit, eu dapibus massa accumsan vitae.
-                    </p>
-                    <p>
-                        Sed quis urna in nisi facilisis hendrerit non vel nisi. Nullam eu risus quis orci ultricies viverra. Proin nec lorem ullamcorper nisi ultricies volutpat. Maecenas scelerisque est id enim porttitor vel feugiat libero ultrices. Nam lacinia elementum mi, vitae dapibus dui pretium sit amet. Aliquam eget justo nec libero sollicitudin congue.
-                    </p>
-
-                </div>
-
-
-                <div class="section">
-                    <p>
-                        What is the tradeoff that they made in developin their strategy?
-                        
-                        How has this given them an advantage?
-
-                        How their strategy fairing?
-                    </p>
-
-                    <h2>Sustainable Competitive Advantage</h2>
-                    <p>
-                    operating at a
-                    lower cost, by commanding a premium price, or by doing
-                    both.
-                    Cost and price advantages can be achieved in two
-                    ways. One is operational effectiveness – doing the same
-                    things your competitors do but doing them better. Oper-
-                    ational effectiveness advantages can take myriad forms,
-                    including better technologies, superior inputs, better-
-                    trained people, or a more effective management struc-
-                    ture. The other way to achieve advantage is strategic
-                    positioning – doing things differently from competitors,
-                    in a way that delivers a unique type of value to customers.
-                    This can mean offering a different set of features, a dif-
-                    ferent array of services, or different logistical arrange-
-                    ments. 
-
-                    </p>
-                    <h2>Growth Strategy</h2>
-                    <p tal:replace="structure context.data['growth_strategy_summary']"/>
-
-                    <a href="${resource_url(context, request, 'growth_strategy')}" class="full-strategy"
-                        >&gt; excerpt from financial statement</a>
-                </div>
-
-                <div class="section">
-                    <h2>Competitive Advantage</h2>
-                    <p tal:replace="structure context.data['competitive_advantage_summary']"/>
-
-                    <a href="${resource_url(context, request, 'competitive_advantage')}" class="full-strategy"
-                        >&gt; excerpt from financial statement</a>
+                    <h2>Questions</h2>
+                    <p tal:replace="structure context.data['questions']"/>
                 </div>
             </div>
-
-
-
             <div id="right-column">
                 <div class="box">
                     <div class="bd">
-                        <h3 id="overview">Tradeoff</h3>
-                        <table>
+                        <h3>Description</h3>
+                         <p tal:replace="structure context.data['description']"/>
+
+                        <table>  
                             <tr>
-                                <td>-</td><td>jet planes</td><td>+</td><td>propeller driven planes</td>
+                                <td class="td_left">Website:</td>
+                                <td class="td_right">
+                                    <a href="http://${context.data['website']}" target="_blank">${context.data['website']}</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td_left">Location:</td>
+                                <td class="td_right">${context.data['city']}, ${context.data['state']}</td>
                             </tr>
                         </table>
-    <h3>Avantair Stats</h3>
-    <table>  
-	<tbody><tr>
-		<td class="td_left">Website:</td>
-		<td class="td_right">
-	  <a href="http://airbnb.com" target="_blank" title="airbnb.com">airbnb.com</a>
-		</td>
-	</tr>
-
-  
-  
-  <tr><td class="td_left">Location:</td><td class="td_right">San Francisco, California, United States</td></tr>
-
-
-  
-	<tr>
-		<td class="td_left">Founded:</td>
-		<td class="td_right">June 2003</td>
-	</tr>
-
-	
-	    <tr>
-			<td class="td_left">Funding:</td>
-			<td class="td_right">$108M</td>
-		</tr>
-	
-</tbody>
-</table>
-
-                 <h3>Business Description</h3>
-                 <p tal:replace="structure context.data['overview']"/>
                     </div>
                 </div>
             </div>
-
-
         </div>
-
-
     </div>
 </html>
  

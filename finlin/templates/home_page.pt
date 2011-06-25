@@ -1,13 +1,22 @@
 <html metal:use-macro="main">
-    <div metal:fill-slot="hd">
+    <div metal:fill-slot="hd" id="landing-logo">
+        <a class="" href="${request.application_url}">
+            <img src="${request.static_url('finlin:static/landing.png')}" />
+        </a>
     </div>
     <div metal:fill-slot="body" id="home">
-        <p id="coming-soon">Coming Soon</p>
-        <a id="logo" class="" href="${request.application_url}">
-            
-            <p id="logo-font">
-                <b>FIN</b><b id="logo-svg"></b><b>LIN</b>
-            </p>
-        </a>
+
+        <p id="intro" style="margin-bottom: 0;">
+            Strategy analysis meets the OTC companies
+        </p>
+        <p style="text-align: center; margin-bottom: 5px">
+            Enter your email to join our invite list:
+        </p>
+        <form style="text-align: center" action="${save_url}" method="post">
+            <input type="text" name="email" style="width: 260px;"/>
+            <input class="button roundify blue shadow" type="submit" 
+                name="form.submitted" value="Go"/>
+
+        </form>
     </div>
 </html>

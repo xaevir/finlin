@@ -64,6 +64,7 @@ body {
     /*background-color: #E1E8EE;*/
     font-family: Lucida Grande,Verdana,Lucida Sans Regular,Lucida Sans Unicode,Arial,sans-serif;
     /*background: -moz-linear-gradient(top , #E2F0FD, white 30%) no-repeat;*/
+    /*background: url(/static/lion-head.png) no-repeat 100% 50%;*/
 }
 h1,h2,h3,h4,h5,h6,strong {
    /*bringing boldness back to headers and the strong element*/
@@ -203,7 +204,6 @@ tr {
 
 /*_____________________________________________________________________Form_*/
 input, textarea {
-   display: block; 
     margin-bottom: 1em;
 }
 input {
@@ -300,6 +300,8 @@ h2 a:hover {
     padding: 20px;
     text-align: center;
     border: 3px solid yellow;
+    font-weight: bold;
+    font-size: 18px;
 }
 /*resizable textarea*/
 div.grippie {
@@ -321,12 +323,20 @@ div.grippie {
 /*___________________________________________________________Main Div Setup_*/
 
 #doc2 {
-	width: 980px;
+	width: 680px;
     margin: 0 auto;
     background-color: transparent;
     padding: 0 40px 0 40px;
     /*-moz-box-shadow: 0px 0px 4px #999;*/
     border-top: none;
+
+    padding: 30px;
+    margin-top: 50px;
+    -moz-border-radius: 10px;
+    margin-top: 0;
+    padding-top: 0;
+    margin-top: 00px;
+
 }
 
 #hd {
@@ -340,40 +350,41 @@ div.grippie {
    /*border-right: 1px solid #B1DAF3;
    border-left: 1px solid #B1DAF3;*/
     padding-top: 3px;
-    margin-bottom: 15px;
+    /*margin-bottom: 15px;*/
 
 }
 #bd {
     /*-moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);*/
 	/*border: 1px solid #e6e6e6;*/
+    /*
     padding: 10px;
     margin-top: -3px;
-    background-color: #f7f7f7;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    background: url('/static/bg_site.jpg') no-repeat top center;
     padding-top: 15px;
+    */
 }
 #ft {
+    margin: 0 auto;
 	margin-top: 20px;
 	margin-bottom: 20px;
     border-top: 1px solid #f3f3f3;
+    text-align: center;
 }
-/*___________________________________________________________________Header_*/
+/*___________________________________________________________________Header_*/ 
 
-#hd a{
-    /*border-right: 1px solid transparent;
-    border-left: 1px solid transparent;
-    */
+#hd {
 }
+
+
+/*
 #hd a:hover{
     border-color: #B1DAF3;
-    text-decoration: none;
-	/*background: -moz-linear-gradient(top,  #EFF6FF,  #fff);*/
+    text-decoration: underline;
+	background: -moz-linear-gradient(top,  #EFF6FF,  #fff);
     background-color: #B1DAF3;
-    color: #fff;
 }
-
+*/
 #logo:hover {
 /*
     background-color: #B1DAF3;
@@ -385,8 +396,13 @@ div.grippie {
 
 #logo{
     display: block;
-    float: left;
 }
+
+#landing-logo{
+    text-align: center;
+    margin-top: 15px;
+}
+
 #logo-svg{
     margin-top: .05em;
     margin-left: .02em;
@@ -433,13 +449,20 @@ div.grippie {
 }
 
 #nav a{
-	font-size: 14px;
+	font-size: 12px;
     text-decoration: none;
     margin-left: 25px;
     display: block;
     float: left;
-    padding-top: 5px;
     color: DeepSkyBlue;
+    padding: 3px;
+    padding-bottom: 2px;
+    padding-top: 4px;
+    /*border: 1px solid #999;*/
+    -moz-border-radius: 4px;
+    background-color: #b1daf3;
+    font-weight: bold;
+    color: #fff;
 }
 #nav .active a{
     /*font-weight: bold;*/
@@ -453,7 +476,30 @@ div.grippie {
 
 /*_____________________________________________________________________Home_*/
 #home {
+    font-family: Georgia, serif;
+    font-size: 20px;
+
+/*    padding: 30px;
+    margin-top: 50px;
+    -moz-border-radius: 7px;
+    background-color: #fff;
+*/
+}
+
+#home #intro{
+    font-weight: bold;
     text-align: center;
+    font-family: Georgia, serif;
+}
+
+#home input {
+    margin-bottom: 0;
+}
+#lion-head{
+    background: url(/static/lion-head.png) no-repeat top left;
+    height: 380px;
+    width: 150px;
+    
 }
 
 #home #logo-font{
@@ -462,38 +508,26 @@ div.grippie {
     padding-bottom: 10px;
 }
 
-#home #logo {
-    font-size: 96px;
-    float: none;
-    color: #fff;
-    background-color: #B1DAF3;
-    filter: dropshadow(color=#FE7300,offX=1,offY=1);
-    text-shadow: #FE7300 2px 2px 0;
-    text-decoration: underline;
 
-}
-#home #logo-svg{
-    position: relative;
-    left: 0;
-    top: .4em;
-
-}
 #coming-soon{
     font-size: 64px;
     font-family: LinuxLibertineORegular,arial,sans-serif;
     margin-bottom: 0;
 }   
 /*__________________________________________________________________Contact_*/
+#contact{
+    font-size: 20px;
+}
+
 #contact h1{
-    color: #ff5100;
-    font-size: 28px;
+    color: #00325E;
+    font-size: 48px;
     font-weight: bold;
     font-family: 'trebuchet MS';
-    padding: 20px 0;
 }
 
 #contact h1 span{
-    font-size: 48px; 
+    font-size: 70px; 
 }
 #contact table{
     border: none !important;
@@ -515,6 +549,13 @@ div.grippie {
 
 #company {
 }
+
+#company .bd {
+    background-color: #E6F7Ff;
+    padding: 5px;
+    -moz-border-radius: 7px 7px 7px 7px;
+}
+
 #company h1{
     color: #000;
     font-size: 40px;
@@ -540,7 +581,7 @@ div.grippie {
 
 #company #left-column{
     float: left;
-    width: 665px;
+    width: 655px;
 }
 
 #company #right-column{
@@ -555,6 +596,7 @@ div.grippie {
 
     margin: 10px;
     padding: 10px;
+    margin-top: 0;
 }
 #company .box .bd {
     background: -moz-linear-gradient(center top , #eeeeee, white);
@@ -1044,9 +1086,9 @@ div.grippie {
     cursor: pointer;
 }
 .shadow {
-    -moz-box-shadow: 2px 2px 2px #888;
-    -webkit-box-shadow: 2px 2px 2px #888;
-    box-shadow: 2px 2px 2px #888;
+    -moz-box-shadow: 1px 1px 1px #888;
+    -webkit-box-shadow: 1px 1px 1px #888;
+    box-shadow: 1px 1px 1px #888;
     behavior: url(/PIE.htc);
 }
 .roundify{
@@ -1055,13 +1097,23 @@ div.grippie {
     border-radius: 8px;
     behavior: url(/PIE.htc);
 }   
-.blue {
+/*.blue {
 	color: #fff;
 	border: solid 1px #0076a3;
 	background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
 	background: -moz-linear-gradient(top,  #00adee,  #0078a5);
     -pie-background: linear-gradient(#00adee,  #0078a5 top);
 }
+*/
+.blue {
+	color: #fff;
+	border: solid 1px #0076a3;
+	background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
+	background: -moz-linear-gradient(top,  #276AA5,  #00325E);
+    -pie-background: linear-gradient(#00adee,  #0078a5 top);
+}
+
+
 .blue:hover {
 	background: -webkit-gradient(linear, left top, left bottom, from(#0095cc), to(#00678e));
 	background: -moz-linear-gradient(top,  #0095cc,  #00678e);
