@@ -1089,13 +1089,13 @@ div.grippie {
     -moz-box-shadow: 1px 1px 1px #888;
     -webkit-box-shadow: 1px 1px 1px #888;
     box-shadow: 1px 1px 1px #888;
-    behavior: url(/PIE.htc);
+    behavior: url(/static/PIE.htc);
 }
 .roundify{
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
-    behavior: url(/PIE.htc);
+    behavior: url(/static/PIE.htc);
 }   
 /*.blue {
 	color: #fff;
@@ -1108,9 +1108,10 @@ div.grippie {
 .blue {
 	color: #fff;
 	border: solid 1px #0076a3;
-	background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
+	background: -webkit-gradient(linear, left top, left bottom, from(#276AA5), to(#00325E));
 	background: -moz-linear-gradient(top,  #276AA5,  #00325E);
-    -pie-background: linear-gradient(#00adee,  #0078a5 top);
+    background: linear-gradient(#276AA5, #00325E);
+    -pie-background: linear-gradient(#276AA5,  #00325E);
 }
 
 
