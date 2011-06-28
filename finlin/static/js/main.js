@@ -56,5 +56,5 @@ $('#comment').blur(function() {
         $(this).val("Comment");
     };
     //$(this).removeClass("focus");
-});class="full-strategy"
+});
 
