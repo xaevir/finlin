@@ -1114,13 +1114,21 @@ div.grippie {
     -pie-background: linear-gradient(#276AA5,  #00325E);
 }
 
-
+/*
 .blue:hover {
 	background: -webkit-gradient(linear, left top, left bottom, from(#0095cc), to(#00678e));
 	background: -moz-linear-gradient(top,  #0095cc,  #00678e);
     background: linear-gradient(#0095cc, #00678e top);
     -pie-background: linear-gradient(#0095cc, #00678e top);
 }
+*/
+.blue:hover {
+    background: -webkit-gradient(linear, 0 0, 0 70%, from(#EEF), to(#FFF));
+    background: -moz-linear-gradient(#EEF, #FFF 70%);
+    background: linear-gradient(#EEF, #FFF 70%);
+    -pie-background: linear-gradient(#EEF, #FFF 70%);
+}
+
 .blue:active {
 	background: -webkit-gradient(linear, left top, left bottom, from(#0078a5), to(#00adee));
 	background: -moz-linear-gradient(top,  #0078a5,  #00adee);

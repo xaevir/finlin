@@ -14,6 +14,9 @@
             <label>Street</label>
             <input name="street" type="text"/>
 
+            <label>Street 2</label>
+            <input name="street2" type="text"/>
+
             <label>City</label>
             <input name="city" type="text"/>
 

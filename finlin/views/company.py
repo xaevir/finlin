@@ -71,6 +71,7 @@ class CompanyForm(Schema):
     competition = String()
     questions = String()
     street = String()
+    street2 = String()
     city = String()
     state = String()
     zip = String()
