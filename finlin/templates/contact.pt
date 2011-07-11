@@ -23,7 +23,7 @@
             </tr>
             <tr>
                 <td><label>Message:</label></td>
-                <td><textarea name="body"></textarea></td>
+                <td><textarea name="message"></textarea></td>
             </tr>
 
             <tr>

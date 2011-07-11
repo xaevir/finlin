@@ -82,14 +82,14 @@ def home_page(context, request):
         else:
             import smtplib
 
-            sender = params['email']
-            receivers = ['bobby.chambers33@gmail.com']
+            from_me = 'finlin_homepage@finlin.com' 
+            to = 'bobby.chambers33@gmail.com'
 
-            message = "email: %s ----"  % params['email']
-            #message += params['body']
-            
+            header = 'To:' + to + '\n' + 'From: ' + from_me + '\n' + 'Subject:Homepage email \n'
+            msg = header + '\n email: ' + params['email'] +  '\n\n'
+
             smtpObj = smtplib.SMTP('localhost')
-            smtpObj.sendmail(sender, receivers, message)         
+            smtpObj.sendmail(from_me, to, msg)         
             request.session.flash('Thank you!')
 
             return HTTPFound(location = resource_url(
@@ -105,12 +105,12 @@ def home_page(context, request):
 class ContactForm(formencode.Schema):
     allow_extra_fields = True
     filter_extra_fields = True
-    name = formencode.All(PlainText(not_empty=True),
-                              MaxLength(50),
+    name = formencode.All(String(not_empty=True),
+                              MaxLength(200),
                               MinLength(2))
     email = formencode.All(Email(not_empty=True),
-                              MaxLength(100))
-    body = formencode.All(String(not_empty=True),
+                              MaxLength(200))
+    message = formencode.All(String(not_empty=True),
                               MaxLength(3000))
 
 @view_config(context='finlin.models.Root', name='contact')
@@ -134,14 +134,14 @@ def contact(context, request):
         else:
             import smtplib
 
-            sender = params['email']
-            receivers = ['bobby.chambers33@gmail.com']
+            from_me = 'finlin_contactpage@finlin.com'    
+            to = 'bobby.chambers33@gmail.com'
 
-            message = "name: %s ----"  % params['name']
-            message += params['body']
-            
+            header = 'To:' + to + '\n' + 'From: ' + from_me + '\n' + 'Subject:Contact email \n'
+            msg =  header + '\n name: %s \n email: %s \n message: %s \n\n' % (params['name'], params['email'], params['message']) 
+                         
             smtpObj = smtplib.SMTP('localhost')
-            smtpObj.sendmail(sender, receivers, message)         
+            smtpObj.sendmail(from_me, to, msg)         
             request.session.flash('Thank you!')
 
             return HTTPFound(location = resource_url(
