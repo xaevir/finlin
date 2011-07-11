@@ -15,7 +15,7 @@ import re
 
 import formencode
 from formencode.schema import Schema
-from formencode.validators import String, PlainText, MaxLength, MinLength, Email
+from formencode.validators import String, PlainText, MaxLength, MinLength, Email, FieldStorageUploadConverter
 from formencode.validators import Invalid, FancyValidator 
 from formencode import variabledecode 
 from formencode import htmlfill
@@ -48,7 +48,6 @@ def slugify(name):
     return name	
 
 
-
 class UniqueCompanyName(FancyValidator):
     def _to_python(self, value, state):
         result = state.db.company.find_one({'name':value})
@@ -65,17 +64,12 @@ class CompanyForm(Schema):
     name = formencode.All(String(not_empty=True), UniqueCompanyName()) 
     ticker = String()
     website = String()
-    description = String()
-    significant_developments = String()
-    business_strategy = String()
-    competition = String()
-    questions = String()
     street = String()
     street2 = String()
     city = String()
     state = String()
     zip = String()
- 
+    description = String()
 
 @view_config(name='list', context=Root, renderer='finlin:templates/company/list.pt')
 def list_company(context, request):
@@ -131,7 +125,7 @@ def add_company(context, request):
             return HTTPFound(location = resource_url(
                                     context,
                                     request,
-                                    params['name']))
+                                    params['slug']))
     return Response(render(tpl, tpl_vars, request))
 
 
@@ -166,7 +160,7 @@ def edit_company(context, request):
                 except KeyError:
                     #the value does not already exist, so set it
                     data[key] = value
-
+            raise Exception
             request.db.company.update({'_id': context.data['_id']}, {'$set': data })
             request.session.flash(context.data['name'] + ' saved')
             return HTTPFound(location = resource_url(

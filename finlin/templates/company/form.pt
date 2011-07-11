@@ -1,6 +1,6 @@
 <html metal:use-macro="main">
     <div metal:fill-slot="body" id="company_form">
-        <form action="${save_url}" method="post">
+        <form action="${save_url}" method="post" >
 
             <label>Name</label>
             <input name="name" id="name" type="text"/>
@@ -29,17 +29,6 @@
             <label>Description</label>
             <textarea name="description" id="description"></textarea>
 
-            <label>Significant developments</label>
-            <textarea name="significant_developments"></textarea>
-
-            <label>Business Strategy</label>
-            <textarea name="business_strategy"></textarea>
-
-            <label>Competition</label>
-            <textarea name="competition"></textarea>
-
-            <label>Questions</label>
-            <textarea name="questions" id="questions"></textarea>
 
             <input type="submit" name="form.submitted" value="Save"/>
         </form>

@@ -7,9 +7,10 @@
     <div metal:fill-slot="body" id="home">
 
         <p id="intro" style="margin-bottom: 0;">
-            Strategy analysis meets the OTC companies
+            Coming this summer<br />
+            <span style="font-size: 16px;">A strategic analysis of the companies in the OTC market</span>
         </p>
-        <p style="text-align: center; margin-bottom: 5px">
+        <p style="text-align: center; margin-bottom: 5px; font-size: 16px">
             Enter your email to join our invite list:
         </p>
         <form style="text-align: center" action="${save_url}" method="post">
